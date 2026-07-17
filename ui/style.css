@@ -249,8 +249,9 @@ html, body { height: 100%; overflow: hidden; background: var(--bg0); color: var(
   flex: 1; background: transparent; border: none; outline: none; resize: none;
   color: var(--tx1); caret-color: var(--ac);
   font-family: var(--font-code); font-size: 14px; line-height: 1.65;
-  padding: 14px 16px; overflow: auto;
-  tab-size: 4; white-space: pre;
+  padding: 14px 16px; margin: 0; white-space: pre; overflow: auto;
+  box-sizing: border-box; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  tab-size: 4;
   position: absolute; top: 0; left: 64px; right: 0; bottom: 0;
   z-index: 2; /* on top of highlight layer */
   scrollbar-width: thin; scrollbar-color: #2a2a44 transparent;

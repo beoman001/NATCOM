@@ -34,7 +34,7 @@ Begin the main simulation loop.
 Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.
 
 // [F] Deliberate Anomaly for Self-Healing Engine Test
-Make a variable called BadSyntax and set it to 5.
+Create a high speed integer named BadSyntax and set it to 5.
 
 // [G] Low-level optimization override
 <SYSTEM_OVERRIDE>

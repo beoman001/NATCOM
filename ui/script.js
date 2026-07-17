@@ -811,6 +811,14 @@ async function runCode() {
   const code   = editor.value.trim();
   const target = targetSelect?.value || 'c';
   if (!code) { log('No code to compile.', 'system'); return; }
+  
+  if (code.toLowerCase().includes('malayali pwoli ahda')) {
+    log(`\n🥚 SECRET EASTER EGG UNLOCKED:`, 'success');
+    log(`Malayali pwoli ahda!`, 'success');
+    log(`We got NATCOM before GTA 6.`, 'success');
+    log(`Let Jesus protect us.`, 'success');
+    log(`${'═'.repeat(60)}\n`, 'system');
+  }
 
   runBtn.classList.add('loading');
   runBtn.innerHTML = '⟳ Compiling...';
