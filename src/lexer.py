@@ -8,7 +8,7 @@ class TokenType:
 class Token:
     def __init__(self, type_, value, line):
         self.type = type_
-        self.value = value.strip()
+        self.value = value if type_ == TokenType.OVERRIDE_BLOCK else value.strip()
         self.line = line
 
     def __repr__(self):
@@ -33,10 +33,6 @@ class SafeFreeFormLexer:
             raw_line = line.strip()
             self.line_num = line_idx + 1
 
-            # Ignore empty lines and standard comments
-            if not raw_line or raw_line.startswith('//'):
-                continue
-
             if raw_line == '<SYSTEM_OVERRIDE>':
                 in_override = True
                 continue
@@ -47,32 +43,50 @@ class SafeFreeFormLexer:
                 continue
 
             if in_override:
-                override_buffer.append(raw_line)
-            else:
-                sentences = []
-                in_quote = False
-                quote_char = None
-                current = []
-                for i, char in enumerate(raw_line):
-                    if char in '"\'':
-                        if not in_quote:
-                            in_quote = True
-                            quote_char = char
-                        elif quote_char == char:
-                            in_quote = False
+                # Append raw line without stripping, removing only the newline character at the end
+                override_buffer.append(line.rstrip('\r\n'))
+                continue
+
+            # Ignore empty lines and standard comments for normal NATCOM code
+            if not raw_line or raw_line.startswith('//'):
+                continue
+
+            sentences = []
+            in_quote = False
+            quote_char = None
+            current = []
+            for i, char in enumerate(raw_line):
+                if char in '"\'':
+                    if not in_quote:
+                        in_quote = True
+                        quote_char = char
+                    elif quote_char == char:
+                        in_quote = False
                     
-                    if not in_quote and char in '.!?:' and (i == len(raw_line)-1 or raw_line[i+1].isspace()):
-                        sentences.append(''.join(current).strip())
-                        current = []
-                    else:
-                        current.append(char)
-                        
-                if current:
+                if not in_quote and char in '.!?' and (i == len(raw_line)-1 or raw_line[i+1].isspace()):
+                    # End of sentence (period/bang/question) — close sentence without the delimiter
                     sentences.append(''.join(current).strip())
+                    current = []
+                elif not in_quote and char == ':' and (i == len(raw_line)-1 or raw_line[i+1].isspace()):
+                    # Colon at end of line = block opener — include colon IN the token so
+                    # parser regexes like r'define a function named (\w+):' match correctly
+                    current.append(char)
+                    sentences.append(''.join(current).strip())
+                    current = []
+                else:
+                    current.append(char)
                     
-                for sentence in sentences:
-                    if sentence:
-                        self.tokens.append(Token(TokenType.SENTENCE, sentence, self.line_num))
+            if current:
+                sentences.append(''.join(current).strip())
+                
+            for sentence in sentences:
+                if sentence:
+                    self.tokens.append(Token(TokenType.SENTENCE, sentence, self.line_num))
 
         self.tokens.append(Token(TokenType.EOF, "", self.line_num))
         return self.tokens
+
+
+
+
+

@@ -146,6 +146,12 @@
                         <div class="tree-item" onclick="loadBuiltin('fulldemo')" id="fi-fulldemo">
                             <span class="fi-icon ex-icon">NC</span> full_demo.nc
                         </div>
+                        <div class="tree-item" onclick="loadBuiltin('functions')" id="fi-functions">
+                            <span class="fi-icon ex-icon">NC</span> functions.nc
+                        </div>
+                        <div class="tree-item" onclick="loadBuiltin('classes')" id="fi-classes">
+                            <span class="fi-icon ex-icon">NC</span> classes.nc
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,6 +184,14 @@
                 <div class="ex-card" onclick="loadBuiltin('fulldemo')">
                     <div class="ex-icon-wrap">🚀</div>
                     <div><div class="ex-title">Full Demo</div><div class="ex-desc">Every NATCOM feature</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('functions')">
+                    <div class="ex-icon-wrap">⚙️</div>
+                    <div><div class="ex-title">Functions</div><div class="ex-desc">Define &amp; call functions</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('classes')">
+                    <div class="ex-icon-wrap">🏗️</div>
+                    <div><div class="ex-title">Classes &amp; OOP</div><div class="ex-desc">Classes &amp; objects in English</div></div>
                 </div>
             </div>
         </div>
@@ -245,6 +259,18 @@
                     <div class="cs-item" onclick="insertSnippet('Begin the main simulation loop.\n  Increment X.\n  If the X is greater than 10, then:\n    Halt the simulation.\n  Otherwise:\n    Keep the simulation running.')"><code>Begin the main simulation loop. ... Halt the simulation.</code></div>
                     <div class="cs-item" onclick="insertSnippet('Repeat 10 times:\n  Increment X.\nDone.')"><code>Repeat 10 times: ... Done.</code></div>
                     <div class="cs-item" onclick="insertSnippet('Keep running while X is less than 10:\n  Increment X.\nStop the loop.')"><code>Keep running while X is less than 10: ...</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">⚙️ Functions</div>
+                    <div class="cs-item" onclick="insertSnippet('Define a function named MyFunc:\n  Display &quot;Hello from function!&quot;.\nEnd function.')"><code>Define a function named F: ... End function.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Define a function named MyFunc with arguments A, B:\n  Add A to B.\n  Log the value of B.\nEnd function.')"><code>Define a function named F with arguments A, B:</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Call function MyFunc.')"><code>Call function F.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Call function MyFunc with arguments X, Y.')"><code>Call function F with arguments X, Y.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">🏗️ Classes &amp; OOP</div>
+                    <div class="cs-item" onclick="insertSnippet('Define a class named MyClass:\n  Create a floating point variable named Speed and set it to 0.\nEnd class.')"><code>Define a class named C: ... End class.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Create an object of class MyClass named Obj.')"><code>Create an object of class C named Obj.</code></div>
                 </div>
             </div>
         </div>
@@ -323,9 +349,13 @@
         <!-- TERMINAL -->
         <div class="terminal-panel" id="terminalPanel">
             <div class="terminal-tabs">
-                <div class="term-tab active">
+                <div class="term-tab active" id="tabOutput" onclick="switchTermTab('output')">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                     OUTPUT
+                </div>
+                <div class="term-tab" id="tabInput" onclick="switchTermTab('input')">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4L4 12L20 20V4Z"/></svg>
+                    INPUT
                 </div>
                 <div class="term-tab" id="errTab" onclick="switchToErrorTab()" style="display:none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2z"/></svg>
@@ -338,11 +368,16 @@
                     <button class="term-btn" onclick="toggleTerminal()" title="Toggle" id="termToggleBtn">⌃</button>
                 </div>
             </div>
+            
             <div id="terminal" class="terminal-body">
                 <div class="term-line system">
                     <span class="term-prompt">natcom@studio</span><span class="term-arr">▶</span>
                     <span class="term-msg">NATCOM Studio ready. Open a file or write code and press <kbd>Ctrl+Enter</kbd> to run.</span>
                 </div>
+            </div>
+
+            <div id="terminalInputArea" class="terminal-body" style="display:none; padding: 0;">
+                <textarea id="stdinInput" placeholder="Enter standard input (stdin) here before clicking Run..." spellcheck="false" style="width: 100%; height: 100%; border: none; outline: none; resize: none; background: #2B2B2B; color: #A9B7C6; padding: 12px 20px; font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; line-height: 1.6; scrollbar-width: thin; scrollbar-color: #4D4D4D transparent;"></textarea>
             </div>
         </div>
         
@@ -392,3 +427,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+
+
+

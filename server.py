@@ -18,6 +18,7 @@ class NatcomRequestHandler(SimpleHTTPRequestHandler):
             data = json.loads(post_data.decode('utf-8'))
             code = data.get("code", "")
             target = data.get("target", "c")
+            user_stdin = data.get("stdin", "")
 
             # Save to temporary workspace
             workspace_file = "web_workspace.nc"
@@ -33,18 +34,30 @@ class NatcomRequestHandler(SimpleHTTPRequestHandler):
             output = build_process.stdout + "\n" + build_process.stderr
 
             if build_process.returncode == 0:
-                # If build succeeds, run the binary. 
-                # Provide a newline to stdin to bypass the 'Press Enter to exit' pause.
-                try:
-                    run_process = subprocess.run([f"./{output_bin}"], input="\n", capture_output=True, text=True, timeout=5)
-                    output += "\n" + run_process.stdout + "\n" + run_process.stderr
-                except subprocess.TimeoutExpired:
-                    output += "\n[SYSTEM] Timeout: Execution exceeded 5 seconds."
+                if target == "js":
+                    js_file = f"{output_bin}.js"
+                    with open(js_file, "r") as jsf:
+                        js_source = jsf.read()
+                    response = {"output": output, "js_source": js_source}
+                else:
+                    # If build succeeds, run the binary. 
+                    # Provide the user_stdin and a newline to bypass the 'Press Enter to exit' pause.
+                    run_input = user_stdin
+                    if not run_input.endswith("\n"):
+                        run_input += "\n"
+                        
+                    try:
+                        run_process = subprocess.run([f"./{output_bin}"], input=run_input, capture_output=True, text=True, timeout=5)
+                        output += "\n" + run_process.stdout + "\n" + run_process.stderr
+                    except subprocess.TimeoutExpired:
+                        output += "\n[SYSTEM] Timeout: Execution exceeded 5 seconds. (Waiting for input?)"
+                    response = {"output": output}
+            else:
+                response = {"output": output}
             
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            response = {"output": output}
             self.wfile.write(json.dumps(response).encode('utf-8'))
         else:
             self.send_error(404)
@@ -62,3 +75,7 @@ if __name__ == "__main__":
         pass
     server.server_close()
     print("[*] Server stopped.")
+
+
+
+

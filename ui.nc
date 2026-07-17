@@ -68,7 +68,7 @@ Log the value of CompilationStatus.
 <SYSTEM_OVERRIDE>
 printf("[BOOTSTRAP V2] Sovereign compiler binary emitted.\\n");
 printf("[BOOTSTRAP V2] Stage 2 complete. Full independence achieved.\\n");
-</SYSTEM_OVERRIDE>`,
+\x3c/SYSTEM_OVERRIDE>`,
 
   ui: `// ui.nc — NATCOM Studio UI Logic (Bootstrapped to JavaScript)
 // Compiled with: ./natcom build ui.nc --target js -o ui/script.js
@@ -84,7 +84,7 @@ Log the value of StudioReady.
 <SYSTEM_OVERRIDE>
 console.log('[NATCOM UI] Bootstrapped IDE Matrix Active.');
 console.log('[NATCOM UI] All sovereign systems online.');
-</SYSTEM_OVERRIDE>`,
+\x3c/SYSTEM_OVERRIDE>`,
 
   calculator: `// calculator.nc — Interactive Calculator
 // Uses user input to perform all arithmetic operations.
@@ -366,7 +366,7 @@ Otherwise:
 // Drop raw C code directly if you need absolute control.
 <SYSTEM_OVERRIDE>
 printf("This is raw C code injected into the matrix.\\n");
-</SYSTEM_OVERRIDE>
+\x3c/SYSTEM_OVERRIDE>
 
 Display "Tutorial Complete. You are now a NATCOM Master."`
 };
@@ -578,7 +578,7 @@ function detectErrors() {
     const trimmed = raw.trim();
 
     if (trimmed === '<SYSTEM_OVERRIDE>') { inOverride = true; return; }
-    if (trimmed === '</SYSTEM_OVERRIDE>') { inOverride = false; return; }
+    if (trimmed === '\x3c/SYSTEM_OVERRIDE>') { inOverride = false; return; }
     if (inOverride) return;
     if (!trimmed || trimmed.startsWith('//')) return;
 
@@ -829,6 +829,7 @@ async function runCode() {
     log(`\n🥚 SECRET EASTER EGG UNLOCKED:`, 'success');
     log(`Malayali pwoli ahda!`, 'success');
     log(`We got NATCOM before GTA 6.`, 'success');
+    log(`Let Jesus protect us.`, 'success');
     log(`${'═'.repeat(60)}\n`, 'system');
   }
 

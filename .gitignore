@@ -1,15 +1,30 @@
-# Compiled Binaries
+# ── Compiled Binaries ──────────────────────────────────────────
 game_engine
 calculator
 natcom_v2_compiler
 web_engine
+nc_*
+
+# ── Generated C Source ─────────────────────────────────────────
 *.c
 
-# Temp Files
+# ── Temp Workspace ─────────────────────────────────────────────
 web_workspace.nc
+/tmp/
 
-# Python Cache
+# ── Python Cache ───────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# ── OS Files ───────────────────────────────────────────────────
 .DS_Store
+Thumbs.db
+
+# ── Firebase (local only) ──────────────────────────────────────
+.firebase/
+firebase-debug.log

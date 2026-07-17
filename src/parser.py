@@ -118,6 +118,26 @@ class SwapNode(ASTNode):
     """Swap the values of X and Y."""
     def __init__(self, a, b): self.a, self.b = a, b
 
+class FunctionNode(ASTNode):
+    """Define a function named X with arguments A, B: ... End function."""
+    def __init__(self, name, args, body):
+        self.name, self.args, self.body = name, args, body
+
+class FunctionCallNode(ASTNode):
+    """Call function X with arguments A, B."""
+    def __init__(self, name, args):
+        self.name, self.args = name, args
+
+class ClassNode(ASTNode):
+    """Define a class named X: ... End class."""
+    def __init__(self, name, body):
+        self.name, self.body = name, body
+
+class ObjectInstantiateNode(ASTNode):
+    """Create an object of class C named X."""
+    def __init__(self, class_name, var_name):
+        self.class_name, self.var_name = class_name, var_name
+
 # ═══════════════════════════════════════════════════════════════
 #  SELF-HEALING ENGINE
 # ═══════════════════════════════════════════════════════════════
@@ -148,6 +168,8 @@ class ErrorHealer:
         print(f"  {G}·{R}  Loop       : Begin the main simulation loop.  ...  Halt the simulation.")
         print(f"  {G}·{R}  Repeat     : Repeat 10 times: ... Done.")
         print(f"  {G}·{R}  Condition  : If the X is greater than Y, then: ... Otherwise: ...")
+        print(f"  {G}·{R}  Functions  : Define a function named F with arguments A, B: ... End function.")
+        print(f"  {G}·{R}  Classes    : Define a class named C: ... End class.")
         print(f"  {G}──────────────────────────────────────────────────────────────────{R}\n")
 
 # ═══════════════════════════════════════════════════════════════
@@ -217,6 +239,46 @@ class MultiverseParser:
         m = re.search(r'render a 3d matrix.*?at coordinates ([\d.-]+),\s*([\d.-]+),\s*([\d.-]+)', text)
         if m:
             return RenderMatrixNode(m.group(1), m.group(2), m.group(3))
+
+        # ── Classes & OOP ─────────────────────────────────────────────────
+        m = re.search(r'define a class named (\w+)', orig, re.IGNORECASE)
+        if m:
+            body = self._collect_body_until("end class", "sync the current game state")
+            if self._peek_contains("end class"):
+                self.advance()
+            return ClassNode(m.group(1), body)
+
+        m = re.search(r'create an object of class (\w+) named (\w+)', orig, re.IGNORECASE)
+        if m:
+            return ObjectInstantiateNode(m.group(1), m.group(2))
+
+        # ── Functions ─────────────────────────────────────────────────────
+        m = re.search(r'define a function named (\w+) with arguments (.*?):', orig, re.IGNORECASE)
+        if m:
+            args = [a.strip() for a in m.group(2).split(',') if a.strip()]
+            body = self._collect_body_until("end function", "sync the current game state")
+            if self._peek_contains("end function"):
+                self.advance()
+            return FunctionNode(m.group(1), args, body)
+
+        m = re.search(r'define a function named (\w+):', orig, re.IGNORECASE)
+        if m:
+            body = self._collect_body_until("end function", "sync the current game state")
+            if self._peek_contains("end function"):
+                self.advance()
+            return FunctionNode(m.group(1), [], body)
+
+        m = re.search(r'call function (\w+) with arguments (.*)', orig, re.IGNORECASE)
+        if m:
+            raw_args = m.group(2)
+            if raw_args.endswith('.'): raw_args = raw_args[:-1]
+            args = [a.strip() for a in raw_args.split(',') if a.strip()]
+            return FunctionCallNode(m.group(1), args)
+
+        m = re.search(r'call function (\w+)', orig, re.IGNORECASE)
+        if m:
+            # Need to avoid matching "call function X with arguments Y" by doing it after
+            return FunctionCallNode(m.group(1), [])
 
         # ── Boolean Declaration ───────────────────────────────────────────
         m = re.search(r'create a boolean named (\w+) and set it to (true|false)', orig, re.IGNORECASE)
@@ -439,3 +501,8 @@ class MultiverseParser:
             if m:
                 return f"{m.group(1).strip()} {sym} {m.group(2).strip()}"
         return raw  # fallback: pass raw as C expression
+
+
+
+
+
