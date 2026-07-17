@@ -25,7 +25,7 @@
                 <path d="M2 12L12 17L22 12" stroke="#00ffcc" stroke-width="1.5" fill="none" opacity="0.6"/>
             </svg>
             <span class="brand-name">NATCOM <span class="brand-studio">Studio</span></span>
-            <span class="brand-version">v2.0</span>
+            <span class="brand-version">v2.0 (Prototype - In Testing)</span>
         </div>
     </div>
     <div class="titlebar-center">
@@ -82,6 +82,9 @@
         </button>
         <button class="activity-btn" id="act-search" onclick="switchActivity('search')" title="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="activity-btn" id="act-ai" onclick="switchActivity('ai')" title="AI Code Generator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         </button>
         <button class="activity-btn" id="act-cheatsheet" onclick="switchActivity('cheatsheet')" title="Language Reference">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -203,6 +206,23 @@
                 <input type="text" class="search-input" placeholder="Search in all files..." id="searchInput" oninput="searchCode()">
             </div>
             <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- AI GENERATOR -->
+        <div class="panel" id="panel-ai">
+            <div class="panel-header"><span>AI CODE GENERATOR</span></div>
+            <div style="padding: 12px; display: flex; flex-direction: column; gap: 12px;">
+                <p style="font-size: 11px; color: var(--tx2); line-height: 1.4; margin: 0;">
+                    Enter your Gemini API Key and describe what you want to build. The AI will write pure NATCOM English-code.
+                </p>
+                <input type="password" id="gemini-api-key" placeholder="Gemini API Key..." class="search-input">
+                <textarea id="ai-prompt" placeholder="E.g. Create a calculator that adds two numbers..." rows="6" class="search-input" style="resize: vertical; font-family: var(--font-ui);"></textarea>
+                <button onclick="generateAICode()" class="run-btn" style="width: 100%; justify-content: center;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    Generate Code
+                </button>
+                <div id="ai-status" style="font-size: 11px; color: var(--ac); display: none; text-align: center;">Generating...</div>
+            </div>
         </div>
 
         <!-- CHEATSHEET / LANGUAGE REFERENCE -->
