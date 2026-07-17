@@ -384,31 +384,35 @@ class MultiverseParser:
             return WhileNode(cond, body)
 
         # ── Conditionals ──────────────────────────────────────────────────
-        cond_m = re.search(r'if (?:the )?(.*?) (drops below|is less than|is greater than|equals|is not|is), then:?', orig, re.IGNORECASE)
-        if cond_m:
-            var1    = cond_m.group(1).strip()
-            op_raw  = cond_m.group(2).strip().lower()
-            # find value after op
-            after = orig[cond_m.end():].strip().rstrip(':').strip()
-            # also try regex for full line
-            full_m = re.search(
-                r'if (?:the )?(.*?) (drops below|is less than|is greater than|equals|is not|is) (.+?),? then',
-                orig, re.IGNORECASE)
-            var2 = full_m.group(3).strip() if full_m else "0"
+        full_m = re.search(
+            r'if (?:the )?(.*?) (drops below|is less than|is greater than|equals|is not|is) (.+?),? then',
+            orig, re.IGNORECASE)
+        
+        if full_m:
+            var1 = full_m.group(1).strip()
+            op_raw = full_m.group(2).strip().lower()
+            var2 = full_m.group(3).strip()
+            
             op_map = {"drops below": "<", "is less than": "<",
                       "is greater than": ">", "equals": "==",
                       "is not": "!=", "is": "=="}
+                      
             if var2.lower() == "zero": var2 = "0"
             if var2.lower() == "true": var2 = "1"
             if var2.lower() == "false": var2 = "0"
+            
             condition = f"{var1} {op_map.get(op_raw, '==')} {var2}"
-            true_body = self._collect_body_until("otherwise", "sync the current game state")
+            
+            true_body = self._collect_body_until("otherwise", "end if", "sync the current game state")
             false_body = []
+            
             if self._peek_contains("otherwise"):
                 self.advance()
                 false_body = self._collect_body_until("end if", "sync the current game state")
-                if self._peek_contains("end if"):
-                    self.advance()
+                
+            if self._peek_contains("end if"):
+                self.advance()
+                
             return IfNode(condition, true_body, false_body)
 
         # ── Halt / Continue ───────────────────────────────────────────────

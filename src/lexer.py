@@ -49,10 +49,30 @@ class SafeFreeFormLexer:
             if in_override:
                 override_buffer.append(raw_line)
             else:
-                # Split by common sentence terminators, avoiding decimal points
-                sentences = [s.strip() for s in re.split(r'[.!?:](?=\s|$)', raw_line) if s.strip()]
+                sentences = []
+                in_quote = False
+                quote_char = None
+                current = []
+                for i, char in enumerate(raw_line):
+                    if char in '"\'':
+                        if not in_quote:
+                            in_quote = True
+                            quote_char = char
+                        elif quote_char == char:
+                            in_quote = False
+                    
+                    if not in_quote and char in '.!?:' and (i == len(raw_line)-1 or raw_line[i+1].isspace()):
+                        sentences.append(''.join(current).strip())
+                        current = []
+                    else:
+                        current.append(char)
+                        
+                if current:
+                    sentences.append(''.join(current).strip())
+                    
                 for sentence in sentences:
-                    self.tokens.append(Token(TokenType.SENTENCE, sentence, self.line_num))
+                    if sentence:
+                        self.tokens.append(Token(TokenType.SENTENCE, sentence, self.line_num))
 
         self.tokens.append(Token(TokenType.EOF, "", self.line_num))
         return self.tokens
