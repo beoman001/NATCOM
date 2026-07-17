@@ -317,17 +317,6 @@
             ></textarea>
         </div>
 
-        <!-- ERROR PANEL (shows when errors detected) -->
-        <div class="error-panel" id="errorPanel" style="display:none">
-            <div class="ep-header">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                <span>PROBLEMS</span>
-                <span id="ep-count" class="ep-count">0</span>
-                <button class="ep-close" onclick="closeErrorPanel()">×</button>
-            </div>
-            <div class="ep-list" id="epList"></div>
-        </div>
-
         <!-- TERMINAL RESIZE -->
         <div class="hresize-handle" id="hresizeHandle"></div>
 
@@ -355,6 +344,17 @@
                     <span class="term-msg">NATCOM Studio ready. Open a file or write code and press <kbd>Ctrl+Enter</kbd> to run.</span>
                 </div>
             </div>
+        </div>
+        
+        <!-- ERROR PANEL (shows when errors detected) -->
+        <div class="error-panel" id="errorPanel" style="display:none">
+            <div class="ep-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                <span>PROBLEMS</span>
+                <span id="ep-count" class="ep-count">0</span>
+                <button class="ep-close" onclick="closeErrorPanel()">×</button>
+            </div>
+            <div class="ep-list" id="epList"></div>
         </div>
     </div>
 </div>
