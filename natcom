@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import sys
+import argparse
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from src.lexer import SafeFreeFormLexer
+from src.parser import MultiverseParser
+from src.codegen import SystemsCodeGen
+
+def main():
+    print("================================================================================")
+    print("               NATCOM COMPILER SUPREME TOOLCHAIN RUNNER                         ")
+    print("================================================================================")
+    parser = argparse.ArgumentParser(description="NATCOM Automated Toolchain Runner")
+    parser.add_argument("command", choices=["build"], help="Command to execute (e.g., build)")
+    parser.add_argument("source", help="Source file (.nc)")
+    parser.add_argument("-o", "--output", default="game_engine", help="Output binary name")
+    parser.add_argument("--target", default="c", choices=["c", "js"], help="Target architecture (c or js)")
+    
+    args = parser.parse_args()
+    
+    if args.command == "build":
+        if not os.path.exists(args.source):
+            print(f"[!] Error: File '{args.source}' not found.")
+            sys.exit(1)
+            
+        print(f"[*] Reading source code from: {args.source}")
+        with open(args.source, "r") as f:
+            source_code = f.read()
+            
+        print("[*] Lexing free-form prose (Phase 1)...")
+        lexer = SafeFreeFormLexer(source_code)
+        tokens = lexer.tokenize()
+        
+        print("[*] Self-Healing AST Parsing & Validation (Phase 2)...")
+        ast_parser = MultiverseParser(tokens)
+        ast = ast_parser.parse()
+        
+        print(f"[*] Systems Code Generation (Phase 3) - Target: {args.target.upper()}...")
+        codegen = SystemsCodeGen(ast, output_bin=args.output, target=args.target)
+        codegen.generate()
+        print("[*] NATCOM Build Pipeline Complete.")
+
+if __name__ == "__main__":
+    main()

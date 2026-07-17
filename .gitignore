@@ -1,0 +1,15 @@
+# Compiled Binaries
+game_engine
+calculator
+natcom_v2_compiler
+web_engine
+*.c
+
+# Temp Files
+web_workspace.nc
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NATCOM Studio | Sovereign IDE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-accent">NATCOM</span> STUDIO
+            </div>
+            <div class="status-bar">
+                <div class="status-dot"></div>
+                <span>Sovereign Link Active</span>
+            </div>
+        </header>
+
+        <main class="workspace">
+            <div class="editor-pane pane">
+                <div class="pane-header">
+                    <h2>main.nc</h2>
+                    <button id="compileBtn" class="compile-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+                        </svg>
+                        COMPILE & EXECUTE
+                    </button>
+                </div>
+                <textarea id="editor" spellcheck="false">// NATCOM Studio Workspace
+// Write your free-form prose here...
+
+Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+Create a high speed integer named CoreTemp and set it to 45.
+Add 10 to CoreTemp.
+Log the value of CoreTemp.
+</textarea>
+            </div>
+
+            <div class="terminal-pane pane">
+                <div class="pane-header">
+                    <h2>OUTPUT MATRIX</h2>
+                    <button id="clearBtn" class="clear-btn">CLEAR</button>
+                </div>
+                <div id="terminal" class="terminal-output">
+                    <div class="log system">NATCOM Studio initialized. Awaiting input...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
