@@ -7,45 +7,47 @@
   <meta name="description" content="Beon Binesh is the creator of NATCOM — the world's first natural English programming language, powered by Google Gemini AI and Antigravity AGY by Google DeepMind." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ── RESET & BASE ─────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --black:   #0a0a0a;
-      --dark:    #111111;
-      --surface: #1a1a1a;
-      --gold:    #d4a853;
-      --gold2:   #f5c842;
-      --cream:   #f0f0e8;
-      --muted:   #888880;
-      --border:  rgba(212,168,83,0.18);
+      --bg: #090a0f;
+      --surface: #11131c;
+      --primary: #4e7cfe;
+      --secondary: #a072ff;
+      --text: #f0f2f5;
+      --muted: #8b92a5;
+      --border: rgba(255, 255, 255, 0.08);
+      --glow: rgba(78, 124, 254, 0.15);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 16px;
-      line-height: 1.7;
+      line-height: 1.6;
       overflow-x: hidden;
-      /* Subtle SVG noise texture */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
-    /* ── SCROLLBAR ────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
-
     /* ── TYPOGRAPHY ───────────────────────────────────────── */
-    h1, h2, h3, .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 0.05em;
+    h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #4e7cfe, #a072ff, #4e7cfe);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
     }
 
     /* ── NAVBAR ───────────────────────────────────────────── */
@@ -56,1089 +58,341 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 6vw;
+      padding: 0 5vw;
       height: 64px;
-      background: rgba(10,10,10,0.7);
-      backdrop-filter: blur(18px) saturate(1.4);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4);
-      border-bottom: 1px solid rgba(212,168,83,0.1);
-      transition: background 0.4s ease;
+      background: rgba(9, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.55rem;
-      letter-spacing: 0.12em;
-      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
       text-decoration: none;
-    }
-
-    .nav-links {
+      letter-spacing: 0.02em;
       display: flex;
-      gap: 2.2rem;
-      list-style: none;
+      align-items: center;
+      gap: 8px;
     }
 
+    .nav-logo svg { fill: var(--primary); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
-
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover { color: var(--text); }
 
     /* ── HERO ─────────────────────────────────────────────── */
     #hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 700px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       text-align: center;
-    }
-
-    /* Aurora / particle canvas */
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    /* CSS aurora blobs */
-    .aurora {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+      padding: 100px 5vw;
       overflow: hidden;
     }
 
-    .aurora-blob {
+    /* Background Gradients */
+    .hero-glow {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.15;
-      animation: drift 18s ease-in-out infinite alternate;
-    }
-
-    .aurora-blob:nth-child(1) {
-      width: 70vw; height: 60vh;
-      background: radial-gradient(circle, #d4a853 0%, transparent 70%);
-      top: -15%; left: -10%;
-      animation-delay: 0s;
-    }
-    .aurora-blob:nth-child(2) {
-      width: 55vw; height: 55vh;
-      background: radial-gradient(circle, #8b5e1a 0%, transparent 70%);
-      bottom: -20%; right: -10%;
-      animation-delay: -7s;
-    }
-    .aurora-blob:nth-child(3) {
-      width: 40vw; height: 40vh;
-      background: radial-gradient(circle, #f5c842 0%, transparent 70%);
-      top: 40%; left: 50%;
+      width: 60vw;
+      height: 60vh;
+      background: radial-gradient(circle, var(--glow) 0%, transparent 60%);
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      animation-delay: -12s;
-    }
-
-    @keyframes drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      33%  { transform: translate(4vw, -3vh) scale(1.05); }
-      66%  { transform: translate(-3vw, 4vh) scale(0.97); }
-      100% { transform: translate(2vw, 2vh) scale(1.02); }
-    }
-
-    /* Parallax layer */
-    .hero-parallax {
-      position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212,168,83,0.08) 0%, transparent 70%),
-        linear-gradient(180deg, transparent 40%, var(--black) 100%);
-      z-index: 1;
-      will-change: transform;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.85;
+      z-index: -1;
+      filter: blur(60px);
     }
 
     .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 14vw, 13rem);
-      line-height: 0.9;
-      letter-spacing: 0.04em;
-      color: var(--cream);
-      /* Subtle gold shimmer */
-      background: linear-gradient(135deg, #f0f0e8 30%, #d4a853 60%, #f0f0e8 80%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 6s linear infinite;
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
     }
 
     .hero-sub {
-      font-size: clamp(0.75rem, 1.8vw, 1rem);
-      font-weight: 400;
-      letter-spacing: 0.12em;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
       color: var(--muted);
-      max-width: 560px;
+      max-width: 600px;
+      margin: 0 auto 3rem;
     }
 
-    .hero-divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0.5rem auto;
-    }
+    /* ── SECTIONS ─────────────────────────────────────────── */
+    section { padding: 100px 5vw; }
+    .container { max-width: 1100px; margin: 0 auto; }
 
-    /* Scroll cue */
-    .scroll-cue {
-      position: absolute;
-      bottom: 3rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-
-    .scroll-cue span {
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .scroll-mouse {
-      width: 22px;
-      height: 36px;
-      border: 1.5px solid rgba(212,168,83,0.4);
-      border-radius: 11px;
-      display: flex;
-      justify-content: center;
-      padding-top: 6px;
-    }
-
-    .scroll-wheel {
-      width: 3px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 2px;
-      animation: scrollDown 1.8s ease-in-out infinite;
-    }
-
-    @keyframes scrollDown {
-      0%   { transform: translateY(0); opacity: 1; }
-      80%  { transform: translateY(12px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 0; }
-    }
-
-    /* ── SECTION BASE ─────────────────────────────────────── */
-    section {
-      padding: 8rem 6vw;
-      position: relative;
-    }
-
-    .section-fade {
-      background: linear-gradient(180deg, var(--black) 0%, var(--dark) 50%, var(--black) 100%);
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding: 4px 12px;
+      background: rgba(78, 124, 254, 0.1);
+      border-radius: 100px;
     }
 
     .section-title {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      color: var(--cream);
-      margin-bottom: 0.4rem;
-    }
-
-    .section-subtitle {
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
+      font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 3rem;
-      display: block;
     }
 
-    /* Gold rule */
-    .gold-rule {
-      width: 50px;
-      height: 2px;
-      background: var(--gold);
-      margin: 1.2rem 0 3rem;
-    }
-
-    /* Gradient separator */
-    .section-sep {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0;
-    }
-
-    /* ── SCROLL REVEAL ────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-50px);
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal-left.revealed {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(50px);
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal-right.revealed {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.35s; }
-    .reveal-delay-4 { transition-delay: 0.5s; }
-    .reveal-delay-5 { transition-delay: 0.65s; }
-
-    /* ── ABOUT SECTION ────────────────────────────────────── */
-    #about {
+    /* ── ABOUT GRID ───────────────────────────────────────── */
+    .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 6rem;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 8rem 6vw;
+      grid-template-columns: 350px 1fr;
+      gap: 4rem;
+      align-items: start;
     }
 
-    .about-image-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
-    .profile-ring {
-      position: relative;
-      width: 220px;
-      height: 220px;
-    }
-
-    .profile-ring::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
+    .profile-img-wrap {
+      width: 200px; height: 200px;
+      margin: 0 auto 1.5rem;
       border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        transparent 0%,
-        var(--gold) 30%,
-        var(--gold2) 60%,
-        transparent 70%,
-        var(--gold) 90%,
-        transparent 100%
-      );
-      animation: spin-ring 6s linear infinite;
-    }
-
-    .profile-ring::after {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      box-shadow: 0 0 40px rgba(212,168,83,0.25), 0 0 80px rgba(212,168,83,0.1);
-    }
-
-    @keyframes spin-ring {
-      to { transform: rotate(360deg); }
+      padding: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
     }
 
     .profile-img {
-      position: relative;
-      z-index: 1;
-      width: 212px;
-      height: 212px;
+      width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center top;
-      border: 3px solid var(--black);
-      display: block;
-      margin: 4px;
+      border: 4px solid var(--surface);
     }
 
-    .profile-name-tag {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-align: center;
-    }
+    .profile-name { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .profile-title { color: var(--muted); font-size: 0.9rem; }
 
-    .about-text h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      margin-bottom: 0.5rem;
-      color: var(--cream);
+    .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #d0d2db; }
+    
+    .mission-box {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(160, 114, 255, 0.05);
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 16px 16px 0;
     }
+    .mission-box h3 { color: var(--secondary); margin-bottom: 0.75rem; }
 
-    .about-text p {
-      color: #b8b8b0;
-      font-size: 1rem;
-      line-height: 1.85;
-      font-weight: 300;
-    }
-
-    .about-text p strong {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ── COBOL SECTION ────────────────────────────────────── */
-    #cobol {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    #cobol-wrap {
-      padding: 8rem 6vw;
-      background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
-    }
-
-    .cobol-intro {
-      max-width: 780px;
-      color: #a0a098;
-      font-size: 0.97rem;
-      line-height: 1.9;
-      margin-bottom: 3.5rem;
-      font-weight: 300;
-    }
-
-    .cobol-intro em {
-      color: var(--gold);
-      font-style: normal;
-      font-weight: 500;
-    }
-
-    /* Comparison table */
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-    }
-
-    .comparison-table thead tr {
-      border-bottom: 2px solid var(--gold);
-    }
-
-    .comparison-table th {
-      padding: 1rem 1.5rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.1em;
-      text-align: left;
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .comparison-table th:first-child {
-      color: var(--muted);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-    }
-
-    .comparison-table td {
-      padding: 0.9rem 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      vertical-align: top;
-      color: #c0c0b8;
-      line-height: 1.6;
-      transition: background 0.3s;
-    }
-
-    .comparison-table tr:hover td {
-      background: rgba(212,168,83,0.04);
-    }
-
-    .comparison-table td:first-child {
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    .comparison-table td:last-child {
-      color: var(--gold);
-    }
-
-    .table-wrapper {
-      border: 1px solid rgba(212,168,83,0.12);
-      border-radius: 12px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(8px);
-    }
-
-    .easter-egg-hint {
-      margin-top: 1.4rem;
-      font-size: 0.78rem;
-      color: rgba(212,168,83,0.45);
-      font-family: 'Inter', monospace;
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      text-align: center;
-      user-select: none;
-    }
-
-    /* ── EASTER EGGS SECTION ──────────────────────────────── */
-    #eggs-wrap {
-      padding: 8rem 6vw;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .egg-grid {
+    /* ── FEATURES GRID ────────────────────────────────────── */
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
-    .egg-card {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(212,168,83,0.1);
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 2.2rem 2rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-      transition:
-        border-color 0.4s ease,
-        box-shadow   0.4s ease,
-        transform    0.4s ease,
-        background   0.4s ease;
+      padding: 2rem;
+      transition: transform 0.3s, border-color 0.3s;
     }
-
-    .egg-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(212,168,83,0.07) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(78, 124, 254, 0.4);
     }
-
-    .egg-card:hover {
-      border-color: rgba(212,168,83,0.5);
-      box-shadow: 0 0 30px rgba(212,168,83,0.08), 0 8px 32px rgba(0,0,0,0.4);
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.04);
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-
-    .egg-card:hover::before { opacity: 1; }
-
-    .egg-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      display: block;
-      line-height: 1;
-    }
-
-    .egg-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.45rem;
-      color: var(--cream);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.3rem;
-    }
-
-    .egg-trigger {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-      display: block;
-      opacity: 0.75;
-    }
-
-    .egg-desc {
-      font-size: 0.88rem;
-      color: #8a8a82;
-      font-weight: 300;
-      line-height: 1.7;
-    }
+    .feature-card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
+    .feature-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
 
     /* ── TECH STACK ───────────────────────────────────────── */
-    #tech-wrap {
-      padding: 6rem 6vw;
-      text-align: center;
-    }
-
-    .badge-row {
+    .tech-stack {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 1rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.65rem 1.4rem;
-      border: 1px solid rgba(212,168,83,0.2);
+    .tech-badge {
+      padding: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 100px;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
-      color: #c0c0b8;
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(6px);
-      transition: all 0.35s ease;
-      cursor: default;
-    }
-
-    .badge:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(212,168,83,0.06);
-      box-shadow: 0 0 20px rgba(212,168,83,0.08);
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* ── FOOTER ───────────────────────────────────────────── */
     footer {
-      padding: 3.5rem 6vw;
+      border-top: 1px solid var(--border);
+      padding: 3rem 5vw;
       text-align: center;
-      border-top: 1px solid rgba(212,168,83,0.08);
-      position: relative;
-    }
-
-    .footer-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-copy {
-      font-size: 0.78rem;
       color: var(--muted);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
     }
 
-    .footer-sub {
-      font-size: 0.7rem;
-      color: rgba(136,136,128,0.55);
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
-    }
-
-    .back-to-top {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid rgba(212,168,83,0.25);
-      border-radius: 100px;
-      transition: all 0.3s ease;
-    }
-
-    .back-to-top:hover {
-      background: rgba(212,168,83,0.1);
-      border-color: var(--gold);
-    }
-
-    /* ── RESPONSIVE ───────────────────────────────────────── */
+    /* ── RESPONSIVE DESIGN ────────────────────────────────── */
     @media (max-width: 900px) {
-      #about {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
-      }
-
-      .about-image-wrap { align-items: center; }
-      .gold-rule { margin-left: auto; margin-right: auto; }
-
-      .egg-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .profile-card { max-width: 400px; margin: 0 auto; }
     }
 
     @media (max-width: 600px) {
-      section { padding: 5rem 5vw; }
-      #about { padding: 5rem 5vw; }
-    }
-
-    /* ── PARTICLES ────────────────────────────────────────── */
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: floatUp linear infinite;
-    }
-
-    @keyframes floatUp {
-      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 0.5; }
-      100% { transform: translateY(-100vh) translateX(var(--drift)) scale(0.4); opacity: 0; }
+      .nav-links { display: none; }
+      #hero { padding: 120px 5vw 60px; }
+      section { padding: 60px 5vw; }
+      .mission-box { padding: 1.5rem; }
     }
   </style>
 </head>
-
 <body>
+
   <!-- NAVBAR -->
-  <nav id="navbar" role="navigation" aria-label="Main Navigation">
-    <a class="nav-logo" href="#hero">NATCOM</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about-section">About</a></li>
-      <li><a href="#cobol-wrap">Legacy</a></li>
-      <li><a href="#eggs-wrap">Easter Eggs</a></li>
-      <li><a href="#tech-wrap">Tech Stack</a></li>
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+        <path d="M2 17L12 22L22 17" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M2 12L12 17L22 12" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      NATCOM Studio
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
     </ul>
   </nav>
 
-  <!-- ══ HERO ══════════════════════════════════════════════ -->
-  <section id="hero" aria-label="Hero">
-    <!-- Aurora background -->
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-blob"></div>
-      <div class="aurora-blob"></div>
-      <div class="aurora-blob"></div>
-    </div>
-
-    <!-- Parallax overlay -->
-    <div class="hero-parallax" id="hero-parallax" aria-hidden="true"></div>
-
-    <!-- Particle canvas -->
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
-
-    <!-- Main content -->
-    <div class="hero-content">
-      <p class="hero-eyebrow reveal">Est. 2026 · Kerala, India</p>
-      <h1 class="hero-title reveal reveal-delay-1">BEON<br>BINESH</h1>
-      <div class="hero-divider reveal reveal-delay-2"></div>
-      <p class="hero-sub reveal reveal-delay-3">
-        Creator of NATCOM (Prototype) &nbsp;·&nbsp; Software Architect &nbsp;·&nbsp; AI Pioneer
-      </p>
-    </div>
-
-    <!-- Scroll cue -->
-    <div class="scroll-cue" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'})" aria-label="Scroll down">
-      <div class="scroll-mouse" aria-hidden="true">
-        <div class="scroll-wheel"></div>
-      </div>
-      <span>Scroll</span>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <h1 class="hero-title">Beon Binesh</h1>
+    <p class="hero-sub">Creator of NATCOM <span style="opacity:0.5;margin:0 10px;">|</span> Software Architect <span style="opacity:0.5;margin:0 10px;">|</span> AI Pioneer</p>
+    <div style="margin-top: 2rem;">
+      <a href="#about" style="text-decoration:none; padding:14px 32px; background:var(--text); color:var(--bg); border-radius:100px; font-weight:600; font-size:0.95rem; transition:transform 0.2s;">
+        Discover NATCOM
+      </a>
     </div>
   </section>
 
-  <div class="section-sep"></div>
-
-  <!-- ══ ABOUT ═════════════════════════════════════════════ -->
-  <div id="about-section" style="background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);">
-    <div id="about">
-      <!-- Left: Profile -->
-      <div class="about-image-wrap reveal-left" id="about-img-col">
-        <div class="profile-ring">
-          <img
-            src="./beon.jpg"
-            alt="Beon Binesh — Creator of NATCOM"
-            class="profile-img"
-            id="profile-photo"
-            onerror="this.style.background='linear-gradient(135deg,#1a1a1a,#2a2010)';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22212%22 height=%22212%22><rect width=%22212%22 height=%22212%22 rx=%22106%22 fill=%22%231a1a1a%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2272%22>BB</text></svg>'"
-          />
+  <!-- ABOUT -->
+  <section id="about" style="background: rgba(17, 19, 28, 0.4);">
+    <div class="container">
+      <span class="section-tag">The Creator</span>
+      <h2 class="section-title">The Mind Behind the Matrix</h2>
+      
+      <div class="about-grid">
+        <!-- Profile Column -->
+        <div class="profile-card">
+          <div class="profile-img-wrap">
+            <img src="./beon.jpg" alt="Beon Binesh" class="profile-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%2311131c%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%234e7cfe%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22>BB</text></svg>'" />
+          </div>
+          <h3 class="profile-name">Beon Binesh</h3>
+          <p class="profile-title">Lead Architect & Founder</p>
         </div>
-        <p class="profile-name-tag">BEON BINESH</p>
-      </div>
 
-      <!-- Right: Bio -->
-      <div class="about-text">
-        <span class="section-subtitle reveal reveal-delay-1">About the Creator</span>
-        <h2 class="reveal reveal-delay-2">The Mind Behind<br>the Language</h2>
-        <div class="gold-rule reveal reveal-delay-3"></div>
-        <p class="reveal reveal-delay-4">
-          <strong>Beon Binesh</strong> is a visionary Software Architect, AI Pioneer, and the sole architect of <strong>NATCOM</strong> — the world's first true natural English programming language. Built entirely using human intuition and accelerated by <strong>Google Gemini AI</strong> and <strong>Antigravity AGY by Google DeepMind</strong>, NATCOM represents a quantum leap in the future of human-computer interaction.
-        </p>
-        <br />
-        <p class="reveal reveal-delay-5">
-          What began as a profound question — <em style="color: var(--gold); font-style: italic;">"Why must human minds adapt to the machine's rigid logic?"</em> — evolved into a revolutionary compiler matrix. NATCOM doesn't just interpret instructions; it understands intent. It thinks, self-heals, and seamlessly compiles natural human prose into highly optimized native C binaries and JavaScript.
-        </p>
-
-        <!-- MISSION SECTION ADDED -->
-        <div style="margin-top: 30px; border-left: 3px solid var(--gold); padding-left: 20px;" class="reveal reveal-delay-6">
-          <h3 style="font-family: 'Bebas Neue'; font-size: 22px; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px;">The Mission</h3>
-          <p style="font-size: 14px; color: #d0d0d0; line-height: 1.6;">
-            To dismantle the barrier of entry to software creation. For decades, coding has been gatekept by cryptic syntax and strict paradigms. The mission of NATCOM is to democratize computation — allowing artists, writers, scientists, and dreamers to build complex software just by explaining what they want the machine to do.
+        <!-- Bio Column -->
+        <div class="about-text">
+          <p>
+            <strong>Beon Binesh</strong> is a visionary Software Architect, AI Pioneer, and the sole architect of <strong>NATCOM</strong> — the world's first true natural English programming language. 
           </p>
+          <p>
+            Built entirely using human intuition and accelerated by <strong>Google Gemini AI</strong> and <strong>Antigravity AGY by Google DeepMind</strong>, NATCOM represents a quantum leap in the future of human-computer interaction.
+          </p>
+          <p>
+            What began as a profound question — <em class="gradient-text">"Why must human minds adapt to the machine's rigid logic?"</em> — evolved into a revolutionary compiler matrix. NATCOM doesn't just interpret instructions; it understands intent. It thinks, self-heals, and seamlessly compiles natural human prose into highly optimized native binaries and JavaScript.
+          </p>
+
+          <div class="mission-box">
+            <h3>The Mission</h3>
+            <p style="margin:0; font-size:0.95rem; color:var(--text);">
+              To dismantle the barrier of entry to software creation. For decades, coding has been gatekept by cryptic syntax and strict paradigms. The mission of NATCOM is to democratize computation — allowing artists, writers, scientists, and dreamers to build complex software simply by explaining what they want the machine to do.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section-sep"></div>
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <span class="section-tag">Capabilities</span>
+      <h2 class="section-title">NATCOM v2.1 Features</h2>
 
-  <!-- ══ NATCOM vs COBOL ═══════════════════════════════════ -->
-  <div id="cobol-wrap">
-    <div id="cobol">
-      <span class="section-subtitle reveal">Paying Tribute</span>
-      <h2 class="section-title reveal reveal-delay-1">Standing on the<br>Shoulders of Giants</h2>
-      <div class="gold-rule reveal reveal-delay-2"></div>
-
-      <p class="cobol-intro reveal reveal-delay-3">
-        NATCOM pays tribute to <em>COBOL</em> — the first English-like programming language, created by
-        <em>Admiral Grace Murray Hopper</em> in 1959. Like COBOL, NATCOM believes code should read like English.
-        But where COBOL required rigid structure and was built for business punch cards, NATCOM is
-        <em>free-form, modern</em>, and compiles to native binaries and JavaScript.
-      </p>
-
-      <div class="table-wrapper reveal reveal-delay-3">
-        <table class="comparison-table" aria-label="NATCOM vs COBOL Comparison">
-          <thead>
-            <tr>
-              <th scope="col">Feature</th>
-              <th scope="col">COBOL (1959)</th>
-              <th scope="col">NATCOM (2026)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Creator</td>
-              <td>Grace Hopper &amp; team</td>
-              <td>Beon Binesh</td>
-            </tr>
-            <tr>
-              <td>Philosophy</td>
-              <td>English-like syntax</td>
-              <td>Full natural English</td>
-            </tr>
-            <tr>
-              <td>Target</td>
-              <td>Mainframes</td>
-              <td>Native C binary + JavaScript</td>
-            </tr>
-            <tr>
-              <td>Input style</td>
-              <td><code style="background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;font-size:0.82em;color:#c0c0b8;">IDENTIFICATION DIVISION</code></td>
-              <td><code style="background:rgba(212,168,83,0.08);padding:2px 6px;border-radius:4px;font-size:0.82em;color:#d4a853;">Ask the user to enter a value for X.</code></td>
-            </tr>
-            <tr>
-              <td>Loops</td>
-              <td><code style="background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;font-size:0.82em;color:#c0c0b8;">PERFORM 10 TIMES</code></td>
-              <td><code style="background:rgba(212,168,83,0.08);padding:2px 6px;border-radius:4px;font-size:0.82em;color:#d4a853;">Repeat 10 times:</code></td>
-            </tr>
-            <tr>
-              <td>Error handling</td>
-              <td>Rigid</td>
-              <td>Self-healing AI engine</td>
-            </tr>
-            <tr>
-              <td>Year</td>
-              <td>1959</td>
-              <td>2026</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-
-    </div>
-  </div>
-
-  <div class="section-sep"></div>
-
-  <!-- ══ EASTER EGGS ════════════════════════════════════════ -->
-  <div id="eggs-wrap">
-    <span class="section-subtitle reveal">Hidden Secrets</span>
-    <h2 class="section-title reveal reveal-delay-1">Hidden Secrets in<br>NATCOM Studio</h2>
-    <div class="gold-rule reveal reveal-delay-2"></div>
-
-    <div class="egg-grid">
-      <div class="egg-card reveal reveal-delay-2" id="egg-vice-city">
-        <span class="egg-icon">🎮</span>
-        <div class="egg-name">Vice City 144p</div>
-        <span class="egg-trigger">CHEAT CODE: <kbd style="background:var(--gold); color:#000; font-family:'Bebas Neue'; font-size:16px; padding:2px 6px;">PWOL</kbd></span>
-        <p class="egg-desc">
-          The ultimate Kerala-coded easter egg hidden inside NATCOM Studio.<br>
-          <em style="color: var(--gold);">&ldquo;We got NATCOM before GTA 6!&rdquo;</em>
-        </p>
-      </div>
-
-      <div class="egg-card reveal reveal-delay-3" id="egg-legacy">
-        <span class="egg-icon">🏛️</span>
-        <div class="egg-name">Legacy Mode</div>
-        <span class="egg-trigger">CHEAT CODE: <kbd style="background:var(--gold); color:#000; font-family:'Bebas Neue'; font-size:16px; padding:2px 6px;">GRAC</kbd></span>
-        <p class="egg-desc">
-          A heartfelt tribute to Admiral Grace Hopper and the COBOL pioneers. Somewhere in the code, a name unlocks a portal to the past.
-        </p>
-      </div>
-
-      <div class="egg-card reveal reveal-delay-3" id="egg-sovereign">
-        <span class="egg-icon">🔐</span>
-        <div class="egg-name">Sovereign Unlock</div>
-        <span class="egg-trigger">CHEAT CODE: <kbd style="background:var(--gold); color:#000; font-family:'Bebas Neue'; font-size:16px; padding:2px 6px;">SOVR</kbd></span>
-        <p class="egg-desc">
-          Activates the ZKP audit layer — a zero-knowledge proof module buried deep in NATCOM's compiler. Only the worthy find it.
-        </p>
-      </div>
-
-      <div class="egg-card reveal reveal-delay-4" id="egg-devmode">
-        <span class="egg-icon">💻</span>
-        <div class="egg-name">Dev Mode</div>
-        <span class="egg-trigger">CHEAT CODE: <kbd style="background:var(--gold); color:#000; font-family:'Bebas Neue'; font-size:16px; padding:2px 6px;">BEON</kbd></span>
-        <p class="egg-desc">
-          Unlocks the creator's channel. NATCOM was built by one mind, one dream. Find the name, unlock the truth.
-        </p>
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>AI Code Generation</h3>
+          <p>Powered by Google Gemini API, NATCOM Studio features a built-in AI assistant. Describe your logic in plain English, and the AI will write valid, executable NATCOM source code instantly.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Native C & JS Compilation</h3>
+          <p>NATCOM is a true multi-target compiler. It translates natural English directly into highly optimized Native C (-O3) for high-performance desktop execution, and JavaScript for the web.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon">🗣️</div>
+          <h3>Object-Oriented English</h3>
+          <p>No brackets, no semicolons. Define variables, math logic, simulation loops, conditions, and custom functions entirely through natural English sentences like <em>"Repeat 10 times"</em>.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Self-Healing Parser</h3>
+          <p>The Sovereign Compiler Toolchain employs advanced heuristic lexical analysis to intuitively understand and autocorrect minor syntax deviations, ensuring a fluid coding experience.</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  </div>
-
-  <div class="section-sep"></div>
-
-  <!-- ══ TIMELINE / FEATURES ════════════════════════════════ -->
-  <div id="timeline-wrap">
-    <span class="section-subtitle reveal">Evolution</span>
-    <h2 class="section-title reveal reveal-delay-1">The NATCOM Timeline</h2>
-    <div class="gold-rule reveal reveal-delay-2"></div>
-
-    <div class="timeline-container reveal reveal-delay-3" style="max-width: 800px; margin: 0 auto; text-align: left; padding: 20px 0;">
-      <!-- Timeline Item 1 -->
-      <div style="border-left: 2px solid var(--gold); padding-left: 20px; margin-bottom: 30px; position: relative;">
-        <div style="position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--gold);"></div>
-        <h3 style="font-family: 'Bebas Neue'; font-size: 24px; color: var(--gold); letter-spacing: 1px; margin: 0 0 5px 0;">v1.0 — The Idea</h3>
-        <p style="font-size: 14px; color: #a0a0a0; margin: 0;">"Why do humans learn the machine's language?" This question birthed the first iteration of NATCOM — a parser that understood simple English statements and converted them into raw logic.</p>
-      </div>
-
-      <!-- Timeline Item 2 -->
-      <div style="border-left: 2px solid var(--gold); padding-left: 20px; margin-bottom: 30px; position: relative;">
-        <div style="position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--gold);"></div>
-        <h3 style="font-family: 'Bebas Neue'; font-size: 24px; color: var(--gold); letter-spacing: 1px; margin: 0 0 5px 0;">v1.5 — The Compiler Matrix</h3>
-        <p style="font-size: 14px; color: #a0a0a0; margin: 0;">Introduction of the Sovereign Compiler Toolchain. NATCOM evolved to parse complex variables, loops, math, and logic, seamlessly targeting highly optimized Native C binaries.</p>
-      </div>
-
-      <!-- Timeline Item 3 -->
-      <div style="border-left: 2px solid var(--gold); padding-left: 20px; margin-bottom: 30px; position: relative;">
-        <div style="position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--gold);"></div>
-        <h3 style="font-family: 'Bebas Neue'; font-size: 24px; color: var(--gold); letter-spacing: 1px; margin: 0 0 5px 0;">v2.0 — Object Oriented English</h3>
-        <p style="font-size: 14px; color: #a0a0a0; margin: 0;">A massive breakthrough. Added support for defining Functions, Classes, and Objects entirely in natural English prose. Multi-target compilation (C and JS) introduced for Web and Desktop execution.</p>
-      </div>
-
-      <!-- Timeline Item 4 -->
-      <div style="border-left: 2px solid var(--gold); padding-left: 20px; position: relative;">
-        <div style="position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff;"></div>
-        <h3 style="font-family: 'Bebas Neue'; font-size: 24px; color: #fff; letter-spacing: 1px; margin: 0 0 5px 0;">v2.1 — AI Genesis (Current)</h3>
-        <p style="font-size: 14px; color: #a0a0a0; margin: 0;">NATCOM Studio now features a built-in AI Code Generator via the Google Gemini API. Users prompt in English, and the AI writes valid NATCOM code perfectly. 4-letter GTA-style cheat codes added.</p>
+  <!-- TECH STACK -->
+  <section style="padding-top: 0;">
+    <div class="container">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Powered By</h3>
+      <div class="tech-stack">
+        <div class="tech-badge">Python 3 Core</div>
+        <div class="tech-badge">GCC Toolchain</div>
+        <div class="tech-badge">Node.js Engine</div>
+        <div class="tech-badge">Google Gemini AI</div>
+        <div class="tech-badge">Antigravity AGY</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section-sep"></div>
-
-  <!-- ══ TECH STACK ═════════════════════════════════════════ -->
-  <div id="tech-wrap">
-    <span class="section-subtitle reveal">The Foundation</span>
-    <h2 class="section-title reveal reveal-delay-1">Built With</h2>
-    <div class="gold-rule reveal reveal-delay-2" style="margin-left:auto;margin-right:auto;"></div>
-
-    <div class="badge-row">
-      <div class="badge reveal reveal-delay-2"><span class="badge-dot"></span>Python</div>
-      <div class="badge reveal reveal-delay-2"><span class="badge-dot"></span>C (GCC)</div>
-      <div class="badge reveal reveal-delay-3"><span class="badge-dot"></span>JavaScript</div>
-      <div class="badge reveal reveal-delay-3"><span class="badge-dot"></span>Google Gemini AI</div>
-      <div class="badge reveal reveal-delay-4"><span class="badge-dot"></span>Antigravity AGY</div>
-      <div class="badge reveal reveal-delay-4"><span class="badge-dot"></span>Natural Language Processing</div>
-    </div>
-  </div>
-
-  <div class="section-sep"></div>
-
-  <!-- ══ FOOTER ═════════════════════════════════════════════ -->
-  <footer id="footer">
-    <div class="footer-brand">NATCOM</div>
-    <p class="footer-copy">© 2026 Beon Binesh &nbsp;·&nbsp; NATCOM Language</p>
-    <p class="footer-sub">Developed with Google Gemini and Antigravity AGY by Google DeepMind</p>
-    <a href="#hero" class="back-to-top" id="back-top-link">↑ &nbsp; Back to Top</a>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Beon Binesh. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; opacity: 0.6;">Developed with Google Gemini and Antigravity AGY by Google DeepMind.</p>
   </footer>
 
-  <!-- ══ JAVASCRIPT ══════════════════════════════════════════ -->
-  <script>
-    /* ── SCROLL REVEAL ─────────────────────────────────────── */
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => observer.observe(el));
-
-    /* ── HERO PARTICLES ────────────────────────────────────── */
-    const canvas = document.getElementById('hero-canvas');
-    const ctx    = canvas.getContext('2d');
-    let W, H, particles = [];
-
-    function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
-    }
-
-    function randomBetween(a, b) { return a + Math.random() * (b - a); }
-
-    function createParticle() {
-      return {
-        x: randomBetween(0, W),
-        y: randomBetween(H * 0.3, H),
-        r: randomBetween(0.5, 2.2),
-        speed: randomBetween(0.15, 0.55),
-        opacity: randomBetween(0.1, 0.5),
-        opDir: Math.random() > 0.5 ? 1 : -1,
-        color: Math.random() > 0.6
-          ? `rgba(212,168,83,` // gold
-          : Math.random() > 0.5
-            ? `rgba(245,200,66,` // bright gold
-            : `rgba(240,240,232,`, // cream
-      };
-    }
-
-    function initParticles(n) {
-      particles = [];
-      for (let i = 0; i < n; i++) particles.push(createParticle());
-    }
-
-    function drawParticles() {
-      ctx.clearRect(0, 0, W, H);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + p.opacity + ')';
-        ctx.fill();
-      });
-    }
-
-    function updateParticles() {
-      particles.forEach(p => {
-        p.y -= p.speed;
-        p.opacity += p.opDir * 0.003;
-        if (p.opacity > 0.55 || p.opacity < 0.05) p.opDir *= -1;
-        if (p.y < -10) {
-          p.y = H + 10;
-          p.x = randomBetween(0, W);
-        }
-      });
-    }
-
-    function loop() {
-      drawParticles();
-      updateParticles();
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('resize', () => {
-      resize();
-      initParticles(70);
-    });
-
-    resize();
-    initParticles(70);
-    loop();
-
-    /* ── PARALLAX HERO ─────────────────────────────────────── */
-    const heroParallax = document.getElementById('hero-parallax');
-    window.addEventListener('scroll', () => {
-      const s = window.scrollY;
-      if (s < window.innerHeight) {
-        heroParallax.style.transform = `translateY(${s * 0.35}px)`;
-      }
-    }, { passive: true });
-
-    /* ── HERO INITIAL REVEAL ───────────────────────────────── */
-    // Auto-trigger hero reveals on load
-    setTimeout(() => {
-      document.querySelectorAll('#hero .reveal').forEach((el, i) => {
-        setTimeout(() => el.classList.add('revealed'), i * 180);
-      });
-    }, 200);
-
-    /* ── NAVBAR SCROLL GLASS ───────────────────────────────── */
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
-        navbar.style.background = 'rgba(10,10,10,0.92)';
-      } else {
-        navbar.style.background = 'rgba(10,10,10,0.7)';
-      }
-    }, { passive: true });
-  </script>
 </body>
 </html>
