@@ -1,18 +1,18 @@
-// hello.nc - A basic introduction to NATCOM
+// hello.nc — Hello World in NATCOM
+// Your very first NATCOM program!
 
-// Creating a variable
-Create a high speed integer named HelloVariable and set it to 1.
+Create a string named Greeting and set it to "Hello, World!".
+Create a boolean named IsRunning and set it to true.
+Create a high speed integer named Counter and set it to 0.
 
-// Logging its value
-Log the value of HelloVariable.
+Display "Welcome to NATCOM — The English Programming Language!"
+Display "No syntax. No curly braces. Just plain English."
+Log the value of Greeting.
+Log the value of IsRunning.
 
-// Running a quick loop
-Begin the main simulation loop.
-  Add 1 to HelloVariable.
-  
-  If the HelloVariable is greater than 5, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
+Repeat 5 times:
+  Increment Counter.
+Done.
 
-Log the value of HelloVariable.
+Display "Counted to:"
+Log the value of Counter.

@@ -82,7 +82,8 @@ class SystemsCodeGen:
         self._needs_math  = False
         self._needs_rand  = False
         self._needs_str   = False
-        self._str_vars    = {}   # name -> max_len
+        self._str_vars    = set()   # string variable names
+        self._bool_vars   = set()   # boolean variable names
         self._tmp_counter = 0
 
     # ── public entry ────────────────────────────────────────────────────────
@@ -216,6 +217,7 @@ class SystemsCodeGen:
                 c.append(f"{indent}{t} {node.name} = {node.value};")
 
         elif isinstance(node, StringDeclarationNode):
+            self._str_vars.add(node.name)
             if js:
                 c.append(f'{indent}let {node.name} = "{node.value}";')
             else:
@@ -223,6 +225,7 @@ class SystemsCodeGen:
                 c.append(f'{indent}char {node.name}[512] = "{safe}";')
 
         elif isinstance(node, BoolDeclarationNode):
+            self._bool_vars.add(node.name)
             if js:
                 val = "true" if node.value == "1" else "false"
                 c.append(f"{indent}let {node.name} = {val};")
@@ -316,9 +319,16 @@ class SystemsCodeGen:
                 c.append(f"{indent}console.log('  ◆  {vn} =', {vn});")
             else:
                 if vn.startswith('"'):
+                    # Literal string constant
                     c.append(f'{indent}nc_log("Output", "%s", {vn});')
+                elif vn in self._str_vars:
+                    c.append(f'{indent}nc_value_s("{vn}", {vn});')
+                elif vn in self._bool_vars:
+                    c.append(f'{indent}nc_value_b("{vn}", {vn});')
                 else:
+                    # Default: treat as numeric float
                     c.append(f'{indent}nc_value_f("{vn}", (double){vn});')
+
 
         elif isinstance(node, DisplayTextNode):
             safe = node.text.replace('"', '\\"')
@@ -328,7 +338,10 @@ class SystemsCodeGen:
         elif isinstance(node, DisplayVarNode):
             for vn in node.vars_list:
                 if js: c.append(f'{indent}console.log("  ◆  {vn} =", {vn});')
-                else:  c.append(f'{indent}nc_value_f("{vn}", (double){vn});')
+                elif vn in self._str_vars:  c.append(f'{indent}nc_value_s("{vn}", {vn});')
+                elif vn in self._bool_vars: c.append(f'{indent}nc_value_b("{vn}", {vn});')
+                else: c.append(f'{indent}nc_value_f("{vn}", (double){vn});')
+
 
         elif isinstance(node, PrintLineNode):
             if js: c.append(f'{indent}console.log("");')

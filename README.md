@@ -1,198 +1,326 @@
-# THE SUPREME UNIFIED BOOTSTRAPPED COMPILER SPECIFICATION: PROJECT NATCOM V2 (FINAL)
+# NATCOM — Natural Communication Language
 
-Welcome to the foundational documentation for **NATCOM** (Natural Communication Language) V2. NATCOM is designed to replace traditional programming constraints with free-form human English prose, serving as the bedrock for a next-generation lightweight Operating System optimized for coding and high-performance gaming mechanics.
+> **Code in plain English. No syntax. No barriers.**
 
-## 1. TECHNICAL ARCHITECTURE & BOOTSTRAPPING ROADMAP
+<div align="center">
 
-NATCOM operates on a dual-paradigm execution model. It natively parses free-form natural language into raw, highly-optimized hardware instructions. The ultimate goal of this project is true self-hosting (Bootstrapping), where the NATCOM compiler is written entirely in the NATCOM language itself.
+![NATCOM Logo](ui/natcom_icon.png)
 
-### The Text Compilation Pipeline
-```text
-[Human Prose input (.nc)]
-       │
-       ▼
-+-------------------------+
-| Safe Free-Form Lexer    | ---> Analyzes natural English tokens & low-level override blocks
-+-------------------------+
-       │
-       ▼
-+-------------------------+
-| Multiverse AST Parser   | ---> Self-Healing AST generation; resolves logical ambiguities
-+-------------------------+
-       │
-       ▼
-+-------------------------+
-| Cloaked Sovereign Layer | ---> Injects zero-knowledge compliance & audit trace vectors
-+-------------------------+
-       │
-       ▼
-+-------------------------+
-| Systems Code Generator  | ---> Direct hardware translation (Zero VM footprint)
-+-------------------------+
-       │
-       ▼
-[Standalone Binary Executable]
-```
+**NATCOM** is the world's first **English-only programming language**.  
+Write programs in natural English sentences — NATCOM compiles them to blazing-fast native C binaries or JavaScript.
 
-### The Bootstrapping Future (Self-Hosting Logic Flow)
-**Stage 1: The Baseline (Current Phase)**
-- Compiler is written in highly-optimized Python.
-- Translates `hello.nc` (NATCOM code) into native binaries.
+[![Version](https://img.shields.io/badge/version-2.0-00ffcc?style=flat-square)](#)
+[![Language](https://img.shields.io/badge/language-English-7c6af7?style=flat-square)](#)
+[![Target](https://img.shields.io/badge/target-Native%20C%20%7C%20JavaScript-f7a06a?style=flat-square)](#)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](#)
 
-**Stage 2: The Translation**
-- The verified Python NATCOM compiler logic is rewritten using NATCOM English syntax (`compiler.nc`).
-- The Python NATCOM compiler builds `compiler.nc` into `natcom_v2.bin`.
+**Created by [Beon Binesh](ui/about.html) · Developed with Google Gemini & Antigravity AGY**
 
-**Stage 3: True Sovereignty**
-- `natcom_v2.bin` can now compile any new NATCOM source code, including its own source code, completely severing ties with Python and becoming a fully dependency-free, self-hosted entity.
+</div>
 
-## 2. ENVIRONMENT INITIALIZATION MATRIX
+---
 
-To deploy and execute the NATCOM toolchain, adhere to the following prerequisites and initialization sequences.
+## 🚀 Quick Start
 
-### System Prerequisites
-- Unix-based Operating System (Linux optimized)
-- Python 3.10+ (for Stage 1 Baseline Compiler)
-- Standard GNU binutils (GCC/Clang for native binary linking)
-
-### Directory Layout
-Ensure your workspace adheres to this exact structure:
-```text
-NATCOM/
-├── src/
-│   ├── lexer.py      (Module 1: Safe Free-Form Lexer Engine)
-│   ├── parser.py     (Module 2: Self-Healing AST Parser)
-│   └── codegen.py    (Module 3: Bootstrapped Systems Code Generator)
-├── natcom            (Module 4: Automated Toolchain Runner CLI)
-└── README.md         (This Specification)
-```
-
-### Initialization Commands
-Execute the following to activate the NATCOM environment:
+### 1. Install
 ```bash
-# Clone/Setup workspace
-cd /home/beoboy/NATCOM
-
-# Grant executable permissions to the automated toolchain runner
+git clone https://github.com/beoboy/NATCOM.git
+cd NATCOM
 chmod +x natcom
-
-# Execute the compiler on a source file to generate the binary
-./natcom build main.nc -o game_engine
-
-# Run the compiled binary
-./game_engine
 ```
 
-## 3. THE COMPLETE NATCOM V2 SPECIFICATION MANUAL
-
-NATCOM is a **Dual-Paradigm** language. It seamlessly supports pure narrative sentences and traditional code blocks. The frontend can handle massive scripts safely.
-
-### Core Paradigms
-
-**1. Variable and State Declaration**
-*Natural:* `Create a high speed integer named PlayerHealth and set it to 100.`
-*Natural:* `Create a floating point variable named GravityForce and set it to 9.8.`
-
-**2. Dynamic Arithmetic Engine**
-*Natural:* `Add 50 to PlayerHealth.`
-*Natural:* `Multiply GravityForce by 2.0.`
-*Natural:* `Subtract 10 from PlayerHealth.`
-*Natural:* `Divide GravityForce by 2.0.`
-
-**3. State Introspection Logging**
-*Natural:* `Log the value of PlayerHealth.`
-This token dynamically maps to robust `printf` statements to inspect memory registers natively.
-
-**4. Conditional Logic & Multiverse Branching**
-*Natural:* `If the PlayerHealth is less than 0, then: ... Otherwise: ...`
-
-**5. Spatial Gaming Configurations (Native Engine Matrices)**
-*Natural:* `Initialize high performance gaming viewport with gravity physics.`
-*Natural:* `Render a 3D matrix representing a vehicle at coordinates 10.5, 50.0, 15.2.`
-
-**6. Low-Level Override Blocks**
-For memory-critical operations, Vibe Coders can seamlessly drop into traditional C-style constructs:
-```text
-<SYSTEM_OVERRIDE>
-flush_render_pipeline();
-</SYSTEM_OVERRIDE>
+### 2. Write your first program (`hello.nc`)
+```
+Create a string named Greeting and set it to "Hello, World!".
+Display "Welcome to NATCOM — The English Programming Language!"
+Log the value of Greeting.
 ```
 
-**7. The Parsing Repair Engine (Self-Healing Core)**
-If an intentional or accidental syntax anomaly occurs, the parser prints a diagnostic dashboard, repairs the tree, and continues compilation seamlessly without crashing.
+### 3. Compile & Run
+```bash
+./natcom build hello.nc -o hello
+./hello
+```
 
-## 4. SIMPLE EXAMPLE CODING OF 5
+### 4. Open NATCOM Studio (Web IDE)
+```bash
+python3 server.py
+# Open: http://localhost:8080
+```
 
-If you want a minimal baseline test of NATCOM's arithmetic capabilities, use this simple 5-step snippet:
+---
 
-```text
-// 1. Declare
-Create a high speed integer named Counter and set it to 0.
+## 💡 Philosophy
 
-// 2. Add
-Add 5 to Counter.
+Traditional programming forces you to learn **syntax rules** before solving real problems.  
+NATCOM flips this — **you write English, the compiler does the translation**.
 
-// 3. Multiply
-Multiply Counter by 10.
+| Traditional (C) | NATCOM |
+|---|---|
+| `int score = 0;` | `Create a high speed integer named Score and set it to 0.` |
+| `scanf("%f", &x);` | `Ask the user to enter a value for X.` |
+| `result = sqrt(x);` | `Set Result to the square root of X.` |
+| `for(int i=0;i<10;i++)` | `Repeat 10 times:` |
+| `if (a > b) { ... }` | `If the A is greater than B, then:` |
 
-// 4. Output
-Log the value of Counter.
+---
 
-// 5. Conditional execution
-If the Counter is greater than 10, then:
-  Log the value of Counter.
+## 📖 Complete Language Reference
+
+### Variables
+
+| Statement | Type |
+|---|---|
+| `Create a high speed integer named X and set it to 5.` | Integer |
+| `Create a floating point variable named X and set it to 3.14.` | Float |
+| `Create a string named Name and set it to "Hello".` | String (char[512]) |
+| `Create a boolean named Flag and set it to true.` | Boolean (true/false) |
+| `Set X to 42.` | Assignment |
+| `Swap the values of X and Y.` | Swap two variables |
+
+### User Input
+
+```
+Ask the user to enter a value for X.
+Ask the user to enter a value for Speed with prompt 'Enter speed (m/s)'.
+Ask the user for text named Name.
+Ask the user to enter text for Address with prompt 'Your address'.
+```
+
+### Arithmetic
+
+```
+Add 10 to Score.
+Subtract 5 from Score.
+Multiply Score by 2.
+Divide Score by 4.
+Increase Health by 50.
+Decrease Fuel by 10.
+Increment Counter.
+Decrement Counter.
+Find the remainder of A divided by B and store in Result.
+```
+
+### Math Functions
+
+```
+Set Result to the square root of X.
+Set Result to the absolute value of X.
+Set Result to the floor of X.
+Set Result to the ceiling of X.
+Set Result to the natural log of X.
+Set Result to e to the power of X.
+Set Result to the maximum of A and B.
+Set Result to the minimum of A and B.
+Raise X to the power of Y.
+Set Result to X to the power of Y.
+Set X to a random number between 1 and 100.
+Generate a random number between 1 and 100 and store in X.
+```
+
+### Output / Display
+
+```
+Log the value of X.
+Display "Hello World".
+Display 'Hello World'.
+Display the value of X.
+Display the values of X and Y and Z.
+Print a blank line.
+```
+
+### Conditionals
+
+```
+If the X is greater than Y, then:
+  Log the value of X.
 Otherwise:
-  Keep the simulation running.
+  Log the value of Y.
 ```
 
-## 5. COMPREHENSIVE WORKING DEMO SCRIPT
+Supported operators: `is greater than`, `is less than`, `equals`, `is not`, `drops below`
 
-Below is a complete, fully operational NATCOM baseline script. This should be saved as `main.nc` to be compiled by the toolchain.
+### Loops
 
-```text
-// main.nc - The Ultimate NATCOM Baseline test
-Initialize the cloaked zero-knowledge matrix for sovereign auditing.
-Initialize high performance gaming viewport with gravity physics.
+**Repeat Loop:**
+```
+Repeat 10 times:
+  Increment Counter.
+  Log the value of Counter.
+Done.
+```
 
-Create a high speed integer named CompilationStatus and set it to 1.
-Create a high speed integer named AstNodes and set it to 0.
+**While Loop:**
+```
+Keep running while Counter is less than 10:
+  Increment Counter.
+Stop the loop.
+```
 
-Log the value of CompilationStatus.
-
+**Simulation Loop (Game Loop):**
+```
 Begin the main simulation loop.
-  If the PlayerHealth is less than 0, then:
-    Trigger the game over sequence.
-    Log the value of Score.
+  Increase Score by 1.
+  If the Score is greater than 100, then:
     Halt the simulation.
   Otherwise:
     Keep the simulation running.
+```
 
-// [E] Cloud Memory Sync Hook
+### Sovereign Layer (Advanced)
+
+```
+Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+Initialize high performance gaming viewport with gravity physics.
+Render a 3D matrix representing a vehicle at coordinates 10.5, 50.0, 15.2.
 Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.
+```
 
-// [F] Deliberate Anomaly for Self-Healing Engine Test
-Make a variable called BadSyntax and set it to 5.
+### Raw Code Override
 
-// [G] Low-level optimization override
+Embed raw C or JavaScript directly inside your English program:
+
+```
 <SYSTEM_OVERRIDE>
-flush_render_pipeline();
+printf("Raw C code here\n");
+int raw_var = 42;
 </SYSTEM_OVERRIDE>
 ```
 
-## 5. THREAT MODEL & RAM EFFICIENCY BLUEPRINT
+### Comments
 
-NATCOM is built for defense-grade security and ultra-low latency execution.
+```
+// This is a comment — ignored by the compiler
+```
 
-### Dependency-Free Auto-Synthesis
-NATCOM self-synthesizes all logic, bypassing external package managers and completely eliminating Dependency Hell. The emitted binary utilizes zero runtime VM layers, running natively on physical CPU architecture with deterministic C++ performance levels.
+---
 
-### Sovereign Cryptographic Traceability
-A core component of the NATCOM code generator is the injection of the **Cloaked Sovereign Layer**. 
-- Every compiled binary embeds an unalterable compliance signature.
-- Higher Intelligence Agencies possess proprietary read-only keys to verify binary compliance if, and only if, the binary attempts illegal OS-level memory violations.
-- The matrix operates purely on Zero-Knowledge Proofs (ZKP), ensuring that standard user data, intellectual property, and proprietary gaming mechanics remain cryptographically invisible. No user data can be leaked.
+## 🔨 Compiler CLI
 
-### RAM Efficiency Blueprint & Compiler Hardening
-- **Extreme GCC Hardening:** The automation runner executes the compilation using strict optimization and security flags: `-O3 -Wall -Wextra -Werror -fstack-protector-strong`.
-- **Stack-Allocated Integrity:** The Systems Code Generator emits secure ISO C strings and heavily utilizes stack allocation to block memory injection operations.
-- **Google Cloud Storage Virtual RAM:** For extreme memory operations (e.g. streaming 4K textures offline natively), NATCOM includes a hybrid storage footprint, maintaining an initial local footprint of under 50MB.
+```bash
+# Compile to native binary (default)
+./natcom build file.nc -o output
+
+# Compile to JavaScript
+./natcom build file.nc --target js -o output.js
+
+# Build examples
+./natcom build examples/calculator.nc -o calculator
+./natcom build examples/full_demo.nc -o full_demo
+```
+
+---
+
+## 📂 Example Programs
+
+### Hello World (`examples/hello.nc`)
+```
+Create a string named Greeting and set it to "Hello, World!".
+Create a boolean named IsRunning and set it to true.
+Create a high speed integer named Counter and set it to 0.
+
+Display "Welcome to NATCOM!"
+Log the value of Greeting.
+Log the value of IsRunning.
+
+Repeat 5 times:
+  Increment Counter.
+Done.
+
+Log the value of Counter.
+```
+
+### Calculator with User Input (`examples/calculator.nc`)
+```
+Create a floating point variable named A and set it to 0.
+Create a floating point variable named B and set it to 0.
+
+Ask the user to enter a value for A.
+Ask the user to enter a value for B.
+
+Create a floating point variable named Sum and set it to 0.
+Add A to Sum.
+Add B to Sum.
+Display the values of Sum.
+```
+
+### Budget Tracker (`examples/budget_tracker.nc`)
+```
+Create a floating point variable named Budget and set it to 0.
+Create a floating point variable named Expenses and set it to 0.
+
+Ask the user to enter a value for Budget.
+Ask the user to enter a value for Expenses.
+
+Create a floating point variable named Savings and set it to 0.
+Add Budget to Savings.
+Subtract Expenses from Savings.
+Display the values of Savings.
+
+If the Savings is greater than 0, then:
+  Display "You saved money!"
+Otherwise:
+  Display "You are over budget!"
+```
+
+---
+
+## 🌐 NATCOM Studio (Web IDE)
+
+The built-in web IDE provides:
+- ✅ **Syntax highlighting** — keywords colored by category
+- ✅ **Live error detection** — red squiggles on unknown lines
+- ✅ **Error suggestions** — intelligent fix suggestions per error
+- ✅ **Error gutter** — red/yellow dots in the margin
+- ✅ **Language reference** — click-to-insert cheatsheet sidebar
+- ✅ **File explorer** — multi-tab editor
+- ✅ **Examples library** — all examples built-in
+- ✅ **Terminal output** — colored compilation output
+- ✅ **Target switching** — Native C or JavaScript
+
+```bash
+python3 server.py      # Start on http://localhost:8080
+```
+
+---
+
+## 🏗 Architecture
+
+```
+NATCOM/
+├── natcom              # CLI compiler entry point
+├── server.py           # Web IDE backend (Python, no dependencies)
+├── src/
+│   ├── lexer.py        # Free-form English tokenizer
+│   ├── parser.py       # MultiverseParser + Self-Healing Engine
+│   └── codegen.py      # Multi-target code generator (C + JS)
+├── ui/
+│   ├── index.html      # NATCOM Studio IDE
+│   ├── style.css       # Premium dark theme
+│   ├── script.js       # IDE logic + syntax highlighter
+│   └── about.html      # Creator page — Beon Binesh
+└── examples/
+    ├── hello.nc
+    ├── calculator.nc
+    ├── budget_tracker.nc
+    ├── counter.nc
+    ├── game_physics.nc
+    └── full_demo.nc
+```
+
+---
+
+## 👤 Created By
+
+**Beon Binesh**  
+Software Architect · Language Designer · AI Pioneer
+
+Developed with **Google Gemini 2.5** and **Antigravity AGY** (Google DeepMind)
+
+> [View Creator Page →](ui/about.html)
+
+---
+
+## 📜 License
+
+MIT License · © 2026 Beon Binesh

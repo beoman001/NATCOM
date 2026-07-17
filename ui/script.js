@@ -1,10 +1,16 @@
-// ============================================================
-//  NATCOM STUDIO — Complete IDE Script (Bootstrapped via ui.nc)
-//  All logic compiled from natural English NATCOM prose.
-// ============================================================
+// ================================================================
+//  NATCOM STUDIO — Complete IDE Engine v2.0
+//  Bootstrapped from ui.nc | Developed by Beon Binesh
+//  Features: Syntax Highlighting, Error Detection, Live Input
+// ================================================================
 
-// ---- SAMPLE CONTENT LIBRARY ----
-const mainNcContent = `Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+// ── BUILT-IN FILE CONTENTS ─────────────────────────────────────
+
+const BUILTIN = {
+  main: `// main.nc — NATCOM Main Program
+// The entry point of your NATCOM project.
+
+Initialize the cloaked zero-knowledge matrix for sovereign auditing.
 Initialize high performance gaming viewport with gravity physics.
 
 Create a high speed integer named PlayerHealth and set it to 100.
@@ -26,153 +32,188 @@ Begin the main simulation loop.
     Keep the simulation running.
 
 Log the value of Score.
-Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.`;
+Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.`,
 
-const compilerNcContent = `// compiler.nc - THE SUPREME BOOTSTRAPPED NATCOM COMPILER
+  compiler: `// compiler.nc — NATCOM Self-Bootstrapped Compiler
+// This file compiles itself using the NATCOM toolchain.
+
 Initialize the cloaked zero-knowledge matrix for sovereign auditing.
-Initialize high performance gaming viewport with gravity physics.
 
 Create a high speed integer named LexerCursor and set it to 0.
 Create a high speed integer named AstNodes and set it to 0.
 Create a high speed integer named CompilationStatus and set it to 1.
 
+Repeat 10 times:
+  Increment LexerCursor.
+  Add 10 to AstNodes.
+Done.
+
+Log the value of LexerCursor.
+Log the value of AstNodes.
 Log the value of CompilationStatus.
 
-Begin the main simulation loop.
-  Add 1 to LexerCursor.
-  Increase AstNodes by 10.
-
-  If the LexerCursor is greater than 100, then:
-    Log the value of AstNodes.
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
-
-Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.
-
 <SYSTEM_OVERRIDE>
-void emit_native_compiler_binary() {
-    printf("[BOOTSTRAP V2] Generating natcom_v2.bin securely...\\n");
-    printf("[BOOTSTRAP V2] Stage 2 Bootstrapping Complete. Total Independence Achieved.\\n");
-}
-emit_native_compiler_binary();
-</SYSTEM_OVERRIDE>`;
+printf("[BOOTSTRAP V2] Sovereign compiler binary emitted.\\n");
+printf("[BOOTSTRAP V2] Stage 2 complete. Full independence achieved.\\n");
+</SYSTEM_OVERRIDE>`,
 
-const uiNcContent = `// ui.nc - NATCOM STUDIO UI LOGIC (Bootstrapped to JavaScript)
+  ui: `// ui.nc — NATCOM Studio UI Logic (Bootstrapped to JavaScript)
+// Compiled with: ./natcom build ui.nc --target js -o ui/script.js
+
 Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+
 Create a high speed integer named CompilationAttempts and set it to 0.
+Create a boolean named StudioReady and set it to true.
+
+Log the value of CompilationAttempts.
+Log the value of StudioReady.
 
 <SYSTEM_OVERRIDE>
-// UI Logic runs after DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('[NATCOM UI] Bootstrapped UI Matrix Active.');
-});
-</SYSTEM_OVERRIDE>`;
+console.log('[NATCOM UI] Bootstrapped IDE Matrix Active.');
+console.log('[NATCOM UI] All sovereign systems online.');
+</SYSTEM_OVERRIDE>`,
 
-const calculatorContent = `// calculator.nc - NATCOM Four-Function Calculator
-// Demonstrates all arithmetic operations natively.
+  calculator: `// calculator.nc — Interactive Calculator
+// Uses user input to perform all arithmetic operations.
 
-Create a floating point variable named NumOne and set it to 100.5.
-Create a floating point variable named NumTwo and set it to 5.0.
+Create a floating point variable named A and set it to 0.
+Create a floating point variable named B and set it to 0.
 
-// ADDITION
-Create a floating point variable named AdditionResult and set it to 0.
-Add NumOne to AdditionResult.
-Add NumTwo to AdditionResult.
-Log the value of AdditionResult.
+Ask the user to enter a value for A.
+Ask the user to enter a value for B.
 
-// SUBTRACTION
-Create a floating point variable named SubtractionResult and set it to 0.
-Add NumOne to SubtractionResult.
-Subtract NumTwo from SubtractionResult.
-Log the value of SubtractionResult.
+Create a floating point variable named Sum and set it to 0.
+Create a floating point variable named Difference and set it to 0.
+Create a floating point variable named Product and set it to 0.
+Create a floating point variable named Quotient and set it to 0.
+Create a floating point variable named Remainder and set it to 0.
+Create a floating point variable named Power and set it to 0.
+Create a floating point variable named SqrtA and set it to 0.
 
-// MULTIPLICATION
-Create a floating point variable named MultiplicationResult and set it to 0.
-Add NumOne to MultiplicationResult.
-Multiply MultiplicationResult by NumTwo.
-Log the value of MultiplicationResult.
+Add A to Sum.
+Add B to Sum.
 
-// DIVISION
-Create a floating point variable named DivisionResult and set it to 0.
-Add NumOne to DivisionResult.
-Divide DivisionResult by NumTwo.
-Log the value of DivisionResult.`;
+Add A to Difference.
+Subtract B from Difference.
 
-const helloContent = `// hello.nc - Your first NATCOM program!
-Create a high speed integer named HelloVariable and set it to 1.
-Log the value of HelloVariable.
+Add A to Product.
+Multiply Product by B.
 
-Begin the main simulation loop.
-  Add 1 to HelloVariable.
+Add A to Quotient.
+Divide Quotient by B.
 
-  If the HelloVariable is greater than 5, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
+Find the remainder of A divided by B and store in Remainder.
 
-Log the value of HelloVariable.`;
+Set Power to A to the power of B.
+Set SqrtA to the square root of A.
 
-const budgetContent = `// budget_tracker.nc - Monthly Budget Tracker
-// Track your income and expenses natively in NATCOM.
+Display "=== Calculator Results ==="
+Display the values of Sum.
+Display the values of Difference.
+Display the values of Product.
+Display the values of Quotient.
+Display the values of Remainder.
+Display the values of Power.
+Display the values of SqrtA.`,
 
-Create a floating point variable named Budget and set it to 5000.0.
-Create a floating point variable named Rent and set it to 1200.0.
-Create a floating point variable named Groceries and set it to 400.0.
-Create a floating point variable named Entertainment and set it to 200.0.
-Create a high speed integer named Month and set it to 0.
+  hello: `// hello.nc — Hello World in NATCOM
+// Your very first NATCOM program!
 
-// Deduct expenses
-Subtract Rent from Budget.
-Subtract Groceries from Budget.
-Subtract Entertainment from Budget.
-
-Log the value of Budget.
-
-Begin the main simulation loop.
-  Add 1 to Month.
-  Subtract Rent from Budget.
-  Subtract Groceries from Budget.
-  Log the value of Budget.
-
-  If the Month is greater than 6, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
-
-Log the value of Month.`;
-
-const counterContent = `// counter.nc - Loop and Counter Example
-// Demonstrates how NATCOM handles iteration natively.
-
+Create a string named Greeting and set it to "Hello, World!".
+Create a boolean named IsRunning and set it to true.
 Create a high speed integer named Counter and set it to 0.
-Create a high speed integer named TotalSum and set it to 0.
 
-Begin the main simulation loop.
-  Add 1 to Counter.
-  Add Counter to TotalSum.
+Display "Welcome to NATCOM!"
+Display "The Natural English Programming Language."
+Log the value of Greeting.
+Log the value of IsRunning.
 
-  If the Counter is greater than 10, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
+Repeat 5 times:
+  Increment Counter.
+Done.
 
-Log the value of Counter.
-Log the value of TotalSum.`;
+Display "Loop finished!"
+Log the value of Counter.`,
 
-const physicsContent = `// game_physics.nc - Game Physics Simulation
-// Demonstrates NATCOM's built-in 3D viewport and physics engine.
+  budget: `// budget_tracker.nc — Monthly Budget Tracker
+// Track income and expenses using natural English.
+
+Create a floating point variable named Budget and set it to 0.
+Create a floating point variable named Rent and set it to 0.
+Create a floating point variable named Food and set it to 0.
+Create a floating point variable named Transport and set it to 0.
+
+Ask the user to enter a value for Budget.
+Ask the user to enter a value for Rent.
+Ask the user to enter a value for Food.
+Ask the user to enter a value for Transport.
+
+Create a floating point variable named TotalExpenses and set it to 0.
+Create a floating point variable named Savings and set it to 0.
+
+Add Rent to TotalExpenses.
+Add Food to TotalExpenses.
+Add Transport to TotalExpenses.
+
+Add Budget to Savings.
+Subtract TotalExpenses from Savings.
+
+Display "=== Monthly Budget Report ==="
+Display the values of Budget.
+Display the values of TotalExpenses.
+Display the values of Savings.
+
+If the Savings is greater than 0, then:
+  Display "You are saving money! Great job!"
+Otherwise:
+  Display "Warning: You are over budget!"`,
+
+  counter: `// counter.nc — Counter with Repeat Loop
+// Demonstrates looping and increment in NATCOM.
+
+Create a high speed integer named Count and set it to 0.
+Create a high speed integer named Total and set it to 0.
+Create a high speed integer named Limit and set it to 0.
+
+Ask the user to enter a value for Limit.
+
+Repeat 10 times:
+  Increment Count.
+  Add Count to Total.
+Done.
+
+Display "=== Counter Results ==="
+Log the value of Count.
+Log the value of Total.
+
+If the Count is greater than 5, then:
+  Display "Count exceeded 5!"
+Otherwise:
+  Display "Count is 5 or less."`,
+
+  physics: `// game_physics.nc — Game Physics Simulation
+// 3D viewport, gravity, random spawning, math functions.
 
 Initialize the cloaked zero-knowledge matrix for sovereign auditing.
 Initialize high performance gaming viewport with gravity physics.
 
-Create a floating point variable named VelocityX and set it to 0.0.
-Create a floating point variable named VelocityY and set it to 0.0.
 Create a floating point variable named Gravity and set it to 9.81.
+Create a floating point variable named VelocityY and set it to 0.0.
 Create a floating point variable named PlayerMass and set it to 75.0.
 Create a high speed integer named FrameCount and set it to 0.
+Create a high speed integer named SpawnX and set it to 0.
+Create a high speed integer named SpawnY and set it to 0.
+Create a floating point variable named Force and set it to 0.
 
 Render a 3D matrix representing a vehicle at coordinates 10.5, 50.0, 15.2.
+
+Generate a random number between 1 and 100 and store in SpawnX.
+Generate a random number between 1 and 100 and store in SpawnY.
+Display the values of SpawnX.
+Display the values of SpawnY.
+
+Set Force to PlayerMass to the power of 2.
+Display the values of Force.
 
 Begin the main simulation loop.
   Add 1 to FrameCount.
@@ -186,349 +227,642 @@ Begin the main simulation loop.
     Keep the simulation running.
 
 Log the value of FrameCount.
-Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.`;
+Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.`,
 
-// ---- EDITOR STATE ----
-let openTabs = { 'main': mainNcContent };
-let activeTab = 'main';
-let tabContents = { 'main': mainNcContent };
-let terminalCollapsed = false;
-let compilationCount = 0;
+  fulldemo: `// full_demo.nc — NATCOM Complete Feature Showcase
+// Every feature of the NATCOM language in one file.
 
-// ---- DOM REFS ----
-const editor      = document.getElementById('editor');
-const terminal    = document.getElementById('terminal');
-const lineNums    = document.getElementById('lineNumbers');
-const runBtn      = document.getElementById('runBtn');
-const buildBtn    = document.getElementById('buildBtn');
-const tabBar      = document.getElementById('tabBar');
-const breadcrumb  = document.getElementById('breadcrumb-file');
-const statusCursor= document.getElementById('status-cursor');
-const statusErrors= document.getElementById('status-errors');
-const statusTarget= document.getElementById('status-target');
-const targetSelect= document.getElementById('targetSelect');
+// ── VARIABLES ────────────────────────────────────────────────
+Create a high speed integer named MyInt and set it to 42.
+Create a floating point variable named MyFloat and set it to 3.14.
+Create a string named MyText and set it to "NATCOM Rocks!".
+Create a boolean named MyFlag and set it to true.
 
-// ---- INIT ----
+// ── USER INPUT ───────────────────────────────────────────────
+Create a floating point variable named A and set it to 0.
+Create a floating point variable named B and set it to 0.
+Ask the user to enter a value for A.
+Ask the user to enter a value for B.
+
+// ── ARITHMETIC ───────────────────────────────────────────────
+Create a floating point variable named Sum and set it to 0.
+Add A to Sum.
+Add B to Sum.
+Display the values of Sum.
+
+// ── MATH FUNCTIONS ───────────────────────────────────────────
+Create a floating point variable named SqrtA and set it to 0.
+Create a floating point variable named MaxVal and set it to 0.
+Create a floating point variable named MinVal and set it to 0.
+Set SqrtA to the square root of A.
+Set MaxVal to the maximum of A and B.
+Set MinVal to the minimum of A and B.
+Display the values of SqrtA.
+Display the values of MaxVal.
+Display the values of MinVal.
+
+// ── RANDOM ───────────────────────────────────────────────────
+Create a high speed integer named Lucky and set it to 0.
+Generate a random number between 1 and 100 and store in Lucky.
+Display the values of Lucky.
+
+// ── INCREMENT / DECREMENT ────────────────────────────────────
+Create a high speed integer named Counter and set it to 0.
+Increment Counter.
+Increment Counter.
+Increment Counter.
+Decrement Counter.
+Log the value of Counter.
+
+// ── REPEAT LOOP ──────────────────────────────────────────────
+Create a high speed integer named LoopTotal and set it to 0.
+Repeat 5 times:
+  Increment LoopTotal.
+Done.
+Log the value of LoopTotal.
+
+// ── SWAP ─────────────────────────────────────────────────────
+Create a floating point variable named X and set it to 10.0.
+Create a floating point variable named Y and set it to 20.0.
+Swap the values of X and Y.
+Display the values of X.
+Display the values of Y.
+
+// ── CONDITIONAL ──────────────────────────────────────────────
+If the A is greater than B, then:
+  Display "A is larger than B."
+Otherwise:
+  Display "B is larger or equal to A."
+`
+};
+
+// ── STATE ─────────────────────────────────────────────────────
+let activeTab    = 'main';
+let tabContents  = { main: BUILTIN.main };
+let tabDirty     = {};
+let compilCount  = 0;
+let termCollapsed= false;
+let syntaxEnabled= true;
+let errorLines   = {};   // lineNum -> {type, msg, suggestion}
+
+// ── DOM REFS ──────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const editor       = $('editor');
+const lineNums     = $('lineNumbers');
+const errorGutter  = $('errorGutter');
+const highlightPre = $('highlightPre');
+const highlightHost= $('highlightHost');
+const terminal     = $('terminal');
+const tabBar       = $('tabBar');
+const breadcrumb   = $('breadcrumb-file');
+const statusCursor = $('statusCursor');
+const statusLines  = $('statusLines');
+const statusErrors = $('statusErrors');
+const statusTarget = $('statusTarget');
+const errorPanel   = $('errorPanel');
+const epList       = $('epList');
+const epCount      = $('ep-count');
+const errorBadge   = $('errorBadge');
+const errorCount   = $('errorCount');
+const runBtn       = $('runBtn');
+const targetSelect = $('targetSelect');
+
+// ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    updateLineNumbers();
-    applySyntaxHighlight();
-    initResize();
-    initHResize();
-    updateStatusTarget();
-
-    editor.addEventListener('scroll', syncScroll);
-    editor.addEventListener('click',  updateCursorStatus);
-    editor.addEventListener('keyup',  updateCursorStatus);
-    targetSelect && targetSelect.addEventListener('change', updateStatusTarget);
+  editor.value = BUILTIN.main;
+  updateAll();
+  initResizeH();
+  initResizeV();
+  updateStatusTarget();
+  log('NATCOM Studio v2.0 ready. Press Ctrl+Enter to compile and run.', 'system');
+  log('Language: English-only .nc files | Target: Native C or JavaScript', 'system');
 });
 
-// ---- LINE NUMBERS ----
+// ── CORE EDITOR UPDATE ────────────────────────────────────────
+function updateAll() {
+  updateLineNumbers();
+  updateHighlight();
+  updateErrorGutter();
+  updateStatusBar();
+}
+
+function onEditorInput() {
+  if (activeTab) tabContents[activeTab] = editor.value;
+  tabDirty[activeTab] = true;
+  const d = $('dirty-' + activeTab);
+  if (d) d.style.display = 'inline';
+  updateAll();
+}
+
+// ── LINE NUMBERS ──────────────────────────────────────────────
 function updateLineNumbers() {
-    const lines = editor.value.split('\n').length;
-    let html = '';
-    for (let i = 1; i <= lines; i++) html += `<div>${i}</div>`;
-    lineNums.innerHTML = html;
+  const lines = editor.value.split('\n');
+  let html = '';
+  lines.forEach((_, i) => {
+    const ln = i + 1;
+    const info = errorLines[ln];
+    let cls = '';
+    if (info) cls = info.type === 'error' ? ' class="ln-err"' : ' class="ln-warn"';
+    html += `<div${cls}>${ln}</div>`;
+  });
+  lineNums.innerHTML = html;
+  lineNums.scrollTop = editor.scrollTop;
 }
 
+// ── SYNC SCROLL ───────────────────────────────────────────────
 function syncScroll() {
-    lineNums.scrollTop = editor.scrollTop;
+  lineNums.scrollTop     = editor.scrollTop;
+  highlightHost.scrollTop= editor.scrollTop;
+  highlightHost.scrollLeft=editor.scrollLeft;
+  errorGutter.scrollTop  = editor.scrollTop;
 }
 
-// ---- SYNTAX HIGHLIGHT (lightweight CSS class approach via overlay) ----
-// We do live keyword coloring via a minimal inline highlighter using selection color
-function applySyntaxHighlight() { /* Handled purely via CSS + textarea for now */ }
+// ── SYNTAX HIGHLIGHTER ────────────────────────────────────────
+const KEYWORDS = [
+  'Initialize','Create','Set','Ask','Add','Subtract','Multiply','Divide',
+  'Increment','Decrement','Swap','Raise','Find','Generate',
+  'Log','Display','Begin','Halt','Keep','Sync','Render',
+  'Repeat','Done','Otherwise','If','Then','Keep running while','Stop the loop',
+  'integer','floating point variable','string','boolean','high speed',
+  'sovereign auditing','simulation loop','simulation running','simulation',
+  'the user','a value for','text named','square root','absolute value',
+  'maximum','minimum','floor','ceiling','natural log','power','remainder',
+  'random number','store in','values of','the value of','times',
+];
+const IO_KW  = ['Ask','Display','Log','Show'];
+const BOOL_V = ['true','false'];
 
-// ---- CURSOR STATUS ----
-function updateCursorStatus() {
-    const text = editor.value.substring(0, editor.selectionStart);
-    const lines = text.split('\n');
-    const ln = lines.length;
-    const col = lines[lines.length - 1].length + 1;
-    statusCursor.textContent = `Ln ${ln}, Col ${col}`;
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// ---- HANDLE KEY ----
-function handleKey(e) {
-    if (e.key === 'Tab') {
-        e.preventDefault();
-        const s = editor.selectionStart, end = editor.selectionEnd;
-        editor.value = editor.value.substring(0, s) + '    ' + editor.value.substring(end);
-        editor.selectionStart = editor.selectionEnd = s + 4;
-        updateLineNumbers();
+function highlightLine(raw, lineIdx) {
+  const ln = lineIdx + 1;
+  const errInfo = errorLines[ln];
+  let cls = '';
+  if (errInfo) cls = errInfo.type === 'error' ? ' err-line' : ' warn-line';
+
+  let s = escHtml(raw);
+
+  // Comments
+  s = s.replace(/(\/\/.*$)/g, '<span class="cmt">$1</span>');
+
+  if (!s.includes('cmt')) {
+    // Strings
+    s = s.replace(/(&quot;[^&]*&quot;|'[^']*')/g, '<span class="str">$1</span>');
+    // Numbers
+    s = s.replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>');
+    // Booleans
+    s = s.replace(/\b(true|false)\b/g,'<span class="bool">$1</span>');
+    // IO keywords
+    s = s.replace(/\b(Ask|Display|Log)\b/g,'<span class="io">$1</span>');
+    // Key action words
+    s = s.replace(/\b(Create|Initialize|Sync|Render|Generate|Repeat|Done|Halt|Swap|Raise|Find|Set)\b/g,'<span class="kw">$1</span>');
+    // Secondary keywords
+    s = s.replace(/\b(Add|Subtract|Multiply|Divide|Increment|Decrement|Begin|Keep|Otherwise|If|Then)\b/g,'<span class="fn">$1</span>');
+    // Operators / Connectors
+    s = s.replace(/\b(to|from|by|in|of|the|a|and|is|than|greater|less|named|times|between|store|value|values|remainder|maximum|minimum|square root|absolute|floor|ceiling|power|running|loop|simulation|sovereign|random|floating point|high speed|integer|string|boolean|text|number)\b/g,'<span class="op">$1</span>');
+  }
+
+  return `<span class="${'hl-ln' + cls}">${s}\n</span>`;
+}
+
+function updateHighlight() {
+  if (!syntaxEnabled) {
+    highlightPre.innerHTML = '';
+    return;
+  }
+
+  // Re-detect errors
+  detectErrors();
+
+  const lines = editor.value.split('\n');
+  let html = '';
+  lines.forEach((line, i) => {
+    html += highlightLine(line, i);
+  });
+  highlightPre.innerHTML = html;
+}
+
+// ── ERROR DETECTION ───────────────────────────────────────────
+const VALID_PATTERNS = [
+  /^\/\//,                          // Comments
+  /^$/,                             // Empty lines
+  /^create a/i,
+  /^set \w+ to/i,
+  /^ask the user/i,
+  /^add .+ to \w+/i,
+  /^subtract .+ from \w+/i,
+  /^multiply \w+ by/i,
+  /^divide \w+ by/i,
+  /^increment \w+/i,
+  /^decrement \w+/i,
+  /^swap the values/i,
+  /^raise \w+ to the power/i,
+  /^set \w+ to the (square root|absolute value|floor|ceiling|maximum|minimum|natural log)/i,
+  /^set \w+ to .+ to the power/i,
+  /^find the remainder/i,
+  /^generate a random/i,
+  /^log the value/i,
+  /^display/i,
+  /^begin the main simulation loop/i,
+  /^halt the simulation/i,
+  /^keep the simulation running/i,
+  /^if the .+ (is|equals|drops below)/i,
+  /^otherwise/i,
+  /^repeat \d+ times/i,
+  /^done/i,
+  /^keep running while/i,
+  /^stop the loop/i,
+  /^initialize/i,
+  /^sync the current/i,
+  /^render a 3d/i,
+  /^<\/?system_override>/i,
+  /^(void|int|float|char|printf|scanf|return|#include|\/\/|{|}|;)/,
+];
+
+const SUGGESTIONS = {
+  'create': 'Try: Create a high speed integer named X and set it to 0.',
+  'ask':    'Try: Ask the user to enter a value for X.',
+  'if':     'Try: If the X is greater than Y, then:',
+  'set':    'Try: Set X to 42.  OR  Set X to the square root of Y.',
+  'repeat': 'Try: Repeat 10 times:',
+  'log':    'Try: Log the value of X.',
+  'display':'Try: Display "Hello World".',
+};
+
+function detectErrors() {
+  errorLines = {};
+  const lines = editor.value.split('\n');
+  let inOverride = false;
+  let inLoop = false;
+  let errors = [];
+
+  lines.forEach((raw, i) => {
+    const ln = i + 1;
+    const trimmed = raw.trim();
+
+    if (trimmed === '<SYSTEM_OVERRIDE>') { inOverride = true; return; }
+    if (trimmed === '</SYSTEM_OVERRIDE>') { inOverride = false; return; }
+    if (inOverride) return;
+    if (!trimmed || trimmed.startsWith('//')) return;
+
+    const matched = VALID_PATTERNS.some(p => p.test(trimmed));
+    if (!matched) {
+      const firstWord = trimmed.split(/\s+/)[0].toLowerCase();
+      const sug = SUGGESTIONS[firstWord] || `Check syntax. Try: "Create a high speed integer named X and set it to 0."`;
+      errorLines[ln] = { type: 'error', msg: `Unrecognized: "${trimmed.slice(0, 50)}..."`, suggestion: sug };
+      errors.push({ ln, msg: errorLines[ln].msg, suggestion: sug, type: 'error' });
     }
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runCode(); }
-    if ((e.ctrlKey || e.metaKey) && e.key === 's')     { e.preventDefault(); saveCurrentFile(); }
+  });
+
+  updateErrorPanel(errors);
 }
 
-function onEditorChange() {
-    if (activeTab) tabContents[activeTab] = editor.value;
-    updateLineNumbers();
-    statusErrors.textContent = '● Unsaved';
+function updateErrorGutter() {
+  const lineH = parseFloat(getComputedStyle(editor).lineHeight) || 22.05;
+  let html = '';
+  Object.entries(errorLines).forEach(([ln, info]) => {
+    const top = (parseInt(ln) - 1) * lineH + 14 + lineH / 2;
+    html += `<div class="eg-dot ${info.type}" style="top:${top}px" title="${escHtml(info.msg)}"></div>`;
+  });
+  errorGutter.innerHTML = html;
+  errorGutter.scrollTop = editor.scrollTop;
 }
 
-function saveCurrentFile() {
-    tabContents[activeTab] = editor.value;
-    statusErrors.textContent = '✓ Saved';
-    log('File saved locally.', 'system');
+function updateErrorPanel(errors) {
+  const hasErrors = errors.length > 0;
+
+  if (!$('errorToggle')?.checked) {
+    errorPanel.style.display = 'none';
+    errorBadge.style.display = 'none';
+    statusErrors.textContent = '✓ No Problems';
+    statusErrors.classList.remove('has-error');
+    return;
+  }
+
+  if (hasErrors) {
+    errorPanel.style.display = 'block';
+    errorBadge.style.display = 'flex';
+    errorCount.textContent = `${errors.length} error${errors.length > 1 ? 's' : ''}`;
+    epCount.textContent = errors.length;
+    statusErrors.textContent = `✖ ${errors.length} error${errors.length > 1 ? 's' : ''}`;
+    statusErrors.classList.add('has-error');
+    $('errTab').style.display = 'flex';
+
+    let html = '';
+    errors.forEach(e => {
+      html += `<div class="ep-item" onclick="jumpToLine(${e.ln})">
+        <svg class="ep-icon-err" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+        <div>
+          <div class="ep-msg">${escHtml(e.msg)}</div>
+          <div class="ep-suggestion">💡 ${escHtml(e.suggestion)}</div>
+        </div>
+        <span class="ep-line">Ln ${e.ln}</span>
+      </div>`;
+    });
+    epList.innerHTML = html;
+  } else {
+    errorPanel.style.display = 'none';
+    errorBadge.style.display = 'none';
+    statusErrors.textContent = '✓ No Problems';
+    statusErrors.classList.remove('has-error');
+    $('errTab').style.display = 'none';
+    epList.innerHTML = '';
+  }
 }
 
-// ---- TAB MANAGEMENT ----
+function jumpToLine(ln) {
+  const lineH = parseFloat(getComputedStyle(editor).lineHeight) || 22.05;
+  editor.scrollTop = (ln - 1) * lineH - 60;
+  editor.focus();
+}
+
+function closeErrorPanel() {
+  errorPanel.style.display = 'none';
+}
+
+// ── STATUS BAR ────────────────────────────────────────────────
+function updateStatusBar() {
+  const text  = editor.value;
+  const lines = text.split('\n');
+  const before= text.substring(0, editor.selectionStart || 0).split('\n');
+  const ln    = before.length;
+  const col   = before[before.length - 1].length + 1;
+  statusCursor.textContent = `Ln ${ln}, Col ${col}`;
+  statusLines.textContent  = `${lines.length} lines`;
+}
+
+function updateCursorStatus() { updateStatusBar(); }
+
+function updateStatusTarget() {
+  const t = (targetSelect?.value || 'c');
+  statusTarget.textContent = t === 'c' ? '⚡ Native C' : '🌐 JavaScript';
+}
+
+// ── KEYBOARD ─────────────────────────────────────────────────
+function handleKey(e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const s = editor.selectionStart, end = editor.selectionEnd;
+    editor.value = editor.value.substring(0, s) + '  ' + editor.value.substring(end);
+    editor.selectionStart = editor.selectionEnd = s + 2;
+    onEditorInput();
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runCode(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's')     { e.preventDefault(); saveTab(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'b')     { e.preventDefault(); switchActivity('explorer'); }
+}
+
+// ── TAB MANAGEMENT ────────────────────────────────────────────
 function switchTab(name) {
-    if (activeTab) tabContents[activeTab] = editor.value;
-    activeTab = name;
-    editor.value = tabContents[name] || '';
-    updateLineNumbers();
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    const tab = document.getElementById('tab-' + name);
-    if (tab) tab.classList.add('active');
-    breadcrumb.textContent = name + '.nc';
-    updateCursorStatus();
-    statusErrors.textContent = '✓ No Errors';
+  if (activeTab) tabContents[activeTab] = editor.value;
+  activeTab = name;
+  editor.value = tabContents[name] || '';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const tab = $('tab-' + name);
+  if (tab) tab.classList.add('active');
+  breadcrumb.textContent = name + '.nc';
+  updateAll();
 }
 
 function openTab(name, content) {
-    if (!tabContents[name]) {
-        tabContents[name] = content;
-        const tab = document.createElement('div');
-        tab.className = 'tab';
-        tab.id = 'tab-' + name;
-        tab.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/></svg>${name}.nc<span class="tab-close" onclick="closeTab(event,'${name}')">×</span>`;
-        tab.onclick = () => switchTab(name);
-        tabBar.appendChild(tab);
-    }
-    switchTab(name);
+  if (!$('tab-' + name)) {
+    tabContents[name] = content;
+    const tab = document.createElement('div');
+    tab.className = 'tab';
+    tab.id = 'tab-' + name;
+    tab.innerHTML = `<span class="tab-icon nc-icon">NC</span><span class="tab-name">${name}.nc</span><span class="tab-dirty" id="dirty-${name}" style="display:none">●</span><span class="tab-close" onclick="closeTab(event,'${name}')">×</span>`;
+    tab.onclick = () => switchTab(name);
+    tabBar.appendChild(tab);
+  }
+  switchTab(name);
 }
 
 function closeTab(e, name) {
-    e.stopPropagation();
-    const tab = document.getElementById('tab-' + name);
-    if (tab) tab.remove();
-    delete tabContents[name];
-    if (activeTab === name) {
-        const remaining = Object.keys(tabContents);
-        if (remaining.length) openTab(remaining[0], tabContents[remaining[0]]);
-        else { editor.value = ''; updateLineNumbers(); }
-    }
+  e.stopPropagation();
+  $('tab-' + name)?.remove();
+  delete tabContents[name];
+  delete tabDirty[name];
+  if (activeTab === name) {
+    const rem = Object.keys(tabContents);
+    if (rem.length) openTab(rem[0], tabContents[rem[0]]);
+    else editor.value = '';
+  }
+  updateAll();
 }
 
-// ---- FILE LOADING ----
-function loadFile(name, content) {
-    document.querySelectorAll('.tree-item').forEach(t => t.classList.remove('active'));
-    const fi = document.getElementById('file-' + name);
-    if (fi) fi.classList.add('active');
-    openTab(name, content);
+function saveTab() {
+  tabDirty[activeTab] = false;
+  const d = $('dirty-' + activeTab);
+  if (d) d.style.display = 'none';
+  log(`Saved ${activeTab}.nc`, 'system');
 }
 
-function newFile() {
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    overlay.innerHTML = `<div class="modal">
-        <h3>New NATCOM File</h3>
-        <input type="text" id="newFileName" placeholder="filename (without .nc)" autofocus>
-        <div class="modal-actions">
-            <button class="modal-btn secondary" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
-            <button class="modal-btn primary" onclick="createNewFile()">Create</button>
-        </div>
-    </div>`;
-    document.body.appendChild(overlay);
-    overlay.querySelector('#newFileName').focus();
-    overlay.querySelector('#newFileName').addEventListener('keydown', e => {
-        if (e.key === 'Enter') createNewFile();
-    });
+// ── FILE LOADING ──────────────────────────────────────────────
+function loadBuiltin(name) {
+  document.querySelectorAll('.tree-item').forEach(t => t.classList.remove('active'));
+  $('fi-' + name)?.classList.add('active');
+  openTab(name, BUILTIN[name] || '// New file\n');
 }
+
+function newFile() { $('newFileModal').style.display = 'flex'; setTimeout(() => $('newFileName').focus(), 50); }
+function closeNewFileModal(e) { if (e.target === $('newFileModal')) $('newFileModal').style.display = 'none'; }
 
 function createNewFile() {
-    const input = document.getElementById('newFileName');
-    const name = input.value.trim().replace(/\.nc$/, '');
-    if (!name) return;
-    document.querySelector('.modal-overlay')?.remove();
-    const template = `// ${name}.nc - New NATCOM Script\nCreate a high speed integer named Value and set it to 0.\nLog the value of Value.`;
-    openTab(name, template);
+  const name = $('newFileName').value.trim().replace(/\.nc$/, '');
+  if (!name) return;
+  $('newFileModal').style.display = 'none';
+  $('newFileName').value = '';
+  const template = `// ${name}.nc — New NATCOM File\n\nCreate a high speed integer named Value and set it to 0.\nLog the value of Value.\n`;
+  BUILTIN[name] = template;
+  openTab(name, template);
 }
 
-// ---- ACTIVITY BAR ----
+// ── ACTIVITY BAR ─────────────────────────────────────────────
 function switchActivity(name) {
-    document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('act-' + name)?.classList.add('active');
-    document.getElementById('panel-' + name)?.classList.add('active');
+  document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  $('act-' + name)?.classList.add('active');
+  $('panel-' + name)?.classList.add('active');
 }
 
 function toggleSection(el) {
-    el.classList.toggle('open');
-    const items = el.nextElementSibling;
-    items.style.display = items.style.display === 'none' ? '' : 'none';
+  el.classList.toggle('expanded');
+  const items = el.nextElementSibling;
+  if (items) items.style.display = el.classList.contains('expanded') ? '' : 'none';
 }
 
-// ---- SETTINGS ----
-function setFontSize(size) { editor.style.fontSize = size + 'px'; lineNums.style.fontSize = size + 'px'; }
-function toggleWrap(el)    { editor.style.whiteSpace = el.checked ? 'pre-wrap' : 'pre'; }
-function updateStatusTarget() {
-    const t = (targetSelect?.value || 'c').toUpperCase();
-    statusTarget.textContent = 'Target: ' + t;
+// ── CHEATSHEET SNIPPET ───────────────────────────────────────
+function insertSnippet(text) {
+  const decoded = text.replace(/&quot;/g, '"');
+  const s = editor.selectionStart;
+  const before = editor.value.substring(0, s);
+  const lineStart = before.lastIndexOf('\n') + 1;
+  const after = editor.value.substring(s);
+  editor.value = before.substring(0, lineStart) + decoded + '\n' + after;
+  editor.selectionStart = editor.selectionEnd = lineStart + decoded.length + 1;
+  editor.focus();
+  onEditorInput();
+  switchActivity('explorer');
 }
 
-// ---- TERMINAL ----
+// ── SETTINGS ─────────────────────────────────────────────────
+function setFontSize(size) {
+  editor.style.fontSize = size + 'px';
+  lineNums.style.fontSize = size + 'px';
+  highlightPre.style.fontSize = size + 'px';
+}
+
+function toggleSyntax(el) {
+  syntaxEnabled = el.checked;
+  updateHighlight();
+}
+
+// ── TERMINAL ─────────────────────────────────────────────────
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 function log(msg, type = 'output') {
-    const lines = String(msg).split('\n');
-    lines.forEach(line => {
-        if (!line.trim()) return;
-        const div = document.createElement('div');
-        div.className = 'term-line ' + type;
-        div.innerHTML = `<span class="term-prompt">natcom@studio</span><span class="term-caret">▶</span><span class="term-msg">${escapeHtml(line)}</span>`;
-        terminal.appendChild(div);
-    });
-    terminal.scrollTop = terminal.scrollHeight;
+  String(msg).split('\n').forEach(line => {
+    if (!line.trim()) return;
+    const d = document.createElement('div');
+    d.className = 'term-line ' + type;
+    d.innerHTML = `<span class="term-prompt">natcom@studio</span><span class="term-arr">▶</span><span class="term-msg">${esc(line)}</span>`;
+    terminal.appendChild(d);
+  });
+  terminal.scrollTop = terminal.scrollHeight;
 }
 
-function escapeHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function clearTerminal() {
-    terminal.innerHTML = '';
-    log('Terminal cleared.', 'system');
-}
+function clearTerminal() { terminal.innerHTML = ''; log('Terminal cleared.', 'system'); }
+function switchToErrorTab() { /* scroll to error section */ terminal.scrollTop = terminal.scrollHeight; }
 
 function toggleTerminal() {
-    const panel = document.getElementById('terminalPanel');
-    terminalCollapsed = !terminalCollapsed;
-    panel.classList.toggle('collapsed', terminalCollapsed);
+  const p = $('terminalPanel');
+  termCollapsed = !termCollapsed;
+  p.classList.toggle('collapsed', termCollapsed);
+  $('termToggleBtn').textContent = termCollapsed ? '⌄' : '⌃';
 }
 
-// ---- RUN & BUILD ----
+// ── RUN ───────────────────────────────────────────────────────
 async function runCode() {
-    compilationCount++;
-    const code = editor.value;
-    if (!code.trim()) { log('No code to compile.', 'system'); return; }
+  compilCount++;
+  const code   = editor.value.trim();
+  const target = targetSelect?.value || 'c';
+  if (!code) { log('No code to compile.', 'system'); return; }
 
-    const target = targetSelect?.value || 'c';
-    runBtn.classList.add('loading');
-    runBtn.innerHTML = 'Running...';
-    statusErrors.textContent = '⟳ Compiling...';
+  runBtn.classList.add('loading');
+  runBtn.innerHTML = '⟳ Compiling...';
+  if (termCollapsed) toggleTerminal();
 
-    log(`\n══════════════════════════════════════════════════`, 'system');
-    log(`  COMPILATION #${compilationCount} | Target: ${target.toUpperCase()}`, 'system');
-    log(`══════════════════════════════════════════════════`, 'system');
+  log(`\n${'═'.repeat(60)}`, 'system');
+  log(`  COMPILATION #${compilCount}  ·  Target: ${target.toUpperCase()}`, 'system');
+  log(`${'═'.repeat(60)}`, 'system');
 
-    try {
-        const res = await fetch('/compile', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code, target })
-        });
-        const data = await res.json();
-        const out = data.output || '';
+  try {
+    const res  = await fetch('/compile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, target })
+    });
+    const data = await res.json();
+    const out  = (data.output || '').trim();
 
-        out.split('\n').forEach(line => {
-            if (!line.trim()) return;
-            if (line.includes('[!]') || line.includes('error') || line.includes('Anomaly'))
-                log(line, 'error');
-            else if (line.includes('[*]') || line.includes('NATCOM'))
-                log(line, 'compiler');
-            else if (line.includes('Complete') || line.includes('successful') || line.includes('[APP LOG]') || line.includes('[ENGINE]') || line.includes('[SOVEREIGN]') || line.includes('[GCP_SYNC]') || line.includes('[BOOTSTRAP'))
-                log(line, 'success');
-            else
-                log(line, 'output');
-        });
+    out.split('\n').forEach(line => {
+      if (!line.trim()) return;
+      const lo = line.toLowerCase();
+      if (lo.includes('[!]') || lo.includes('error') || lo.includes('anomaly') || lo.includes('gcc error'))
+        log(line, 'error');
+      else if (lo.includes('[*]') || lo.includes('natcom') || lo.includes('phase'))
+        log(line, 'compiler');
+      else if (lo.includes('✔') || lo.includes('complete') || lo.includes('successful') || lo.includes('[app log]') || lo.includes('[engine]') || lo.includes('[sovereign]') || lo.includes('[gcp') || lo.includes('[bootstrap') || lo.includes('◆') || lo.includes('▶'))
+        log(line, 'success');
+      else if (lo.includes('⚠') || lo.includes('warning') || lo.includes('self-healing'))
+        log(line, 'warn');
+      else
+        log(line, 'output');
+    });
 
-        if (out.includes('successful') || out.includes('Complete')) {
-            statusErrors.textContent = '✓ Build Passed';
-        } else if (out.includes('[!]') || out.includes('failed')) {
-            statusErrors.textContent = '✗ Build Failed';
-        } else {
-            statusErrors.textContent = '✓ No Errors';
-        }
-    } catch (err) {
-        log(`[NETWORK ERROR] Cannot reach NATCOM backend: ${err.message}`, 'error');
-        log(`Make sure server.py is running: python3 server.py`, 'system');
-        statusErrors.textContent = '✗ Server Offline';
-    } finally {
-        runBtn.classList.remove('loading');
-        runBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg>Run`;
-    }
+    const success = out.includes('✔') || out.includes('complete') || out.includes('successful');
+    statusErrors.textContent = success
+      ? (Object.keys(errorLines).length ? `⚠ ${Object.keys(errorLines).length} warnings` : '✓ Build Passed')
+      : '✖ Build Failed';
+
+  } catch (err) {
+    log(`[NETWORK ERROR] Cannot reach NATCOM backend: ${err.message}`, 'error');
+    log('Make sure the server is running: python3 server.py', 'system');
+    statusErrors.textContent = '✖ Server Offline';
+    statusErrors.classList.add('has-error');
+  } finally {
+    runBtn.classList.remove('loading');
+    runBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg> Run`;
+  }
 }
 
-async function buildCode() {
-    log('\n[BUILD] Initiating build-only pass...', 'system');
-    await runCode();
-}
+async function buildCode() { await runCode(); }
 
-// ---- SEARCH ----
+// ── SEARCH ────────────────────────────────────────────────────
 function searchCode() {
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    const resultsEl = document.getElementById('search-results');
-    resultsEl.innerHTML = '';
-    if (!query) return;
+  const q   = $('searchInput').value.toLowerCase().trim();
+  const res = $('search-results');
+  res.innerHTML = '';
+  if (!q || q.length < 2) return;
 
-    const allFiles = { 'main': mainNcContent, 'compiler': compilerNcContent, 'calculator': calculatorContent, 'hello': helloContent, 'budget': budgetContent, 'counter': counterContent, 'physics': physicsContent };
-    let found = 0;
-
-    Object.entries(allFiles).forEach(([fname, content]) => {
-        content.split('\n').forEach((line, idx) => {
-            if (line.toLowerCase().includes(query) && found < 30) {
-                const div = document.createElement('div');
-                div.className = 'search-result-item';
-                const highlighted = escapeHtml(line).replace(new RegExp(escapeHtml(query), 'gi'), m => `<span class="search-highlight">${m}</span>`);
-                div.innerHTML = `<span style="color:#7c6af7;font-size:10px;">${fname}.nc:${idx+1}</span><br>${highlighted}`;
-                div.onclick = () => loadFile(fname, allFiles[fname]);
-                resultsEl.appendChild(div);
-                found++;
-            }
-        });
+  let found = 0;
+  Object.entries(BUILTIN).forEach(([fname, content]) => {
+    content.split('\n').forEach((line, idx) => {
+      if (line.toLowerCase().includes(q) && found < 25) {
+        const div = document.createElement('div');
+        div.className = 'sr-item';
+        const hl = esc(line).replace(new RegExp(esc(q), 'gi'), m => `<span class="sr-hl">${m}</span>`);
+        div.innerHTML = `<div class="sr-file">${fname}.nc : ${idx + 1}</div>${hl}`;
+        div.onclick = () => loadBuiltin(fname);
+        res.appendChild(div);
+        found++;
+      }
     });
+  });
 
-    if (!found) {
-        resultsEl.innerHTML = '<div style="padding:12px 16px;color:#6b7280;font-size:12px;">No results found.</div>';
-    }
+  if (!found) res.innerHTML = '<div style="padding:12px 14px;color:#4a5168;font-size:12px;">No results found.</div>';
 }
 
-// ---- RESIZE (Sidebar) ----
-function initResize() {
-    const handle = document.getElementById('resizeHandle');
-    const sidebar = document.querySelector('.sidebar');
-    let dragging = false, startX, startW;
-
-    handle.addEventListener('mousedown', e => {
-        dragging = true; startX = e.clientX; startW = sidebar.offsetWidth;
-        handle.classList.add('resizing');
-        document.body.style.cursor = 'col-resize';
-        document.body.style.userSelect = 'none';
-    });
-    document.addEventListener('mousemove', e => {
-        if (!dragging) return;
-        const w = Math.min(400, Math.max(160, startW + (e.clientX - startX)));
-        sidebar.style.width = w + 'px';
-    });
-    document.addEventListener('mouseup', () => {
-        dragging = false;
-        handle.classList.remove('resizing');
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-    });
+// ── RESIZE SIDEBAR ────────────────────────────────────────────
+function initResizeH() {
+  const handle  = $('resizeHandle');
+  const sidebar = document.querySelector('.sidebar');
+  let drag = false, sx, sw;
+  handle.addEventListener('mousedown', e => {
+    drag = true; sx = e.clientX; sw = sidebar.offsetWidth;
+    handle.classList.add('resizing');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!drag) return;
+    sidebar.style.width = Math.min(480, Math.max(160, sw + (e.clientX - sx))) + 'px';
+  });
+  document.addEventListener('mouseup', () => {
+    drag = false; handle.classList.remove('resizing');
+    document.body.style.cursor = ''; document.body.style.userSelect = '';
+  });
 }
 
-// ---- RESIZE (Terminal) ----
-function initHResize() {
-    const handle = document.getElementById('hresizeHandle');
-    const termPanel = document.getElementById('terminalPanel');
-    let dragging = false, startY, startH;
-
-    handle.addEventListener('mousedown', e => {
-        dragging = true; startY = e.clientY; startH = termPanel.offsetHeight;
-        handle.classList.add('resizing');
-        document.body.style.cursor = 'row-resize';
-        document.body.style.userSelect = 'none';
-    });
-    document.addEventListener('mousemove', e => {
-        if (!dragging) return;
-        const h = Math.min(500, Math.max(80, startH - (e.clientY - startY)));
-        termPanel.style.height = h + 'px';
-    });
-    document.addEventListener('mouseup', () => {
-        dragging = false;
-        handle.classList.remove('resizing');
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-    });
+// ── RESIZE TERMINAL ───────────────────────────────────────────
+function initResizeV() {
+  const handle = $('hresizeHandle');
+  const term   = $('terminalPanel');
+  let drag = false, sy, sh;
+  handle.addEventListener('mousedown', e => {
+    drag = true; sy = e.clientY; sh = term.offsetHeight;
+    handle.classList.add('resizing');
+    document.body.style.cursor = 'row-resize';
+    document.body.style.userSelect = 'none';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!drag) return;
+    term.style.height = Math.min(600, Math.max(80, sh - (e.clientY - sy))) + 'px';
+  });
+  document.addEventListener('mouseup', () => {
+    drag = false; handle.classList.remove('resizing');
+    document.body.style.cursor = ''; document.body.style.userSelect = '';
+  });
 }

@@ -5,327 +5,387 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NATCOM Studio — Sovereign IDE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- TITLE BAR -->
-    <div class="titlebar">
-        <div class="titlebar-left">
-            <div class="traffic-lights">
-                <span class="tl tl-red" title="Close"></span>
-                <span class="tl tl-yellow" title="Minimize"></span>
-                <span class="tl tl-green" title="Maximize"></span>
-            </div>
-            <div class="app-brand">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#00ffcc" opacity="0.9"/>
-                    <path d="M2 17L12 22L22 17" stroke="#00ffcc" stroke-width="1.5" fill="none"/>
-                    <path d="M2 12L12 17L22 12" stroke="#00ffcc" stroke-width="1.5" fill="none" opacity="0.6"/>
-                </svg>
-                <span class="brand-name">NATCOM <span class="brand-studio">Studio</span></span>
-            </div>
+
+<!-- TITLE BAR -->
+<div class="titlebar">
+    <div class="titlebar-left">
+        <div class="traffic-lights">
+            <span class="tl tl-red"></span>
+            <span class="tl tl-yellow"></span>
+            <span class="tl tl-green"></span>
         </div>
-        <div class="titlebar-center">
-            <div class="breadcrumb">
-                <span class="bc-folder">NATCOM</span>
-                <span class="bc-sep">›</span>
-                <span class="bc-file" id="breadcrumb-file">main.nc</span>
-            </div>
-        </div>
-        <div class="titlebar-right">
-            <div class="sovereign-status">
-                <div class="pulse-dot"></div>
-                <span>Sovereign Link Active</span>
-            </div>
+        <div class="app-brand">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#00ffcc" opacity="0.9"/>
+                <path d="M2 17L12 22L22 17" stroke="#00ffcc" stroke-width="1.5" fill="none"/>
+                <path d="M2 12L12 17L22 12" stroke="#00ffcc" stroke-width="1.5" fill="none" opacity="0.6"/>
+            </svg>
+            <span class="brand-name">NATCOM <span class="brand-studio">Studio</span></span>
+            <span class="brand-version">v2.0</span>
         </div>
     </div>
+    <div class="titlebar-center">
+        <div class="breadcrumb">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="bc-root">NATCOM</span>
+            <span class="bc-sep">›</span>
+            <span class="bc-file" id="breadcrumb-file">main.nc</span>
+        </div>
+    </div>
+    <div class="titlebar-right">
+        <div class="sovereign-status">
+            <div class="pulse-dot"></div>
+            <span>Sovereign Link Active</span>
+        </div>
+    </div>
+</div>
 
-    <!-- MENU BAR -->
-    <div class="menubar">
+<!-- MENU BAR -->
+<div class="menubar">
+    <div class="menubar-left">
         <button class="menu-item" onclick="newFile()">File</button>
         <button class="menu-item">Edit</button>
         <button class="menu-item" onclick="runCode()">Run</button>
         <button class="menu-item">View</button>
-        <div class="menubar-actions">
-            <button class="run-btn" onclick="runCode()" id="runBtn">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg>
-                Run
-            </button>
-            <button class="build-btn" onclick="buildCode()" id="buildBtn">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Build
-            </button>
+        <button class="menu-item" onclick="window.open('about.html','_blank')">About Creator</button>
+    </div>
+    <div class="menubar-actions">
+        <div class="error-badge" id="errorBadge" style="display:none">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+            <span id="errorCount">0 errors</span>
         </div>
+        <button class="run-btn" onclick="runCode()" id="runBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg>
+            Run
+        </button>
+        <button class="build-btn" onclick="buildCode()" id="buildBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Build
+        </button>
+    </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="ide-layout">
+
+    <!-- ACTIVITY BAR -->
+    <div class="activity-bar">
+        <button class="activity-btn active" id="act-explorer" onclick="switchActivity('explorer')" title="Explorer (Ctrl+B)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </button>
+        <button class="activity-btn" id="act-examples" onclick="switchActivity('examples')" title="Examples">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </button>
+        <button class="activity-btn" id="act-search" onclick="switchActivity('search')" title="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="activity-btn" id="act-cheatsheet" onclick="switchActivity('cheatsheet')" title="Language Reference">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+        <div class="activity-spacer"></div>
+        <button class="activity-btn" id="act-settings" onclick="switchActivity('settings')" title="Settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
     </div>
 
-    <!-- MAIN LAYOUT -->
-    <div class="ide-layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
 
-        <!-- ACTIVITY BAR -->
-        <div class="activity-bar">
-            <button class="activity-btn active" id="act-explorer" onclick="switchActivity('explorer')" title="Explorer">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-            </button>
-            <button class="activity-btn" id="act-search" onclick="switchActivity('search')" title="Search">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </button>
-            <button class="activity-btn" id="act-examples" onclick="switchActivity('examples')" title="Examples">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            </button>
-            <button class="activity-btn" id="act-terminal" onclick="switchActivity('terminal')" title="Terminal">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-            </button>
-            <div class="activity-spacer"></div>
-            <button class="activity-btn" id="act-settings" onclick="switchActivity('settings')" title="Settings">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            </button>
-        </div>
-
-        <!-- SIDEBAR -->
-        <div class="sidebar" id="sidebar">
-
-            <!-- EXPLORER PANEL -->
-            <div class="panel active" id="panel-explorer">
-                <div class="panel-header">
-                    <span>EXPLORER</span>
-                    <button class="panel-action" onclick="newFile()" title="New File">+</button>
-                </div>
-                <div class="file-tree">
-                    <div class="tree-section">
-                        <div class="tree-section-header" onclick="toggleSection(this)">
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
-                            NATCOM PROJECT
-                        </div>
-                        <div class="tree-items">
-                            <div class="tree-item active" onclick="loadFile('main', mainNcContent)" id="file-main">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
-                                main.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('compiler', compilerNcContent)" id="file-compiler">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
-                                compiler.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('ui', uiNcContent)" id="file-ui">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
-                                ui.nc
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tree-section">
-                        <div class="tree-section-header" onclick="toggleSection(this)">
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
-                            EXAMPLES
-                        </div>
-                        <div class="tree-items">
-                            <div class="tree-item" onclick="loadFile('calculator', calculatorContent)" id="file-calculator">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
-                                calculator.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('hello', helloContent)" id="file-hello">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
-                                hello.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('budget', budgetContent)" id="file-budget">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
-                                budget_tracker.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('counter', counterContent)" id="file-counter">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
-                                counter.nc
-                            </div>
-                            <div class="tree-item" onclick="loadFile('physics', physicsContent)" id="file-physics">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
-                                game_physics.nc
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- EXPLORER -->
+        <div class="panel active" id="panel-explorer">
+            <div class="panel-header">
+                <span>EXPLORER</span>
+                <button class="panel-action" onclick="newFile()" title="New File">+</button>
             </div>
-
-            <!-- SEARCH PANEL -->
-            <div class="panel" id="panel-search">
-                <div class="panel-header"><span>SEARCH</span></div>
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search in files..." id="searchInput" oninput="searchCode()">
-                </div>
-                <div id="search-results" class="search-results"></div>
-            </div>
-
-            <!-- EXAMPLES PANEL -->
-            <div class="panel" id="panel-examples">
-                <div class="panel-header"><span>EXAMPLES</span></div>
-                <div class="examples-list">
-                    <div class="example-card" onclick="loadFile('calculator', calculatorContent)">
-                        <div class="ex-icon">🧮</div>
-                        <div class="ex-info">
-                            <div class="ex-name">Calculator</div>
-                            <div class="ex-desc">Full arithmetic operations</div>
-                        </div>
+            <div class="file-tree">
+                <div class="tree-section">
+                    <div class="tree-section-header expanded" onclick="toggleSection(this)">
+                        <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
+                        PROJECT
                     </div>
-                    <div class="example-card" onclick="loadFile('budget', budgetContent)">
-                        <div class="ex-icon">💰</div>
-                        <div class="ex-info">
-                            <div class="ex-name">Budget Tracker</div>
-                            <div class="ex-desc">Track monthly expenses</div>
+                    <div class="tree-items" id="project-items">
+                        <div class="tree-item active" onclick="loadBuiltin('main')" id="fi-main">
+                            <span class="fi-icon nc-icon">NC</span> main.nc
                         </div>
-                    </div>
-                    <div class="example-card" onclick="loadFile('counter', counterContent)">
-                        <div class="ex-icon">🔢</div>
-                        <div class="ex-info">
-                            <div class="ex-name">Counter Loop</div>
-                            <div class="ex-desc">Loops and conditionals</div>
+                        <div class="tree-item" onclick="loadBuiltin('compiler')" id="fi-compiler">
+                            <span class="fi-icon nc-icon">NC</span> compiler.nc
                         </div>
-                    </div>
-                    <div class="example-card" onclick="loadFile('physics', physicsContent)">
-                        <div class="ex-icon">🎮</div>
-                        <div class="ex-info">
-                            <div class="ex-name">Game Physics</div>
-                            <div class="ex-desc">3D viewport simulation</div>
-                        </div>
-                    </div>
-                    <div class="example-card" onclick="loadFile('hello', helloContent)">
-                        <div class="ex-icon">👋</div>
-                        <div class="ex-info">
-                            <div class="ex-name">Hello World</div>
-                            <div class="ex-desc">Your first NATCOM program</div>
+                        <div class="tree-item" onclick="loadBuiltin('ui')" id="fi-ui">
+                            <span class="fi-icon nc-icon">NC</span> ui.nc
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SETTINGS PANEL -->
-            <div class="panel" id="panel-settings">
-                <div class="panel-header"><span>SETTINGS</span></div>
-                <div class="settings-list">
-                    <div class="setting-group">
-                        <div class="setting-group-title">COMPILER</div>
-                        <div class="setting-item">
-                            <span>Target</span>
-                            <select class="setting-select" id="targetSelect">
-                                <option value="c">Native C (Fast)</option>
-                                <option value="js">JavaScript (Web)</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <span>Optimization</span>
-                            <select class="setting-select">
-                                <option>-O3 (Max)</option>
-                                <option>-O2</option>
-                                <option>-O1</option>
-                            </select>
-                        </div>
+                <div class="tree-section">
+                    <div class="tree-section-header expanded" onclick="toggleSection(this)">
+                        <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
+                        EXAMPLES
                     </div>
-                    <div class="setting-group">
-                        <div class="setting-group-title">EDITOR</div>
-                        <div class="setting-item">
-                            <span>Font Size</span>
-                            <input type="number" class="setting-input" value="14" min="10" max="24" onchange="setFontSize(this.value)">
+                    <div class="tree-items">
+                        <div class="tree-item" onclick="loadBuiltin('calculator')" id="fi-calculator">
+                            <span class="fi-icon ex-icon">NC</span> calculator.nc
                         </div>
-                        <div class="setting-item">
-                            <span>Word Wrap</span>
-                            <label class="toggle"><input type="checkbox" checked onchange="toggleWrap(this)"><span class="slider"></span></label>
+                        <div class="tree-item" onclick="loadBuiltin('hello')" id="fi-hello">
+                            <span class="fi-icon ex-icon">NC</span> hello.nc
                         </div>
-                    </div>
-                    <div class="setting-group">
-                        <div class="setting-group-title">SOVEREIGN LAYER</div>
-                        <div class="setting-item">
-                            <span>ZKP Audit</span>
-                            <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                        <div class="tree-item" onclick="loadBuiltin('budget')" id="fi-budget">
+                            <span class="fi-icon ex-icon">NC</span> budget_tracker.nc
                         </div>
-                        <div class="setting-item">
-                            <span>Cloud Sync</span>
-                            <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                        <div class="tree-item" onclick="loadBuiltin('counter')" id="fi-counter">
+                            <span class="fi-icon ex-icon">NC</span> counter.nc
+                        </div>
+                        <div class="tree-item" onclick="loadBuiltin('physics')" id="fi-physics">
+                            <span class="fi-icon ex-icon">NC</span> game_physics.nc
+                        </div>
+                        <div class="tree-item" onclick="loadBuiltin('fulldemo')" id="fi-fulldemo">
+                            <span class="fi-icon ex-icon">NC</span> full_demo.nc
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- RESIZE HANDLE -->
-        <div class="resize-handle" id="resizeHandle"></div>
-
-        <!-- EDITOR + TERMINAL CONTAINER -->
-        <div class="editor-area">
-            <!-- EDITOR TABS -->
-            <div class="tab-bar" id="tabBar">
-                <div class="tab active" id="tab-main" onclick="switchTab('main')">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/></svg>
-                    main.nc
-                    <span class="tab-close" onclick="closeTab(event,'main')">×</span>
+        <!-- EXAMPLES -->
+        <div class="panel" id="panel-examples">
+            <div class="panel-header"><span>EXAMPLES</span></div>
+            <div class="examples-list">
+                <div class="ex-card" onclick="loadBuiltin('hello')">
+                    <div class="ex-icon-wrap">👋</div>
+                    <div><div class="ex-title">Hello World</div><div class="ex-desc">First NATCOM program</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('calculator')">
+                    <div class="ex-icon-wrap">🧮</div>
+                    <div><div class="ex-title">Calculator</div><div class="ex-desc">User input + all arithmetic</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('budget')">
+                    <div class="ex-icon-wrap">💰</div>
+                    <div><div class="ex-title">Budget Tracker</div><div class="ex-desc">Loops + conditionals</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('counter')">
+                    <div class="ex-icon-wrap">🔢</div>
+                    <div><div class="ex-title">Counter</div><div class="ex-desc">Repeat loops + increment</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('physics')">
+                    <div class="ex-icon-wrap">🎮</div>
+                    <div><div class="ex-title">Game Physics</div><div class="ex-desc">3D viewport + random</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('fulldemo')">
+                    <div class="ex-icon-wrap">🚀</div>
+                    <div><div class="ex-title">Full Demo</div><div class="ex-desc">Every NATCOM feature</div></div>
                 </div>
             </div>
+        </div>
 
-            <!-- CODE EDITOR -->
-            <div class="editor-wrapper">
-                <div class="line-numbers" id="lineNumbers"></div>
-                <textarea id="editor" class="editor" spellcheck="false" onkeydown="handleKey(event)" oninput="updateLineNumbers(); highlightSyntax(); onEditorChange()">Initialize the cloaked zero-knowledge matrix for sovereign auditing.
-Initialize high performance gaming viewport with gravity physics.
-
-Create a high speed integer named PlayerHealth and set it to 100.
-Create a floating point variable named GravityForce and set it to 9.81.
-Create a high speed integer named Score and set it to 0.
-
-Add 50 to PlayerHealth.
-Multiply GravityForce by 2.0.
-Log the value of PlayerHealth.
-Log the value of GravityForce.
-
-Begin the main simulation loop.
-  Decrease PlayerHealth by 10.
-  Increase Score by 100.
-
-  If the PlayerHealth is less than 0, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
-
-Log the value of Score.
-Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.</textarea>
-                <canvas id="syntaxCanvas" class="syntax-canvas"></canvas>
+        <!-- SEARCH -->
+        <div class="panel" id="panel-search">
+            <div class="panel-header"><span>SEARCH</span></div>
+            <div style="padding:8px 12px;">
+                <input type="text" class="search-input" placeholder="Search in all files..." id="searchInput" oninput="searchCode()">
             </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
 
-            <!-- RESIZE BETWEEN EDITOR AND TERMINAL -->
-            <div class="hresize-handle" id="hresizeHandle"></div>
+        <!-- CHEATSHEET / LANGUAGE REFERENCE -->
+        <div class="panel" id="panel-cheatsheet">
+            <div class="panel-header"><span>LANGUAGE REFERENCE</span></div>
+            <div class="cheatsheet" id="cheatsheet">
+                <div class="cs-section">
+                    <div class="cs-title">📦 Variables</div>
+                    <div class="cs-item" onclick="insertSnippet('Create a high speed integer named MyVar and set it to 0.')"><code>Create a high speed integer named X and set it to 0.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Create a floating point variable named MyVar and set it to 0.0.')"><code>Create a floating point variable named X and set it to 0.0.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Create a string named MyText and set it to &quot;Hello&quot;.')"><code>Create a string named X and set it to "Hello".</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Create a boolean named MyFlag and set it to true.')"><code>Create a boolean named X and set it to true.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set X to 42.')"><code>Set X to 42.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">🎯 User Input</div>
+                    <div class="cs-item" onclick="insertSnippet('Ask the user to enter a value for X.')"><code>Ask the user to enter a value for X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Ask the user for text named Name.')"><code>Ask the user for text named Name.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">➕ Math</div>
+                    <div class="cs-item" onclick="insertSnippet('Add 5 to X.')"><code>Add 5 to X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Subtract 3 from X.')"><code>Subtract 3 from X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Multiply X by 2.')"><code>Multiply X by 2.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Divide X by 4.')"><code>Divide X by 4.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Increment X.')"><code>Increment X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Decrement X.')"><code>Decrement X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Swap the values of X and Y.')"><code>Swap the values of X and Y.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">🔢 Math Functions</div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the square root of X.')"><code>Set Result to the square root of X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Raise X to the power of Y.')"><code>Raise X to the power of Y.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the absolute value of X.')"><code>Set Result to the absolute value of X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the maximum of A and B.')"><code>Set Result to the maximum of A and B.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the minimum of A and B.')"><code>Set Result to the minimum of A and B.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the floor of X.')"><code>Set Result to the floor of X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Set Result to the ceiling of X.')"><code>Set Result to the ceiling of X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Find the remainder of A divided by B and store in Result.')"><code>Find the remainder of A divided by B and store in Result.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Generate a random number between 1 and 100 and store in Result.')"><code>Generate a random number between 1 and 100 and store in Result.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">📤 Output</div>
+                    <div class="cs-item" onclick="insertSnippet('Log the value of X.')"><code>Log the value of X.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Display &quot;Hello World&quot;.')"><code>Display "Hello World".</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Display the values of X and Y.')"><code>Display the values of X and Y.</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">🔀 Conditions</div>
+                    <div class="cs-item" onclick="insertSnippet('If the X is greater than Y, then:\n  Log the value of X.\nOtherwise:\n  Log the value of Y.')"><code>If the X is greater than Y, then: ... Otherwise: ...</code></div>
+                </div>
+                <div class="cs-section">
+                    <div class="cs-title">🔁 Loops</div>
+                    <div class="cs-item" onclick="insertSnippet('Begin the main simulation loop.\n  Increment X.\n  If the X is greater than 10, then:\n    Halt the simulation.\n  Otherwise:\n    Keep the simulation running.')"><code>Begin the main simulation loop. ... Halt the simulation.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Repeat 10 times:\n  Increment X.\nDone.')"><code>Repeat 10 times: ... Done.</code></div>
+                    <div class="cs-item" onclick="insertSnippet('Keep running while X is less than 10:\n  Increment X.\nStop the loop.')"><code>Keep running while X is less than 10: ...</code></div>
+                </div>
+            </div>
+        </div>
 
-            <!-- TERMINAL PANEL -->
-            <div class="terminal-panel" id="terminalPanel">
-                <div class="terminal-tabs">
-                    <div class="term-tab active">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                        OUTPUT
-                    </div>
-                    <div class="term-tab" onclick="clearTerminal()">CLEAR</div>
-                    <div class="term-actions">
-                        <button class="term-action-btn" onclick="toggleTerminal()" title="Toggle Terminal">⌃</button>
+        <!-- SETTINGS -->
+        <div class="panel" id="panel-settings">
+            <div class="panel-header"><span>SETTINGS</span></div>
+            <div class="settings-list">
+                <div class="setting-group">
+                    <div class="sg-title">COMPILER</div>
+                    <div class="setting-item"><span>Target</span>
+                        <select class="setting-select" id="targetSelect" onchange="updateStatusTarget()">
+                            <option value="c">Native C (-O3)</option>
+                            <option value="js">JavaScript</option>
+                        </select>
                     </div>
                 </div>
-                <div id="terminal" class="terminal-body">
-                    <div class="term-line system">
-                        <span class="term-prompt">natcom@studio</span><span class="term-caret">▶</span> NATCOM Studio ready. Open a file or write code and press Run.
+                <div class="setting-group">
+                    <div class="sg-title">EDITOR</div>
+                    <div class="setting-item"><span>Font Size</span>
+                        <input type="number" class="setting-input" value="14" min="10" max="24" onchange="setFontSize(this.value)">
+                    </div>
+                    <div class="setting-item"><span>Syntax Highlight</span>
+                        <label class="toggle"><input type="checkbox" checked id="syntaxToggle" onchange="toggleSyntax(this)"><span class="slider"></span></label>
+                    </div>
+                    <div class="setting-item"><span>Error Squiggles</span>
+                        <label class="toggle"><input type="checkbox" checked id="errorToggle"><span class="slider"></span></label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- STATUS BAR -->
-    <div class="statusbar">
-        <div class="status-left">
-            <span class="status-item status-branch">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-                master
-            </span>
-            <span class="status-item" id="status-errors">✓ No Errors</span>
+    <!-- SIDEBAR RESIZE -->
+    <div class="resize-handle" id="resizeHandle"></div>
+
+    <!-- EDITOR AREA -->
+    <div class="editor-area">
+
+        <!-- TABS -->
+        <div class="tab-bar" id="tabBar">
+            <div class="tab active" id="tab-main" onclick="switchTab('main')">
+                <span class="tab-icon nc-icon">NC</span>
+                <span class="tab-name">main.nc</span>
+                <span class="tab-dirty" id="dirty-main" style="display:none">●</span>
+                <span class="tab-close" onclick="closeTab(event,'main')">×</span>
+            </div>
         </div>
-        <div class="status-right">
-            <span class="status-item" id="status-cursor">Ln 1, Col 1</span>
-            <span class="status-item">NATCOM</span>
-            <span class="status-item">UTF-8</span>
-            <span class="status-item status-target" id="status-target">Target: C</span>
+
+        <!-- EDITOR + HIGHLIGHT WRAPPER -->
+        <div class="editor-wrapper" id="editorWrapper">
+            <!-- Line numbers -->
+            <div class="line-numbers" id="lineNumbers"></div>
+
+            <!-- Error gutter -->
+            <div class="error-gutter" id="errorGutter"></div>
+
+            <!-- Highlight overlay (sits BEHIND textarea) -->
+            <div class="highlight-host" id="highlightHost">
+                <pre class="highlight-pre" id="highlightPre"></pre>
+            </div>
+
+            <!-- The actual textarea -->
+            <textarea id="editor" class="editor" spellcheck="false"
+                oninput="onEditorInput()"
+                onkeydown="handleKey(event)"
+                onscroll="syncScroll()"
+                onclick="updateCursorStatus()"
+                onkeyup="updateCursorStatus()"
+            ></textarea>
+        </div>
+
+        <!-- ERROR PANEL (shows when errors detected) -->
+        <div class="error-panel" id="errorPanel" style="display:none">
+            <div class="ep-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                <span>PROBLEMS</span>
+                <span id="ep-count" class="ep-count">0</span>
+                <button class="ep-close" onclick="closeErrorPanel()">×</button>
+            </div>
+            <div class="ep-list" id="epList"></div>
+        </div>
+
+        <!-- TERMINAL RESIZE -->
+        <div class="hresize-handle" id="hresizeHandle"></div>
+
+        <!-- TERMINAL -->
+        <div class="terminal-panel" id="terminalPanel">
+            <div class="terminal-tabs">
+                <div class="term-tab active">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    OUTPUT
+                </div>
+                <div class="term-tab" id="errTab" onclick="switchToErrorTab()" style="display:none">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2z"/></svg>
+                    ERRORS
+                </div>
+                <div class="term-actions">
+                    <button class="term-btn" onclick="clearTerminal()" title="Clear">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                    <button class="term-btn" onclick="toggleTerminal()" title="Toggle" id="termToggleBtn">⌃</button>
+                </div>
+            </div>
+            <div id="terminal" class="terminal-body">
+                <div class="term-line system">
+                    <span class="term-prompt">natcom@studio</span><span class="term-arr">▶</span>
+                    <span class="term-msg">NATCOM Studio ready. Open a file or write code and press <kbd>Ctrl+Enter</kbd> to run.</span>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<!-- STATUS BAR -->
+<div class="statusbar">
+    <div class="status-left">
+        <span class="status-item status-branch">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+            master
+        </span>
+        <span class="status-item status-errors" id="statusErrors">✓ No Problems</span>
+    </div>
+    <div class="status-right">
+        <span class="status-item" id="statusCursor">Ln 1, Col 1</span>
+        <span class="status-item" id="statusLines">1 lines</span>
+        <span class="status-item">NATCOM .nc</span>
+        <span class="status-item">UTF-8</span>
+        <span class="status-item status-target" id="statusTarget">⚡ Native C</span>
+    </div>
+</div>
+
+<!-- NEW FILE MODAL -->
+<div class="modal-overlay" id="newFileModal" style="display:none" onclick="closeNewFileModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <h3>New NATCOM File</h3>
+        <input type="text" id="newFileName" class="modal-input" placeholder="filename (without .nc)" autofocus>
+        <div class="modal-actions">
+            <button class="modal-btn secondary" onclick="document.getElementById('newFileModal').style.display='none'">Cancel</button>
+            <button class="modal-btn primary" onclick="createNewFile()">Create .nc File</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
