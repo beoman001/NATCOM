@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=NATCOM Studio
+Comment=Sovereign Natural Language IDE & Compiler
+Exec=/bin/bash /home/beoboy/NATCOM/natcom-studio-launch.sh
+Icon=/home/beoboy/NATCOM/natcom_icon.png
+Terminal=false
+StartupNotify=true
+Categories=Development;IDE;TextEditor;
+Keywords=natcom;compiler;ide;programming;natural;language;

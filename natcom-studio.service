@@ -1,0 +1,16 @@
+[Unit]
+Description=NATCOM Studio — Sovereign IDE Backend
+After=network.target
+
+[Service]
+Type=simple
+User=beoboy
+WorkingDirectory=/home/beoboy/NATCOM
+ExecStart=/usr/bin/python3 /home/beoboy/NATCOM/server.py
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

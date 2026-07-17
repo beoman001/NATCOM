@@ -17,6 +17,7 @@ class NatcomRequestHandler(SimpleHTTPRequestHandler):
             post_data = self.rfile.read(content_length)
             data = json.loads(post_data.decode('utf-8'))
             code = data.get("code", "")
+            target = data.get("target", "c")
 
             # Save to temporary workspace
             workspace_file = "web_workspace.nc"
@@ -26,7 +27,7 @@ class NatcomRequestHandler(SimpleHTTPRequestHandler):
                 f.write(code)
 
             # Build and Execute
-            build_cmd = [COMPILER_SCRIPT, "build", workspace_file, "-o", output_bin]
+            build_cmd = [COMPILER_SCRIPT, "build", workspace_file, "-o", output_bin, "--target", target]
             build_process = subprocess.run(build_cmd, capture_output=True, text=True)
             
             output = build_process.stdout + "\n" + build_process.stderr

@@ -2,6 +2,7 @@
 import sys
 import argparse
 import os
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -9,39 +10,125 @@ from src.lexer import SafeFreeFormLexer
 from src.parser import MultiverseParser
 from src.codegen import SystemsCodeGen
 
+# ── ANSI Color Codes ──────────────────────────────────────────────────────────
+RESET  = "\033[0m"
+BOLD   = "\033[1m"
+DIM    = "\033[2m"
+CYAN   = "\033[96m"
+GREEN  = "\033[92m"
+YELLOW = "\033[93m"
+RED    = "\033[91m"
+BLUE   = "\033[94m"
+PURPLE = "\033[95m"
+WHITE  = "\033[97m"
+GRAY   = "\033[90m"
+
+def hr(char="─", width=72, color=GRAY):
+    print(f"{color}{char * width}{RESET}")
+
+def section(label, color=CYAN):
+    print(f"\n{color}{BOLD}  {label}{RESET}")
+
+def step(icon, label, detail="", color=GREEN):
+    detail_str = f"  {GRAY}{detail}{RESET}" if detail else ""
+    print(f"  {color}{icon}{RESET}  {WHITE}{label}{RESET}{detail_str}")
+
+def success(msg):
+    print(f"\n  {GREEN}✔{RESET}  {BOLD}{WHITE}{msg}{RESET}")
+
+def error(msg):
+    print(f"\n  {RED}✖{RESET}  {BOLD}{RED}{msg}{RESET}")
+
+def warn(msg):
+    print(f"  {YELLOW}⚠{RESET}  {YELLOW}{msg}{RESET}")
+
 def main():
-    print("================================================================================")
-    print("               NATCOM COMPILER SUPREME TOOLCHAIN RUNNER                         ")
-    print("================================================================================")
-    parser = argparse.ArgumentParser(description="NATCOM Automated Toolchain Runner")
-    parser.add_argument("command", choices=["build"], help="Command to execute (e.g., build)")
-    parser.add_argument("source", help="Source file (.nc)")
-    parser.add_argument("-o", "--output", default="game_engine", help="Output binary name")
-    parser.add_argument("--target", default="c", choices=["c", "js"], help="Target architecture (c or js)")
-    
+    t_start = time.time()
+
+    # ── Banner ─────────────────────────────────────────────────────────────────
+    print()
+    hr("═")
+    print(f"{CYAN}{BOLD}{'':>4}NATCOM STUDIO  ·  Sovereign Compiler Toolchain  v2.0{RESET}")
+    print(f"{GRAY}{'':>4}Natural Communication Language  ·  Multi-Target  ·  Self-Healing{RESET}")
+    hr("═")
+
+    parser = argparse.ArgumentParser(
+        description="NATCOM Compiler — Build .nc source to native binary or JavaScript.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    parser.add_argument("command", choices=["build"], help="build  Compile a .nc source file")
+    parser.add_argument("source", help="Path to the .nc source file")
+    parser.add_argument("-o", "--output", default="program", help="Output binary/file name (default: program)")
+    parser.add_argument("--target", default="c", choices=["c", "js"],
+                        help="c   → Native binary via GCC -O3 (default)\njs  → JavaScript (ECMAScript)")
+
     args = parser.parse_args()
-    
+
     if args.command == "build":
+        source_name = os.path.basename(args.source)
+        target_label = "Native C  (-O3, GCC)" if args.target == "c" else "JavaScript (ECMAScript)"
+
+        # ── Build Info ─────────────────────────────────────────────────────────
+        section("BUILD CONFIGURATION", CYAN)
+        hr()
+        step("📄", f"Source File   :  {source_name}", args.source)
+        step("🎯", f"Target        :  {target_label}")
+        step("📦", f"Output        :  {args.output}")
+        hr()
+
+        # ── Source Read ────────────────────────────────────────────────────────
         if not os.path.exists(args.source):
-            print(f"[!] Error: File '{args.source}' not found.")
+            error(f"File not found: '{args.source}'")
             sys.exit(1)
-            
-        print(f"[*] Reading source code from: {args.source}")
+
         with open(args.source, "r") as f:
             source_code = f.read()
-            
-        print("[*] Lexing free-form prose (Phase 1)...")
+
+        line_count = source_code.count('\n') + 1
+        char_count = len(source_code)
+
+        section("COMPILATION PIPELINE", PURPLE)
+        t0 = time.time()
+
+        # Phase 1 — Lexer
+        step("🔍", "Phase 1  │  Lexical Analysis", "Tokenizing free-form prose...")
         lexer = SafeFreeFormLexer(source_code)
         tokens = lexer.tokenize()
-        
-        print("[*] Self-Healing AST Parsing & Validation (Phase 2)...")
+        t1 = time.time()
+        step("   ", f"          └─ {len(tokens)} tokens  ·  {line_count} lines  ·  {char_count} chars",
+             f"{(t1-t0)*1000:.1f}ms", GRAY)
+
+        # Phase 2 — Parser
+        step("🧠", "Phase 2  │  AST Parsing & Self-Healing Validation", "Building Abstract Syntax Tree...")
         ast_parser = MultiverseParser(tokens)
         ast = ast_parser.parse()
-        
-        print(f"[*] Systems Code Generation (Phase 3) - Target: {args.target.upper()}...")
+        t2 = time.time()
+        node_count = len(ast.statements)
+        step("   ", f"          └─ {node_count} AST nodes generated",
+             f"{(t2-t1)*1000:.1f}ms", GRAY)
+
+        # Phase 3 — Code Generation
+        step("⚙️ ", "Phase 3  │  Code Generation", f"Emitting {args.target.upper()} source...")
         codegen = SystemsCodeGen(ast, output_bin=args.output, target=args.target)
         codegen.generate()
-        print("[*] NATCOM Build Pipeline Complete.")
+        t3 = time.time()
+        step("   ", f"          └─ Output written",
+             f"{(t3-t2)*1000:.1f}ms", GRAY)
+
+        # ── Summary ────────────────────────────────────────────────────────────
+        t_total = time.time() - t_start
+        hr()
+        success(f"Build complete in {t_total*1000:.0f}ms")
+
+        if args.target == "c":
+            print(f"\n  {GRAY}  Run your program:{RESET}")
+            print(f"  {CYAN}  ./{args.output}{RESET}\n")
+        else:
+            print(f"\n  {GRAY}  JavaScript output:{RESET}")
+            out_js = args.output if args.output.endswith(".js") else args.output + ".js"
+            print(f"  {CYAN}  {out_js}{RESET}\n")
+        hr("═")
+        print()
 
 if __name__ == "__main__":
     main()

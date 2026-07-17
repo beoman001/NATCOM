@@ -3,54 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NATCOM Studio | Sovereign IDE</title>
+    <title>NATCOM Studio — Sovereign IDE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="app-container">
-        <header class="header">
-            <div class="logo">
-                <span class="logo-accent">NATCOM</span> STUDIO
+    <!-- TITLE BAR -->
+    <div class="titlebar">
+        <div class="titlebar-left">
+            <div class="traffic-lights">
+                <span class="tl tl-red" title="Close"></span>
+                <span class="tl tl-yellow" title="Minimize"></span>
+                <span class="tl tl-green" title="Maximize"></span>
             </div>
-            <div class="status-bar">
-                <div class="status-dot"></div>
+            <div class="app-brand">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#00ffcc" opacity="0.9"/>
+                    <path d="M2 17L12 22L22 17" stroke="#00ffcc" stroke-width="1.5" fill="none"/>
+                    <path d="M2 12L12 17L22 12" stroke="#00ffcc" stroke-width="1.5" fill="none" opacity="0.6"/>
+                </svg>
+                <span class="brand-name">NATCOM <span class="brand-studio">Studio</span></span>
+            </div>
+        </div>
+        <div class="titlebar-center">
+            <div class="breadcrumb">
+                <span class="bc-folder">NATCOM</span>
+                <span class="bc-sep">›</span>
+                <span class="bc-file" id="breadcrumb-file">main.nc</span>
+            </div>
+        </div>
+        <div class="titlebar-right">
+            <div class="sovereign-status">
+                <div class="pulse-dot"></div>
                 <span>Sovereign Link Active</span>
             </div>
-        </header>
-
-        <main class="workspace">
-            <div class="editor-pane pane">
-                <div class="pane-header">
-                    <h2>main.nc</h2>
-                    <button id="compileBtn" class="compile-btn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
-                        </svg>
-                        COMPILE & EXECUTE
-                    </button>
-                </div>
-                <textarea id="editor" spellcheck="false">// NATCOM Studio Workspace
-// Write your free-form prose here...
-
-Initialize the cloaked zero-knowledge matrix for sovereign auditing.
-Create a high speed integer named CoreTemp and set it to 45.
-Add 10 to CoreTemp.
-Log the value of CoreTemp.
-</textarea>
-            </div>
-
-            <div class="terminal-pane pane">
-                <div class="pane-header">
-                    <h2>OUTPUT MATRIX</h2>
-                    <button id="clearBtn" class="clear-btn">CLEAR</button>
-                </div>
-                <div id="terminal" class="terminal-output">
-                    <div class="log system">NATCOM Studio initialized. Awaiting input...</div>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
+
+    <!-- MENU BAR -->
+    <div class="menubar">
+        <button class="menu-item" onclick="newFile()">File</button>
+        <button class="menu-item">Edit</button>
+        <button class="menu-item" onclick="runCode()">Run</button>
+        <button class="menu-item">View</button>
+        <div class="menubar-actions">
+            <button class="run-btn" onclick="runCode()" id="runBtn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg>
+                Run
+            </button>
+            <button class="build-btn" onclick="buildCode()" id="buildBtn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Build
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div class="ide-layout">
+
+        <!-- ACTIVITY BAR -->
+        <div class="activity-bar">
+            <button class="activity-btn active" id="act-explorer" onclick="switchActivity('explorer')" title="Explorer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+            </button>
+            <button class="activity-btn" id="act-search" onclick="switchActivity('search')" title="Search">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </button>
+            <button class="activity-btn" id="act-examples" onclick="switchActivity('examples')" title="Examples">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </button>
+            <button class="activity-btn" id="act-terminal" onclick="switchActivity('terminal')" title="Terminal">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </button>
+            <div class="activity-spacer"></div>
+            <button class="activity-btn" id="act-settings" onclick="switchActivity('settings')" title="Settings">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+
+            <!-- EXPLORER PANEL -->
+            <div class="panel active" id="panel-explorer">
+                <div class="panel-header">
+                    <span>EXPLORER</span>
+                    <button class="panel-action" onclick="newFile()" title="New File">+</button>
+                </div>
+                <div class="file-tree">
+                    <div class="tree-section">
+                        <div class="tree-section-header" onclick="toggleSection(this)">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
+                            NATCOM PROJECT
+                        </div>
+                        <div class="tree-items">
+                            <div class="tree-item active" onclick="loadFile('main', mainNcContent)" id="file-main">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
+                                main.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('compiler', compilerNcContent)" id="file-compiler">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
+                                compiler.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('ui', uiNcContent)" id="file-ui">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#00ffcc" stroke-width="1.5"/></svg>
+                                ui.nc
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tree-section">
+                        <div class="tree-section-header" onclick="toggleSection(this)">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M3 1L7 5L3 9V1Z"/></svg>
+                            EXAMPLES
+                        </div>
+                        <div class="tree-items">
+                            <div class="tree-item" onclick="loadFile('calculator', calculatorContent)" id="file-calculator">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
+                                calculator.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('hello', helloContent)" id="file-hello">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
+                                hello.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('budget', budgetContent)" id="file-budget">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
+                                budget_tracker.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('counter', counterContent)" id="file-counter">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
+                                counter.nc
+                            </div>
+                            <div class="tree-item" onclick="loadFile('physics', physicsContent)" id="file-physics">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffd700" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="#ffd700" stroke-width="1.5"/></svg>
+                                game_physics.nc
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEARCH PANEL -->
+            <div class="panel" id="panel-search">
+                <div class="panel-header"><span>SEARCH</span></div>
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search in files..." id="searchInput" oninput="searchCode()">
+                </div>
+                <div id="search-results" class="search-results"></div>
+            </div>
+
+            <!-- EXAMPLES PANEL -->
+            <div class="panel" id="panel-examples">
+                <div class="panel-header"><span>EXAMPLES</span></div>
+                <div class="examples-list">
+                    <div class="example-card" onclick="loadFile('calculator', calculatorContent)">
+                        <div class="ex-icon">🧮</div>
+                        <div class="ex-info">
+                            <div class="ex-name">Calculator</div>
+                            <div class="ex-desc">Full arithmetic operations</div>
+                        </div>
+                    </div>
+                    <div class="example-card" onclick="loadFile('budget', budgetContent)">
+                        <div class="ex-icon">💰</div>
+                        <div class="ex-info">
+                            <div class="ex-name">Budget Tracker</div>
+                            <div class="ex-desc">Track monthly expenses</div>
+                        </div>
+                    </div>
+                    <div class="example-card" onclick="loadFile('counter', counterContent)">
+                        <div class="ex-icon">🔢</div>
+                        <div class="ex-info">
+                            <div class="ex-name">Counter Loop</div>
+                            <div class="ex-desc">Loops and conditionals</div>
+                        </div>
+                    </div>
+                    <div class="example-card" onclick="loadFile('physics', physicsContent)">
+                        <div class="ex-icon">🎮</div>
+                        <div class="ex-info">
+                            <div class="ex-name">Game Physics</div>
+                            <div class="ex-desc">3D viewport simulation</div>
+                        </div>
+                    </div>
+                    <div class="example-card" onclick="loadFile('hello', helloContent)">
+                        <div class="ex-icon">👋</div>
+                        <div class="ex-info">
+                            <div class="ex-name">Hello World</div>
+                            <div class="ex-desc">Your first NATCOM program</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS PANEL -->
+            <div class="panel" id="panel-settings">
+                <div class="panel-header"><span>SETTINGS</span></div>
+                <div class="settings-list">
+                    <div class="setting-group">
+                        <div class="setting-group-title">COMPILER</div>
+                        <div class="setting-item">
+                            <span>Target</span>
+                            <select class="setting-select" id="targetSelect">
+                                <option value="c">Native C (Fast)</option>
+                                <option value="js">JavaScript (Web)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <span>Optimization</span>
+                            <select class="setting-select">
+                                <option>-O3 (Max)</option>
+                                <option>-O2</option>
+                                <option>-O1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <div class="setting-group-title">EDITOR</div>
+                        <div class="setting-item">
+                            <span>Font Size</span>
+                            <input type="number" class="setting-input" value="14" min="10" max="24" onchange="setFontSize(this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <span>Word Wrap</span>
+                            <label class="toggle"><input type="checkbox" checked onchange="toggleWrap(this)"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <div class="setting-group-title">SOVEREIGN LAYER</div>
+                        <div class="setting-item">
+                            <span>ZKP Audit</span>
+                            <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                        <div class="setting-item">
+                            <span>Cloud Sync</span>
+                            <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESIZE HANDLE -->
+        <div class="resize-handle" id="resizeHandle"></div>
+
+        <!-- EDITOR + TERMINAL CONTAINER -->
+        <div class="editor-area">
+            <!-- EDITOR TABS -->
+            <div class="tab-bar" id="tabBar">
+                <div class="tab active" id="tab-main" onclick="switchTab('main')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#00ffcc" opacity="0.8"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/></svg>
+                    main.nc
+                    <span class="tab-close" onclick="closeTab(event,'main')">×</span>
+                </div>
+            </div>
+
+            <!-- CODE EDITOR -->
+            <div class="editor-wrapper">
+                <div class="line-numbers" id="lineNumbers"></div>
+                <textarea id="editor" class="editor" spellcheck="false" onkeydown="handleKey(event)" oninput="updateLineNumbers(); highlightSyntax(); onEditorChange()">Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+Initialize high performance gaming viewport with gravity physics.
+
+Create a high speed integer named PlayerHealth and set it to 100.
+Create a floating point variable named GravityForce and set it to 9.81.
+Create a high speed integer named Score and set it to 0.
+
+Add 50 to PlayerHealth.
+Multiply GravityForce by 2.0.
+Log the value of PlayerHealth.
+Log the value of GravityForce.
+
+Begin the main simulation loop.
+  Decrease PlayerHealth by 10.
+  Increase Score by 100.
+
+  If the PlayerHealth is less than 0, then:
+    Halt the simulation.
+  Otherwise:
+    Keep the simulation running.
+
+Log the value of Score.
+Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.</textarea>
+                <canvas id="syntaxCanvas" class="syntax-canvas"></canvas>
+            </div>
+
+            <!-- RESIZE BETWEEN EDITOR AND TERMINAL -->
+            <div class="hresize-handle" id="hresizeHandle"></div>
+
+            <!-- TERMINAL PANEL -->
+            <div class="terminal-panel" id="terminalPanel">
+                <div class="terminal-tabs">
+                    <div class="term-tab active">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                        OUTPUT
+                    </div>
+                    <div class="term-tab" onclick="clearTerminal()">CLEAR</div>
+                    <div class="term-actions">
+                        <button class="term-action-btn" onclick="toggleTerminal()" title="Toggle Terminal">⌃</button>
+                    </div>
+                </div>
+                <div id="terminal" class="terminal-body">
+                    <div class="term-line system">
+                        <span class="term-prompt">natcom@studio</span><span class="term-caret">▶</span> NATCOM Studio ready. Open a file or write code and press Run.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="statusbar">
+        <div class="status-left">
+            <span class="status-item status-branch">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+                master
+            </span>
+            <span class="status-item" id="status-errors">✓ No Errors</span>
+        </div>
+        <div class="status-right">
+            <span class="status-item" id="status-cursor">Ln 1, Col 1</span>
+            <span class="status-item">NATCOM</span>
+            <span class="status-item">UTF-8</span>
+            <span class="status-item status-target" id="status-target">Target: C</span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
