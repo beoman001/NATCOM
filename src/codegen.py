@@ -355,6 +355,7 @@ class SystemsCodeGen:
                 c.append(f"{indent}{node.var_name} = parseFloat(await natcom_input('{safe_p}', 'number')) || 0;")
                 c.append(f"{indent}console.log('\\u25b6 input', '\\u003cint\\u003e', '{node.var_name}', '=', {node.var_name});")
             else:
+                c.append(f'{indent}double {node.var_name} = 0; // auto-declared input var')
                 c.append(f'{indent}nc_input_prompt("{safe_p}");')
                 c.append(f"{indent}scanf(\"%lf\", &{node.var_name});")
                 c.append(f'{indent}nc_log("Input received", "%g", (double){node.var_name});')
@@ -366,6 +367,9 @@ class SystemsCodeGen:
                 c.append(f"{indent}{node.var_name} = await natcom_input('{safe_p}', 'string') || '';")
                 c.append(f"{indent}console.log('\\u25b6 input', '\\u003cstr\\u003e', '{node.var_name}', '=', {node.var_name});")
             else:
+                if node.var_name not in self._str_vars:
+                    c.append(f'{indent}char {node.var_name}[256] = ""; // auto-declared string var')
+                    self._str_vars.add(node.var_name)
                 c.append(f'{indent}nc_input_prompt("{safe_p}");')
                 c.append(f"{indent}fgets({node.var_name}, sizeof({node.var_name}), stdin);")
                 c.append(f"{indent}{node.var_name}[strcspn({node.var_name}, \"\\n\")] = 0;")

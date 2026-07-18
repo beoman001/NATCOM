@@ -438,7 +438,7 @@ class MultiverseParser:
 
         m = re.search(r'keep running while (.+)', orig, re.IGNORECASE)
         if m:
-            raw_cond = m.group(1).strip()
+            raw_cond = m.group(1).strip().rstrip(':')
             cond = self._build_condition(raw_cond)
             body = self._collect_body_until("stop the loop", "end while", "sync the current game state")
             if self._peek_contains("stop the loop", "end while"):
