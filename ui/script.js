@@ -1055,7 +1055,7 @@ async function runCode() {
   // If code has 'Ask the user' and target is C, remind user JS mode is better
   const isInteractive = /ask the user/i.test(code);
   if (isInteractive && target === 'c') {
-    log('ℹ  This program has user input. For interactive input, switch target to JavaScript in Settings.', 'system');
+    log('ℹ  This .nc program requires user input. For interactive browser input, switch NATCOM target to JavaScript.', 'system');
     log('   In JavaScript mode, a prompt dialog will appear for each input — just like Python input().', 'system');
   }
 
@@ -1130,7 +1130,7 @@ async function runCode() {
         log('(No output produced)', 'system');
       } else {
         // C mode + interactive: show a tip
-        log('ℹ  Program compiled. For interactive input in the browser, switch target to JavaScript.', 'system');
+        log('ℹ  NATCOM .nc program compiled. For interactive input in the browser, switch target to JavaScript.', 'system');
       }
 
       statusErrors.textContent = buildErrors.length ? `⚠ ${buildErrors.length} warnings` : '✓ OK';
