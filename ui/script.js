@@ -754,7 +754,7 @@ function updateCursorStatus() { updateStatusBar(); }
 
 function updateStatusTarget() {
   const t = (targetSelect?.value || 'c');
-  statusTarget.textContent = t === 'c' ? '⚡ Native C' : '🌐 JavaScript';
+  statusTarget.textContent = t === 'c' ? '⚡ NATCOM Native (x86_64)' : '🌐 NATCOM Web Engine';
 }
 
 // ── KEYBOARD ─────────────────────────────────────────────────
@@ -1055,8 +1055,8 @@ async function runCode() {
   // If code has 'Ask the user' and target is C, remind user JS mode is better
   const isInteractive = /ask the user/i.test(code);
   if (isInteractive && target === 'c') {
-    log('ℹ  This .nc program requires user input. For interactive browser input, switch NATCOM target to JavaScript.', 'system');
-    log('   In JavaScript mode, a prompt dialog will appear for each input — just like Python input().', 'system');
+    log('ℹ  This NATCOM program requires interactive user input.', 'system');
+    log('   Switch the compiler target to "NATCOM Web Engine" in Settings to enable interactive browser prompts.', 'system');
   }
 
   runBtn.classList.add('loading');
@@ -1130,7 +1130,7 @@ async function runCode() {
         log('(No output produced)', 'system');
       } else {
         // C mode + interactive: show a tip
-        log('ℹ  NATCOM .nc program compiled. For interactive input in the browser, switch target to JavaScript.', 'system');
+        log('ℹ  NATCOM .nc program compiled. For interactive input, switch target to NATCOM Web Engine.', 'system');
       }
 
       statusErrors.textContent = buildErrors.length ? `⚠ ${buildErrors.length} warnings` : '✓ OK';
