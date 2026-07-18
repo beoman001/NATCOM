@@ -3,55 +3,55 @@
    Full VS Code / JetBrains inspired design
    ===================================================================== */
 :root {
-  --bg0:       #0a0a10;
-  --bg1:       #0e0e18;
-  --bg2:       #121220;
-  --bg3:       #181828;
-  --bg4:       #1e1e32;
-  --bg-hover:  rgba(255,255,255,0.045);
-  --bg-active: rgba(0,255,204,0.07);
-  --bg-tab:    #141420;
-  --bg-tab-a:  #0e0e18;
+  --bg0:       #2B2B2B;
+  --bg1:       #313335;
+  --bg2:       #3C3F41;
+  --bg3:       #4E5254;
+  --bg4:       #555555;
+  --bg-hover:  rgba(255,255,255,0.1);
+  --bg-active: rgba(33,66,131,0.5); /* Darcula Selection Blue */
+  --bg-tab:    #3C3F41;
+  --bg-tab-a:  #2B2B2B;
 
-  --ac:        #00ffcc;
-  --ac-dim:    rgba(0,255,204,0.12);
-  --ac-glow:   rgba(0,255,204,0.3);
-  --ac2:       #7c6af7;
-  --ac3:       #f7a06a;
-  --ac-red:    #ff6b6b;
-  --ac-yellow: #ffd700;
+  --ac:        #CC7832; /* Darcula Orange */
+  --ac-dim:    rgba(204, 120, 50, 0.2);
+  --ac-glow:   rgba(204, 120, 50, 0.4);
+  --ac2:       #9876AA; /* Darcula Purple */
+  --ac3:       #6897BB; /* Darcula Blue/Number */
+  --ac-red:    #FF6B68;
+  --ac-yellow: #FFC66D; /* Darcula Yellow/Function */
 
-  --tx0: #f0f2f8;
-  --tx1: #c9cdd8;
-  --tx2: #8891a4;
-  --tx3: #4a5168;
-  --tx4: #2a2d3e;
+  --tx0: #A9B7C6;
+  --tx1: #A9B7C6;
+  --tx2: #808080;
+  --tx3: #808080;
+  --tx4: #555555;
 
   /* Syntax */
-  --sy-kw:   #c792ea;
-  --sy-str:  #c3e88d;
-  --sy-num:  #f78c6c;
-  --sy-cmt:  #4a5568;
-  --sy-fn:   #82aaff;
-  --sy-var:  #eeffff;
-  --sy-op:   #89ddff;
-  --sy-bool: #ff9cac;
-  --sy-io:   #ffd700;
-  --sy-err:  rgba(255,80,80,0.15);
-  --sy-warn: rgba(255,200,0,0.12);
+  --sy-kw:   #CC7832; /* Keyword */
+  --sy-str:  #6A8759; /* String */
+  --sy-num:  #6897BB; /* Number */
+  --sy-cmt:  #808080; /* Comment */
+  --sy-fn:   #FFC66D; /* Function */
+  --sy-var:  #A9B7C6; /* Variable */
+  --sy-op:   #A9B7C6; /* Operator */
+  --sy-bool: #CC7832; /* Boolean */
+  --sy-io:   #FFC66D;
+  --sy-err:  rgba(255,107,104,0.15);
+  --sy-warn: rgba(204,120,50,0.15);
 
-  --border:   rgba(255,255,255,0.055);
-  --border-a: rgba(0,255,204,0.28);
-  --radius:   6px;
-  --font-ui:  'Inter', -apple-system, sans-serif;
-  --font-code:'Fira Code', 'Consolas', monospace;
+  --border:   #555555;
+  --border-a: #777777;
+  --radius:   0px; /* PyCharm is quite sharp */
+  --font-ui:  system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
-  --titlebar-h: 40px;
-  --menubar-h:  30px;
-  --activity-w: 50px;
+  --titlebar-h: 30px;
+  --menubar-h:  40px;
+  --activity-w: 40px;
   --sidebar-w:  260px;
-  --statusbar-h:22px;
-  --tab-h:      36px;
+  --statusbar-h: 24px;
+  --tab-h:      30px;
   --terminal-h: 210px;
 }
 
@@ -387,9 +387,66 @@ kbd { background: var(--bg4); border: 1px solid var(--border); border-radius: 3p
   cursor: pointer; padding: 0 4px; line-height: 1; flex-shrink: 0;
   transition: color .2s;
 }
-.egg-close:hover { color: #d4a853; }
+.egg-close:hover { color: #d4a853; }/* ======================== INLINE TERMINAL INPUT (PyCharm-style) ======================== */
+.term-input-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 0; animation: fadeUp .15s ease forwards;
+}
+.term-input-arrow {
+  color: #569CD6; font-size: 14px; flex-shrink: 0; font-family: var(--font-code);
+}
+.term-input-prompt-label {
+  color: #9CDCFE; font-size: 13px; font-family: var(--font-code); white-space: nowrap;
+}
+.term-input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid #569CD6;
+  outline: none;
+  color: #E5E5E5;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  padding: 2px 4px;
+  caret-color: #CC7832;
+  min-width: 80px;
+  transition: border-color .2s;
+}
+.term-input-field:focus {
+  border-bottom-color: #CC7832;
+  box-shadow: 0 2px 0 -1px rgba(204,120,50,0.4);
+}
+.term-input-field::placeholder { color: #4A5A6A; }
+.term-input-hint {
+  color: #3A4A5A; font-size: 11px; font-family: var(--font-code);
+  white-space: nowrap; flex-shrink: 0;
+}
 
+/* Type badge in debug output */
+.term-type-badge {
+  display: inline-block;
+  font-size: 9px; font-family: var(--font-code);
+  padding: 0px 5px; border-radius: 3px;
+  margin-right: 4px; letter-spacing: .5px;
+  vertical-align: middle; font-weight: 700;
+}
+.type-int    { background: #214283; color: #6897BB; }
+.type-float  { background: #1a3a24; color: #6A8759; }
+.type-str    { background: #1a3a1a; color: #6A8759; }
+.type-bool   { background: #3a2040; color: #CC7832; }
+.type-fn     { background: #3a2a00; color: #FFC66D; }
+.type-class  { background: #2a1a40; color: #9876AA; }
+.type-obj    { background: #1a2a3a; color: #4EC9B0; }
 
-
-
+/* Debug section header */
+.term-debug-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 0 3px; margin-top: 2px;
+  color: var(--tx3); font-size: 11px; font-family: var(--font-code);
+  border-top: 1px solid #3a3a3a;
+  animation: fadeUp .15s ease forwards;
+}
+.term-debug-header::after {
+  content: ''; flex: 1; height: 1px; background: #3a3a3a;
+}
 

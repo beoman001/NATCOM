@@ -7,14 +7,15 @@
 ![NATCOM Logo](ui/natcom_icon.png)
 
 **NATCOM** is the world's first **English-only programming language**.  
-Write programs in natural English sentences — NATCOM compiles them to blazing-fast native C binaries or JavaScript.
+Write programs in natural English sentences — NATCOM compiles them to blazing-fast native binaries or runs them interactively in the browser.
 
-[![Version](https://img.shields.io/badge/version-2.0-00ffcc?style=flat-square)](#)
-[![Language](https://img.shields.io/badge/language-English-7c6af7?style=flat-square)](#)
-[![Target](https://img.shields.io/badge/target-Native%20C%20%7C%20JavaScript-f7a06a?style=flat-square)](#)
+[![Version](https://img.shields.io/badge/version-2.0-CC7832?style=flat-square)](#)
+[![Language](https://img.shields.io/badge/language-English-6A8759?style=flat-square)](#)
+[![Target](https://img.shields.io/badge/target-NATCOM%20Native%20%7C%20NATCOM%20Web%20Engine-6897BB?style=flat-square)](#)
+[![Studio](https://img.shields.io/badge/IDE-NATCOM%20Studio-9876AA?style=flat-square)](#)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](#)
 
-**Created by [Beon Binesh](ui/about.html) · Developed with Google Gemini & Antigravity AGY**
+**Created by [Beon Binesh](ui/about.html) · Developed with Google Gemini & Antigravity AGY by Google DeepMind**
 
 </div>
 
@@ -22,9 +23,9 @@ Write programs in natural English sentences — NATCOM compiles them to blazing-
 
 ## 🚀 Quick Start
 
-### 1. Install
+### 1. Clone & Install
 ```bash
-git clone https://github.com/beoboy/NATCOM.git
+git clone https://github.com/beoman001/NATCOM.git
 cd NATCOM
 chmod +x natcom
 ```
@@ -32,17 +33,22 @@ chmod +x natcom
 ### 2. Write your first program (`hello.nc`)
 ```
 Create a string named Greeting and set it to "Hello, World!".
-Display "Welcome to NATCOM — The English Programming Language!"
+Display "Welcome to NATCOM — The English Programming Language!".
 Log the value of Greeting.
 ```
 
-### 3. Compile & Run
+### 3. Compile & Run (NATCOM Native)
 ```bash
 ./natcom build hello.nc -o hello
 ./hello
 ```
 
-### 4. Open NATCOM Studio (Web IDE)
+### 4. Compile to Web Engine
+```bash
+./natcom build hello.nc --target js -o hello
+```
+
+### 5. Open NATCOM Studio (Full Web IDE)
 ```bash
 python3 server.py
 # Open: http://localhost:8080
@@ -52,54 +58,91 @@ python3 server.py
 
 ## 💡 Philosophy
 
-Traditional programming forces you to learn **syntax rules** before solving real problems.  
+Traditional programming forces you to learn **machine syntax** before solving real problems.  
 NATCOM flips this — **you write English, the compiler does the translation**.
 
-| Traditional (C) | NATCOM |
+> *"Why should humans learn the machine's language? The machine should learn ours."*  
+> — Beon Binesh, Creator of NATCOM
+
+| Traditional Code | NATCOM |
 |---|---|
 | `int score = 0;` | `Create a high speed integer named Score and set it to 0.` |
 | `scanf("%f", &x);` | `Ask the user to enter a value for X.` |
 | `result = sqrt(x);` | `Set Result to the square root of X.` |
 | `for(int i=0;i<10;i++)` | `Repeat 10 times:` |
 | `if (a > b) { ... }` | `If the A is greater than B, then:` |
+| `class Car { ... }` | `Define a class named Car: ... End class.` |
+
+---
+
+## 🎓 NATCOM Studio — Interactive Web IDE
+
+NATCOM Studio is a full-featured, PyCharm-style web IDE built entirely in NATCOM itself (bootstrapped).
+
+### Features
+| Feature | Description |
+|---|---|
+| 🎨 **JetBrains Darcula Theme** | Full Darcula color scheme, JetBrains Mono font |
+| ⚡ **NATCOM Native (x86_64)** | Compiles `.nc` files to native C binaries with `-O3` optimization |
+| 🌐 **NATCOM Web Engine** | Runs programs interactively in the browser — no installation needed |
+| 🔴 **Interactive Input** | PyCharm-style inline terminal input — type values when prompted, press Enter to continue |
+| 🔢 **Type Badges** | Real-time type display: `int`, `float`, `str`, `bool`, `fn`, `class` on every output line |
+| 🌈 **Syntax Highlighting** | Full NATCOM keyword highlighting with Darcula colors |
+| 📁 **File Explorer** | Project tree with all built-in examples, new file creation |
+| 📚 **Language Reference** | Clickable cheatsheet — click any snippet to insert into editor |
+| 🤖 **AI Code Generator** | Gemini AI integration — describe what you want, get NATCOM code |
+| 🐛 **Error Squiggles** | Real-time error detection with inline problem markers |
+| 🔍 **Search** | Search across all open files |
+| ♾️ **Bootstrapped Compiler** | NATCOM compiles its own IDE — the ultimate metacircular demo |
+| 🔐 **Easter Eggs** | Hidden cheat codes unlock special modes |
 
 ---
 
 ## 📖 Complete Language Reference
 
-### Variables
-
-| Statement | Type |
-|---|---|
-| `Create a high speed integer named X and set it to 5.` | Integer |
-| `Create a floating point variable named X and set it to 3.14.` | Float |
-| `Create a string named Name and set it to "Hello".` | String (char[512]) |
-| `Create a boolean named Flag and set it to true.` | Boolean (true/false) |
-| `Set X to 42.` | Assignment |
-| `Swap the values of X and Y.` | Swap two variables |
-
-### User Input
+### Variables & Data Types
 
 ```
-Ask the user to enter a value for X.
-Ask the user to enter a value for Speed with prompt 'Enter speed (m/s)'.
-Ask the user for text named Name.
-Ask the user to enter text for Address with prompt 'Your address'.
+Create a high speed integer named Score and set it to 0.
+Create a floating point variable named Price and set it to 9.99.
+Create a string named Name and set it to "Beon".
+Create a boolean named IsActive and set it to true.
+Set Score to 42.
+Swap the values of A and B.
 ```
 
-### Arithmetic
+| Type | Keyword | Compiled C Type |
+|---|---|---|
+| Integer | `high speed integer` | `int` |
+| Float | `floating point variable` | `float` |
+| String | `string` | `char[512]` |
+| Boolean | `boolean` | `int` (0/1) |
+
+---
+
+### User Input (Interactive)
+
+```
+Ask the user to enter a value for Score.
+Ask the user for text named PlayerName.
+```
+
+> **NATCOM Web Engine automatically handles interactive input** — a PyCharm-style inline input field appears in the terminal. Type your value and press Enter to continue.
+
+---
+
+### Arithmetic Operations
 
 ```
 Add 10 to Score.
 Subtract 5 from Score.
 Multiply Score by 2.
 Divide Score by 4.
-Increase Health by 50.
-Decrease Fuel by 10.
-Increment Counter.
-Decrement Counter.
-Find the remainder of A divided by B and store in Result.
+Increment Score.
+Decrement Score.
 ```
+
+---
 
 ### Math Functions
 
@@ -108,66 +151,94 @@ Set Result to the square root of X.
 Set Result to the absolute value of X.
 Set Result to the floor of X.
 Set Result to the ceiling of X.
-Set Result to the natural log of X.
-Set Result to e to the power of X.
+Set Result to the log of X.
+Set Result to the exp of X.
 Set Result to the maximum of A and B.
 Set Result to the minimum of A and B.
-Raise X to the power of Y.
-Set Result to X to the power of Y.
-Set X to a random number between 1 and 100.
+Set X to the power of Y to the power of 2.
+Find the remainder of A divided by B and store in C.
 Generate a random number between 1 and 100 and store in X.
 ```
 
-### Output / Display
+---
+
+### Display & Output
 
 ```
-Log the value of X.
-Display "Hello World".
-Display 'Hello World'.
-Display the value of X.
-Display the values of X and Y and Z.
-Print a blank line.
+Display "Hello, World!".
+Display the values of Score.
+Display the values of A and B and C.
+Log the value of Score.
 ```
+
+---
 
 ### Conditionals
 
 ```
-If the X is greater than Y, then:
-  Log the value of X.
+If the Score is greater than 100, then:
+  Display "High score!".
 Otherwise:
-  Log the value of Y.
-```
-
-Supported operators: `is greater than`, `is less than`, `equals`, `is not`, `drops below`
-
-### Loops
-
-**Repeat Loop:**
-```
-Repeat 10 times:
-  Increment Counter.
-  Log the value of Counter.
+  Display "Keep trying!".
 Done.
 ```
 
-**While Loop:**
+**Comparison operators:** `greater than`, `less than`, `equal to`, `greater than or equal to`, `less than or equal to`, `not equal to`
+
+---
+
+### Loops
+
 ```
-Keep running while Counter is less than 10:
-  Increment Counter.
+Repeat 10 times:
+  Increment Count.
+Done.
+
+Keep running while Count is less than 100:
+  Add 1 to Count.
 Stop the loop.
-```
 
-**Simulation Loop (Game Loop):**
-```
 Begin the main simulation loop.
-  Increase Score by 1.
-  If the Score is greater than 100, then:
-    Halt the simulation.
-  Otherwise:
-    Keep the simulation running.
+  ...
+  Halt the simulation.
 ```
 
-### Sovereign Layer (Advanced)
+---
+
+### Functions
+
+```
+Define a function named Greet:
+  Display "Hello from a NATCOM function!".
+End function.
+
+Call function Greet.
+
+Define a function named Add with parameters A and B:
+  Set Result to A.
+  Add B to Result.
+  Display the values of Result.
+End function.
+
+Call function Add with arguments 10 and 20.
+```
+
+---
+
+### Classes & Object-Oriented Programming
+
+```
+Define a class named Car:
+  Create a floating point variable named Speed and set it to 0.
+  Create a floating point variable named Fuel and set it to 100.
+End class.
+
+Create an object of class Car named MyCar.
+```
+
+---
+
+### Special Features
 
 ```
 Initialize the cloaked zero-knowledge matrix for sovereign auditing.
@@ -176,431 +247,234 @@ Render a 3D matrix representing a vehicle at coordinates 10.5, 50.0, 15.2.
 Sync the current game state to Google Cloud Storage virtual RAM expansion using safe offline fallbacks.
 ```
 
-### Raw Code Override
+---
 
-Embed raw C or JavaScript directly inside your English program:
+### System Override (Raw C Code Injection)
 
 ```
 <SYSTEM_OVERRIDE>
 printf("Raw C code here\n");
-int raw_var = 42;
 </SYSTEM_OVERRIDE>
 ```
 
-### Comments
-
-```
-// This is a comment — ignored by the compiler
-```
-
 ---
 
-## 🔨 Compiler CLI
+## 🎮 Example Programs
 
-```bash
-# Compile to native binary (default)
-./natcom build file.nc -o output
-
-# Compile to JavaScript
-./natcom build file.nc --target js -o output.js
-
-# Build examples
-./natcom build examples/calculator.nc -o calculator
-./natcom build examples/full_demo.nc -o full_demo
-```
-
----
-
-## 📂 Example Programs
-
-### Hello World (`examples/hello.nc`)
+### Hello World
 ```
 Create a string named Greeting and set it to "Hello, World!".
-Create a boolean named IsRunning and set it to true.
-Create a high speed integer named Counter and set it to 0.
-
-Display "Welcome to NATCOM!"
+Display "Welcome to NATCOM!".
 Log the value of Greeting.
-Log the value of IsRunning.
-
-Repeat 5 times:
-  Increment Counter.
-Done.
-
-Log the value of Counter.
 ```
 
-### Calculator with User Input (`examples/calculator.nc`)
+### Interactive Calculator
 ```
 Create a floating point variable named A and set it to 0.
 Create a floating point variable named B and set it to 0.
+Create a floating point variable named Result and set it to 0.
 
 Ask the user to enter a value for A.
 Ask the user to enter a value for B.
 
-Create a floating point variable named Sum and set it to 0.
-Add A to Sum.
-Add B to Sum.
-Display the values of Sum.
+Add A to Result.
+Add B to Result.
+
+Display "Sum:".
+Log the value of Result.
 ```
 
-### Budget Tracker (`examples/budget_tracker.nc`)
+### Counter with Loop
+```
+Create a high speed integer named Count and set it to 0.
+Create a high speed integer named Limit and set it to 0.
+
+Ask the user to enter a value for Limit.
+
+Repeat 5 times:
+  Increment Count.
+Done.
+
+Display "Final count:".
+Log the value of Count.
+```
+
+### Budget Tracker
 ```
 Create a floating point variable named Budget and set it to 0.
 Create a floating point variable named Expenses and set it to 0.
+Create a floating point variable named Savings and set it to 0.
 
 Ask the user to enter a value for Budget.
 Ask the user to enter a value for Expenses.
 
-Create a floating point variable named Savings and set it to 0.
 Add Budget to Savings.
 Subtract Expenses from Savings.
+
+Display "=== Budget Report ===".
+Display the values of Budget.
+Display the values of Expenses.
 Display the values of Savings.
 
 If the Savings is greater than 0, then:
-  Display "You saved money!"
+  Display "You are saving money!".
 Otherwise:
-  Display "You are over budget!"
+  Display "Warning: Over budget!".
 ```
 
----
-
-## 🌐 NATCOM Studio (Web IDE)
-
-The built-in web IDE provides:
-- ✅ **Syntax highlighting** — keywords colored by category
-- ✅ **Live error detection** — red squiggles on unknown lines
-- ✅ **Error suggestions** — intelligent fix suggestions per error
-- ✅ **Error gutter** — red/yellow dots in the margin
-- ✅ **Language reference** — click-to-insert cheatsheet sidebar
-- ✅ **File explorer** — multi-tab editor
-- ✅ **Examples library** — all examples built-in
-- ✅ **Terminal output** — colored compilation output
-- ✅ **Target switching** — Native C or JavaScript
-
-```bash
-python3 server.py      # Start on http://localhost:8080
+### Game Physics Simulation
 ```
+Initialize the cloaked zero-knowledge matrix for sovereign auditing.
+Initialize high performance gaming viewport with gravity physics.
 
----
+Create a floating point variable named Gravity and set it to 9.81.
+Create a floating point variable named Velocity and set it to 0.0.
+Create a high speed integer named Frame and set it to 0.
+Create a high speed integer named SpawnX and set it to 0.
 
-## 🏗 Architecture
+Generate a random number between 1 and 1000 and store in SpawnX.
+Display the values of SpawnX.
 
-```
-NATCOM/
-├── natcom              # CLI compiler entry point
-├── server.py           # Web IDE backend (Python, no dependencies)
-├── src/
-│   ├── lexer.py        # Free-form English tokenizer
-│   ├── parser.py       # MultiverseParser + Self-Healing Engine
-│   └── codegen.py      # Multi-target code generator (C + JS)
-├── ui/
-│   ├── index.html      # NATCOM Studio IDE
-│   ├── style.css       # Premium dark theme
-│   ├── script.js       # IDE logic + syntax highlighter
-│   └── about.html      # Creator page — Beon Binesh
-└── examples/
-    ├── hello.nc
-    ├── calculator.nc
-    ├── budget_tracker.nc
-    ├── counter.nc
-    ├── game_physics.nc
-    └── full_demo.nc
-```
-
----
-
-## 👤 Created By
-
-**Beon Binesh**  
-Software Architect · Language Designer · AI Pioneer
-
-Developed with **Google Gemini 2.5** and **Antigravity AGY** (Google DeepMind)
-
-> [View Creator Page →](ui/about.html)
-
----
-
-## 🐛 Errors & Troubleshooting
-
-Real errors real users have actually hit. If you're stuck, start here.
-
----
-
-### ❌ `permission denied: ./natcom`
-
-**Why this happens:** You downloaded or cloned the repo but forgot to make the file executable.
-
-```bash
-# Fix:
-chmod +x natcom
-./natcom build hello.nc -o hello
-```
-
----
-
-### ❌ `python3: command not found`
-
-**Why this happens:** Python 3 is not installed on your system, or your system uses `python` instead of `python3`.
-
-```bash
-# Check which you have:
-python --version
-python3 --version
-
-# Fix for Ubuntu/Debian:
-sudo apt install python3
-
-# Fix for macOS (using Homebrew):
-brew install python3
-
-# If 'python' works but 'python3' doesn't:
-alias python3=python     # temporary fix
-```
-
----
-
-### ❌ `gcc: command not found`
-
-**Why this happens:** GCC (C compiler) is not installed. NATCOM compiles `.nc` → `.c` → binary, so GCC is required for the C target.
-
-```bash
-# Ubuntu/Debian:
-sudo apt install gcc build-essential
-
-# macOS:
-xcode-select --install
-
-# Note: If you don't want to install GCC, use --target js instead:
-./natcom build hello.nc --target js -o hello.js
-node hello.js
-```
-
----
-
-### ❌ `[ANOMALY] Unknown sentence: "..."` in the terminal
-
-**Why this happens:** The compiler couldn't understand your English sentence. This is the most common error in NATCOM. The parser is smart but needs the right pattern.
-
-**Common mistakes and fixes:**
-
-| ❌ Wrong | ✅ Correct |
-|---|---|
-| `Create integer X = 5.` | `Create a high speed integer named X and set it to 5.` |
-| `input X` | `Ask the user to enter a value for X.` |
-| `print X` | `Log the value of X.` |
-| `if X > 5:` | `If the X is greater than 5, then:` |
-| `for i in range(10):` | `Repeat 10 times:` |
-| `while X < 10:` | `Keep running while X is less than 10:` |
-| `X = X + 1` | `Increment X.` or `Add 1 to X.` |
-| `end for` | `Done.` |
-| `end while` | `Stop the loop.` |
-
-> **Tip:** Every NATCOM statement must end with a `.` (period), `!`, or `?`. Forgetting this is the #1 mistake.
-
----
-
-### ❌ `[ANOMALY] — but my sentence looks correct!`
-
-**Why this happens:** Case sensitivity in variable names. NATCOM variable names ARE case-sensitive.
-
-```
-// ❌ This breaks — declared as 'Score' but used as 'score'
-Create a high speed integer named Score and set it to 0.
-Log the value of score.   // Error: 'score' is not defined
-
-// ✅ Fix:
-Log the value of Score.
-```
-
----
-
-### ❌ Calculator gives wrong answer / shows `0.000000`
-
-**Why this happens:** You declared a variable as integer but tried to store a decimal result.
-
-```
-// ❌ Will lose decimal precision:
-Create a high speed integer named Result and set it to 0.
-Ask the user to enter a value for Result.
-// If user types 3.14, it becomes 3
-
-// ✅ Use float for decimal numbers:
-Create a floating point variable named Result and set it to 0.
-Ask the user to enter a value for Result.
-```
-
----
-
-### ❌ Web IDE says `Server Offline` / can't connect
-
-**Why this happens:** The backend server (`server.py`) isn't running.
-
-```bash
-# Step 1: Start the server
-python3 server.py
-
-# Step 2: You should see:
-# [*] Starting NATCOM Studio Backend on http://localhost:8080
-
-# Step 3: Open your browser to:
-# http://localhost:8080
-
-# If port 8080 is already in use:
-# Edit server.py and change PORT = 8080 to PORT = 8081 (or any free port)
-```
-
----
-
-### ❌ `Timeout: Execution exceeded 5 seconds`
-
-**Why this happens:** Your program has an infinite loop with no exit condition, OR it's waiting for user input (STDIN) but you haven't provided it.
-
-```
-// ❌ This will timeout — infinite loop:
 Begin the main simulation loop.
-  Increment Counter.
-  // No halt condition!
+  Add 1 to Frame.
+  Add Gravity to Velocity.
+  Multiply Velocity by 0.016.
 
-// ✅ Fix — always add a halt:
-Begin the main simulation loop.
-  Increment Counter.
-  If the Counter is greater than 100, then:
+  If the Frame is greater than 60, then:
+    Log the value of Velocity.
     Halt the simulation.
   Otherwise:
     Keep the simulation running.
+
+Log the value of Frame.
 ```
 
-> **For programs with user input (`Ask the user...`):** Switch the target to **JavaScript** in NATCOM Studio. The JS target runs in your browser and supports real interactive `prompt()` dialogs — no timeout issues.
-
----
-
-### ❌ `GCC Error: implicit declaration of function`
-
-**Why this happens:** You used a math function (`sqrt`, `log`, `ceil`, etc.) but the compiler skipped including `math.h`. This is rare — the auto-scanner should catch it — but can happen with `<SYSTEM_OVERRIDE>` blocks.
-
+### OOP — Classes & Objects
 ```
-// ❌ Raw C override bypasses auto-scanner:
-<SYSTEM_OVERRIDE>
-double x = sqrt(25.0);   // might get implicit declaration warning
-</SYSTEM_OVERRIDE>
+Define a class named Person:
+  Create a high speed integer named Age and set it to 0.
+  Create a floating point variable named Score and set it to 0.
+End class.
 
-// ✅ Add the include in your override:
-<SYSTEM_OVERRIDE>
-#include <math.h>
-double x = sqrt(25.0);
-</SYSTEM_OVERRIDE>
+Create an object of class Person named Beon.
+Display "Object Beon created from class Person.".
+Display "OOP in plain English — only in NATCOM.".
 ```
 
----
-
-### ❌ String input cuts off at the first space
-
-**Why this happens:** The C `scanf` used internally reads only one word by default.
-
+### Bootstrapped Compiler (Metacircular)
 ```
-// ❌ If user types "John Smith", only "John" is stored:
-Ask the user for text named FullName.
+Display "Initializing Sovereign Compiler Matrix...".
+Display "Target architecture: NATCOM Native".
 
-// ✅ Workaround: ask for each word separately:
-Ask the user for text named FirstName.
-Ask the user for text named LastName.
+Create a string named SourceLine and set it to "Add 5 to X".
+Display "Reading source line:".
+Log the value of SourceLine.
 
-// Or use --target js (JavaScript target) which handles full strings natively.
-```
+Display "[ LEXER ] Tokenizing natural prose...".
+Display "[ PARSER ] Translating to machine instructions...".
 
----
+Create a boolean named Handled and set it to false.
 
-### ❌ `Repeat` loop runs but `Done.` is not recognized
-
-**Why this happens:** The `Done.` terminator must be on its own line and match exactly. Extra spaces or a missing period break it.
-
-```
-// ❌ These all fail:
-Repeat 5 times:
-  Increment X.
-done          // lowercase fails
-done.         // might fail if parser expects capital D
-Repeat 5 times:
-  Increment X. Done.    // Same line — fails
-
-// ✅ Correct format:
-Repeat 5 times:
-  Increment X.
+If the SourceLine contains "Add", then:
+  Display "-> Detected arithmetic ADD instruction.".
+  Display "-> Generating C Code: X += 5;".
+  Set Handled to true.
 Done.
+
+Display "Compilation complete. Binary generated.".
 ```
 
 ---
 
-### ❌ `If/Otherwise` block not working correctly
+## 🏛️ Legacy & Inspiration — NATCOM & COBOL
 
-**Why this happens:** Missing colon after `then:`, or the `Otherwise:` is not recognized because of indentation issues.
+NATCOM proudly stands on the shoulders of giants. **COBOL** (1959), created by **Admiral Grace Murray Hopper**, was the first programming language to use English-like syntax. NATCOM carries that vision forward — into the AI era.
+
+| Feature | COBOL (1959) | NATCOM (2026) |
+|---|---|---|
+| Creator | Grace Hopper & team | Beon Binesh |
+| Philosophy | English-like syntax | Full natural English |
+| Target | Mainframes | Native Binary + Web Engine |
+| Input style | `IDENTIFICATION DIVISION` | `Ask the user to enter a value for X.` |
+| Loops | `PERFORM 10 TIMES` | `Repeat 10 times:` |
+| Error handling | Rigid structure | Self-healing AI engine |
+| Year | 1959 | 2026 |
+
+---
+
+## 🏗️ Architecture
 
 ```
-// ❌ Missing colon after 'then':
-If the X is greater than 5, then
-  Display "Big"
-
-// ❌ No trailing colon on Otherwise:
-Otherwise
-  Display "Small"
-
-// ✅ Correct format:
-If the X is greater than 5, then:
-  Display "Big".
-Otherwise:
-  Display "Small".
+NATCOM/
+├── natcom              # CLI compiler entry point (bash script)
+├── server.py           # NATCOM Studio backend (Python HTTP server)
+├── src/
+│   ├── lexer.py        # Tokenizer — breaks English into tokens
+│   ├── parser.py       # Parser — builds AST from tokens
+│   └── codegen.py      # Code Generator — emits C or JS from AST
+├── ui/
+│   ├── index.html      # NATCOM Studio IDE (PyCharm-style)
+│   ├── style.css       # Darcula theme + interactive terminal styles
+│   ├── script.js       # IDE engine + NATCOM Web Engine runner
+│   └── about.html      # Creator page (Beon Binesh)
+├── examples/
+│   ├── hello.nc
+│   ├── calculator.nc
+│   ├── budget_tracker.nc
+│   ├── counter.nc
+│   ├── game_physics.nc
+│   ├── full_demo.nc
+│   ├── functions.nc
+│   ├── classes.nc
+│   └── compiler.nc     # Bootstrapped metacircular compiler
+└── firebase_public/    # Firebase Hosting deployment
 ```
 
 ---
 
-### ❌ Functions — `End function.` not recognized
+## 🛠️ CLI Reference
 
-**Why this happens:** The function end marker must be exactly `End function.` (capital E, full stop).
+```bash
+# Compile to NATCOM Native (x86_64 binary)
+./natcom build program.nc -o program
 
-```
-// ❌ These fail:
-end function
-End Function.      // capital F is fine but verify it works
-end function.      // lowercase 'end' fails
+# Compile to NATCOM Web Engine (JavaScript)
+./natcom build program.nc --target js -o program
 
-// ✅ Correct:
-Define a function named Greet:
-  Display "Hello from function!".
-End function.
-```
+# Run the compiled binary
+./program
 
----
-
-### ⚠️ Warning: Program works in C but not in JS target
-
-**Why this happens:** Some C-only features (like `<SYSTEM_OVERRIDE>` with raw C code, or `nc_banner()` formatting) don't translate to JavaScript.
-
-```
-// This works in C target but JS target ignores it:
-<SYSTEM_OVERRIDE>
-printf("Raw C only!\n");
-</SYSTEM_OVERRIDE>
-
-// For JS-compatible programs, avoid SYSTEM_OVERRIDE blocks.
-// Pure NATCOM English statements work in both targets.
+# Start NATCOM Studio
+python3 server.py
+# Then open: http://localhost:8080
 ```
 
 ---
 
-### 💡 General Tips to Avoid Errors
+## 🔐 Easter Eggs
 
-1. **Always end every statement with a period `.`**
-2. **Variable names are case-sensitive** — `Score` ≠ `score`
-3. **Use floating point for any decimal math** — integers truncate
-4. **For programs with user input**, use the **JavaScript target** in NATCOM Studio for the best interactive experience (real `prompt()` dialogs)
-5. **Indent loop/if bodies** with spaces for readability — NATCOM ignores indentation but it helps humans
-6. **Comments start with `//`** — anything after `//` on a line is ignored
-7. **Test simple things first** — if unsure, start with `Display "Hello".` and build up
-8. **Read the self-healing hints** — when NATCOM can't parse a sentence, it prints a cheat sheet with correct examples right in the terminal
+NATCOM Studio has hidden cheat codes — type them anywhere in your `.nc` file:
+
+| Code | Trigger | Secret |
+|---|---|---|
+| 🎮 **Vice City 144p** | `malayali pwoli ahda` | We got NATCOM before GTA 6! |
+| 🏛️ **Legacy Mode** | `thank you cobol` | Tribute to Grace Hopper |
+| 🔐 **Sovereign Unlock** | `Initialize the cloaked zero-knowledge matrix` | ZKP audit layer activated |
+| 💻 **Dev Mode** | `beon` | Welcome message from the creator |
 
 ---
 
 ## 📜 License
 
-MIT License · © 2026 Beon Binesh
+MIT License — free to use, modify, and distribute.
+
+---
+
+<div align="center">
+
+**NATCOM v2.0** · Built with ❤️ by **Beon Binesh**  
+*Developed with Google Gemini AI & Antigravity AGY by Google DeepMind*
+
+> *"Code is just language. Language is just thought. NATCOM is thought, compiled."*
+
+</div>

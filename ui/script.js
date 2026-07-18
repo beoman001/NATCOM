@@ -1051,12 +1051,14 @@ async function runCode() {
     easterEgg('BEON', '💻', 'Dev Mode', 'Welcome, creator. NATCOM was built by Beon Binesh with Google Gemini & Antigravity AGY.');
   }
 
-  // ── Auto-detect interactive programs ──────────────────────
-  // If code has 'Ask the user' and target is C, remind user JS mode is better
+  // ── Auto-detect interactive programs & force Web Engine ──
   const isInteractive = /ask the user/i.test(code);
-  if (isInteractive && target === 'c') {
-    log('ℹ  This NATCOM program requires interactive user input.', 'system');
-    log('   Switch the compiler target to "NATCOM Web Engine" in Settings to enable interactive browser prompts.', 'system');
+  if (isInteractive && target !== 'js') {
+    // Auto-switch to NATCOM Web Engine for interactive programs
+    targetSelect.value = 'js';
+    target = 'js';
+    updateStatusTarget();
+    log('ℹ  Auto-switched to NATCOM Web Engine for interactive input.', 'system');
   }
 
   runBtn.classList.add('loading');
@@ -1099,37 +1101,15 @@ async function runCode() {
     }
 
     if (buildOk) {
-      // ── JS mode: execute in browser with real prompt() ────
+      // ── NATCOM Web Engine mode: async interactive execution ──────
       if (target === 'js' && data.js_source) {
-        try {
-          const _log = log;
-          const jsEvalCode = `
-            (function() {
-              // Override console.log so output goes to NATCOM terminal
-              const console = {
-                log: (...args) => {
-                  const line = args.join(' ').trim();
-                  if (!line) return;
-                  // Format variable output lines: "  ◆  Name =   Value" → "Name = Value"
-                  const varM = line.match(/◆\s+([A-Za-z_]\w*)\s+(.+)/);
-                  if (varM) { _log(varM[1] + ' = ' + varM[2].trim(), 'output'); return; }
-                  _log(line.replace(/^\s+/, ''), 'output');
-                }
-              };
-              ${data.js_source}
-            })();
-          `;
-          eval(jsEvalCode);
-        } catch (e) {
-          log('Runtime Error: ' + e.message, 'error');
-        }
+        await runNatcomWebEngine(data.js_source);
       } else if (outputLines.length > 0) {
-        // ── C mode: display extracted clean output ─────────
+        // ── NATCOM Native mode: display extracted clean output ─────
         outputLines.forEach(({ text, type }) => log(text, type));
       } else if (!isInteractive) {
         log('(No output produced)', 'system');
       } else {
-        // C mode + interactive: show a tip
         log('ℹ  NATCOM .nc program compiled. For interactive input, switch target to NATCOM Web Engine.', 'system');
       }
 
@@ -1148,6 +1128,140 @@ async function runCode() {
   } finally {
     runBtn.classList.remove('loading');
     runBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg> Run`;
+  }
+}
+
+// ============================================================
+//  NATCOM WEB ENGINE — Fully Async Interactive Runner
+//  Replaces prompt() with inline terminal input widgets
+//  PyCharm-style: program flows naturally, pausing for input
+// ============================================================
+async function runNatcomWebEngine(jsSource) {
+
+  // ── natcom_input(): creates an inline input row in the terminal ──
+  // Returns a Promise that resolves when the user presses Enter.
+  function natcom_input(promptLabel, inputType = 'string') {
+    return new Promise((resolve) => {
+      const row = document.createElement('div');
+      row.className = 'term-input-row';
+      row.innerHTML = `
+        <span class="term-input-arrow">▷</span>
+        <span class="term-input-prompt-label">${esc(promptLabel)}:</span>
+        <input class="term-input-field" type="text"
+          placeholder="type here and press Enter…"
+          autocomplete="off" spellcheck="false">
+        <span class="term-input-hint">[⏎ Enter]</span>
+      `;
+      terminal.appendChild(row);
+      terminal.scrollTop = terminal.scrollHeight;
+
+      const field = row.querySelector('.term-input-field');
+      field.focus();
+
+      field.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const val = field.value;
+          // Replace input row with an echoed "submitted" line
+          const echo = document.createElement('div');
+          echo.className = 'term-line';
+          echo.innerHTML = `<span class="term-input-arrow">▷</span><span class="term-input-prompt-label">${esc(promptLabel)}:</span><span class="term-msg out-msg" style="color:#E5E5E5;margin-left:4px">${esc(val)}</span>`;
+          row.replaceWith(echo);
+          terminal.scrollTop = terminal.scrollHeight;
+          resolve(val);
+        }
+      });
+    });
+  }
+
+  // ── Console bridge: intercepts all console.log from NATCOM code ──
+  const _log = log;
+  const natcomConsole = {
+    log: (...args) => {
+      const raw = args.join(' ').trim();
+      if (!raw) return;
+
+      // ▶ input echo lines (from InputNode)
+      if (raw.startsWith('▶ input')) {
+        const parts = raw.split(' ');
+        // Format: "▶ input <type> VarName = value"
+        const typeTag = parts[1] || '';
+        const varName = parts[2] || '';
+        const value   = parts.slice(4).join(' ');
+        const typeClass = typeTag.includes('int') ? 'type-int' : typeTag.includes('str') ? 'type-str' : typeTag.includes('float') ? 'type-float' : 'type-int';
+        const typeLbl   = typeTag.replace(/[<>]/g, '');
+        const d = document.createElement('div');
+        d.className = 'term-line';
+        d.innerHTML = `<span class="term-type-badge ${typeClass}">${typeLbl}</span><span class="out-msg">${esc(varName)} = <span style="color:#9CDCFE">${esc(value)}</span></span>`;
+        terminal.appendChild(d);
+        terminal.scrollTop = terminal.scrollHeight;
+        return;
+      }
+
+      // Variable display: "VarName = value"
+      const varM = raw.match(/^([A-Za-z_]\w*)\s*=\s*(.+)/);
+      if (varM) {
+        // Determine type from value for badge
+        const v = varM[2].trim();
+        let typeClass = 'type-float', typeLbl = 'num';
+        if (v === 'true' || v === 'false') { typeClass = 'type-bool'; typeLbl = 'bool'; }
+        else if (!isNaN(v) && Number.isInteger(parseFloat(v))) { typeClass = 'type-int'; typeLbl = 'int'; }
+        else if (v.startsWith('"') || isNaN(v)) { typeClass = 'type-str'; typeLbl = 'str'; }
+
+        const d = document.createElement('div');
+        d.className = 'term-line output';
+        d.innerHTML = `<span class="term-type-badge ${typeClass}">${typeLbl}</span><span class="out-msg"><span style="color:#A9B7C6">${esc(varM[1])}</span><span style="color:#CC7832"> = </span><span style="color:#9CDCFE">${esc(v)}</span></span>`;
+        terminal.appendChild(d);
+        terminal.scrollTop = terminal.scrollHeight;
+        return;
+      }
+
+      // [SOVEREIGN], [ENGINE], [GCP], [RENDER] lines
+      if (raw.match(/^\[(SOVEREIGN|ENGINE|GCP|RENDER|NATCOM)\]/)) {
+        _log(raw.replace(/^\[\w+\]\s*/, ''), 'success');
+        return;
+      }
+
+      // Function call debug header
+      if (raw.includes(':function')) {
+        const d = document.createElement('div');
+        d.className = 'term-debug-header';
+        d.innerHTML = `<span class="term-type-badge type-fn">fn</span> ${esc(raw.replace(':function','').trim())}`;
+        terminal.appendChild(d);
+        terminal.scrollTop = terminal.scrollHeight;
+        return;
+      }
+
+      // Class instantiation
+      if (raw.includes(':class') || raw.includes(':object')) {
+        const d = document.createElement('div');
+        d.className = 'term-debug-header';
+        d.innerHTML = `<span class="term-type-badge type-class">class</span> ${esc(raw.replace(/:class|:object/g,'').trim())}`;
+        terminal.appendChild(d);
+        terminal.scrollTop = terminal.scrollHeight;
+        return;
+      }
+
+      // Generic output line
+      _log(raw.replace(/^\s+/, ''), 'output');
+    },
+    error: (...args) => _log(args.join(' '), 'error'),
+    warn:  (...args) => _log(args.join(' '), 'warn'),
+  };
+
+  // ── Wrap user code in an async IIFE so await works inside ──
+  // Replace synchronous prompt() fallback just in case
+  const wrappedCode = `
+    (async function __natcom_main__() {
+      ${jsSource.replace(/\bprompt\s*\(/g, 'await natcom_input(')}
+    })().catch(err => { natcomConsole.error('Runtime Error: ' + err.message); });
+  `;
+
+  try {
+    // Use Function constructor to inject natcom_input and natcomConsole as locals
+    const runner = new Function('natcom_input', 'console', 'natcomConsole', wrappedCode);
+    await runner(natcom_input, natcomConsole, natcomConsole);
+  } catch (e) {
+    _log('Runtime Error: ' + e.message, 'error');
   }
 }
 
