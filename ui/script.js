@@ -996,7 +996,7 @@ function easterEgg(code, icon, name, msg) {
 }
 
 function clearTerminal() { terminal.innerHTML = ''; log('Terminal cleared.', 'system'); }
-function switchToErrorTab() { terminal.scrollTop = terminal.scrollHeight; }
+function switchToErrorTab() { switchTermTab('output'); terminal.scrollTop = terminal.scrollHeight; }
 
 function switchTermTab(tabName) {
   const tabs = {
