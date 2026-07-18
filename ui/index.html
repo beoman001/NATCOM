@@ -58,14 +58,18 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
             <span id="errorCount">0 errors</span>
         </div>
-        <button class="run-btn" onclick="runCode()" id="runBtn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3L19 12L5 21V3Z"/></svg>
-            Run
-        </button>
-        <button class="build-btn" onclick="buildCode()" id="buildBtn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Build
-        </button>
+        <div style="display: flex; align-items: center; background: #313335; border: 1px solid #555555; padding: 2px 4px; border-radius: 3px; gap: 4px;">
+            <select style="background: transparent; border: none; color: #A9B7C6; outline: none; font-size: 11px; font-family: var(--font-ui); cursor: pointer; padding: 0 4px;">
+                <option>main.nc</option>
+            </select>
+            <div style="width: 1px; height: 16px; background: #555555; margin: 0 4px;"></div>
+            <button class="run-btn" onclick="runCode()" id="runBtn" title="Run 'main.nc' (Shift+F10)" style="background: transparent; border: none; box-shadow: none; padding: 2px 4px; border-radius: 2px; cursor: pointer;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#499C54"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="build-btn" onclick="buildCode()" id="buildBtn" title="Build 'main.nc' (Ctrl+F9)" style="background: transparent; border: none; box-shadow: none; padding: 2px 4px; border-radius: 2px; cursor: pointer;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CC7832" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -74,8 +78,9 @@
 
     <!-- ACTIVITY BAR -->
     <div class="activity-bar">
-        <button class="activity-btn active" id="act-explorer" onclick="switchActivity('explorer')" title="Explorer (Ctrl+B)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <button class="activity-btn active" id="act-explorer" onclick="switchActivity('explorer')" title="Project (Alt+1)" style="flex-direction: column; width: 100%; height: auto; padding: 12px 0; font-size: 10px; gap: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="writing-mode: vertical-rl; transform: rotate(180deg); margin-top: 4px;">1: Project</span>
         </button>
         <button class="activity-btn" id="act-examples" onclick="switchActivity('examples')" title="Examples">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -83,8 +88,9 @@
         <button class="activity-btn" id="act-search" onclick="switchActivity('search')" title="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         </button>
-        <button class="activity-btn" id="act-ai" onclick="switchActivity('ai')" title="AI Code Generator">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <button class="activity-btn" id="act-ai" onclick="switchActivity('ai')" title="AI Assistant" style="flex-direction: column; width: 100%; height: auto; padding: 12px 0; font-size: 10px; gap: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            <span style="writing-mode: vertical-rl; transform: rotate(180deg); margin-top: 4px;">AI Assistant</span>
         </button>
         <button class="activity-btn" id="act-cheatsheet" onclick="switchActivity('cheatsheet')" title="Language Reference">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -155,6 +161,9 @@
                         <div class="tree-item" onclick="loadBuiltin('classes')" id="fi-classes">
                             <span class="fi-icon ex-icon">NC</span> classes.nc
                         </div>
+                        <div class="tree-item" onclick="loadBuiltin('compiler')" id="fi-compiler">
+                            <span class="fi-icon ex-icon">NC</span> compiler.nc
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,6 +204,10 @@
                 <div class="ex-card" onclick="loadBuiltin('classes')">
                     <div class="ex-icon-wrap">🏗️</div>
                     <div><div class="ex-title">Classes &amp; OOP</div><div class="ex-desc">Classes &amp; objects in English</div></div>
+                </div>
+                <div class="ex-card" onclick="loadBuiltin('compiler')">
+                    <div class="ex-icon-wrap">♾️</div>
+                    <div><div class="ex-title">Compiler</div><div class="ex-desc">Bootstrapped metacompiler simulation</div></div>
                 </div>
             </div>
         </div>
@@ -369,13 +382,13 @@
         <!-- TERMINAL -->
         <div class="terminal-panel" id="terminalPanel">
             <div class="terminal-tabs">
-                <div class="term-tab active" id="tabOutput" onclick="switchTermTab('output')">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                    OUTPUT
+                <div class="term-tab active" id="tabOutput" onclick="switchTermTab('output')" style="font-size: 11px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#499C54"><path d="M8 5v14l11-7z"/></svg>
+                    4: Run
                 </div>
-                <div class="term-tab" id="tabInput" onclick="switchTermTab('input')">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4L4 12L20 20V4Z"/></svg>
-                    INPUT
+                <div class="term-tab" id="tabInput" onclick="switchTermTab('input')" style="font-size: 11px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4L4 12L20 20V4Z"/></svg>
+                    Input
                 </div>
                 <div class="term-tab" id="errTab" onclick="switchToErrorTab()" style="display:none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M12 2L1 21h22L12 2z"/></svg>

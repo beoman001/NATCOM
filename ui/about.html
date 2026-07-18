@@ -339,6 +339,31 @@
     </div>
   </section>
 
+  <!-- COBOL TRIBUTE -->
+  <section id="cobol">
+    <div class="container">
+      <div style="background: rgba(17, 19, 28, 0.6); border: 1px solid var(--border); border-radius: 24px; padding: 4rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(160,114,255,0.15) 0%, transparent 70%); filter: blur(30px);"></div>
+        <span class="section-tag" style="background: rgba(255, 215, 0, 0.1); color: #ffd700; border: 1px solid rgba(255,215,0,0.2);">Legacy</span>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Standing on the Shoulders of Giants</h2>
+        <p style="font-size: 1.15rem; color: #d0d2db; max-width: 800px; margin: 0 auto 3rem; line-height: 1.8;">
+          NATCOM pays profound tribute to <strong>COBOL</strong> (Common Business-Oriented Language) — the very first English-like programming language created by Admiral Grace Murray Hopper and her team in 1959. Like COBOL, NATCOM believes that code should read like human language. But where COBOL required rigid structure and was built for business punch cards, NATCOM is free-form, context-aware, and compiles to native machine binaries.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; text-align: left;">
+          <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+            <div style="color: #ffd700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">COBOL (1959)</div>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--muted);">PERFORM 10 TIMES.</div>
+          </div>
+          <div style="background: rgba(78, 124, 254, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(78, 124, 254, 0.2);">
+            <div style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">NATCOM (2026)</div>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #f0f2f8;">Repeat 10 times:</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURES -->
   <section id="features">
     <div class="container">
@@ -369,6 +394,25 @@
           <div class="feature-icon">🛡️</div>
           <h3>Self-Healing Parser</h3>
           <p>The Sovereign Compiler Toolchain employs advanced heuristic lexical analysis to intuitively understand and autocorrect minor syntax deviations, ensuring a fluid coding experience.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="feature-card" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 3rem; padding: 3rem; background: linear-gradient(135deg, rgba(17,19,28,0.8), rgba(25,27,40,0.9)); border-color: rgba(160, 114, 255, 0.3);">
+          <div style="flex: 1;">
+            <div class="feature-icon" style="background: linear-gradient(135deg, var(--secondary), #ff8fa3); -webkit-background-clip: text; font-size: 3rem;">♾️</div>
+            <h3 style="font-size: 1.75rem;">Bootstrapped Compiler Matrix</h3>
+            <p style="font-size: 1.1rem;">NATCOM is capable of metacircular evaluation. The ultimate goal of NATCOM is to compile itself — a compiler written entirely in natural English that can compile its own source code into a native binary.</p>
+          </div>
+          <div style="flex: 1; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="background: #111; padding: 10px 15px; font-family: monospace; font-size: 12px; color: #888; border-bottom: 1px solid #333;">compiler.nc</div>
+            <div style="background: #1e1e1e; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 13px; line-height: 1.6; color: #c9cdd8;">
+              <span style="color: #c792ea;">Create a string named</span> SourceCode <span style="color: #c792ea;">and set it to</span> <span style="color: #c3e88d;">"Add 5 to X"</span>.<br>
+              <br>
+              <span style="color: #4a5568;">// Metacircular Evaluation</span><br>
+              <span style="color: #c792ea;">If the</span> SourceCode <span style="color: #c792ea;">contains</span> <span style="color: #c3e88d;">"Add"</span>, <span style="color: #c792ea;">then:</span><br>
+              &nbsp;&nbsp;<span style="color: #82aaff;">Display</span> <span style="color: #c3e88d;">"Compiling addition logic..."</span>.<br>
+              <span style="color: #c792ea;">Done.</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
