@@ -999,24 +999,25 @@ function clearTerminal() { terminal.innerHTML = ''; log('Terminal cleared.', 'sy
 function switchToErrorTab() { terminal.scrollTop = terminal.scrollHeight; }
 
 function switchTermTab(tabName) {
-  const tOut = document.getElementById('tabOutput');
-  const tIn = document.getElementById('tabInput');
-  const pOut = document.getElementById('terminal');
-  const pIn = document.getElementById('terminalInputArea');
+  const tabs = {
+    output: { tab: $('tabOutput'), panel: $('terminal') },
+    vars: { tab: $('tabVars'), panel: $('terminalVarsArea') },
+    debug: { tab: $('tabDebug'), panel: $('terminalDebugArea') }
+  };
   
-  if (tabName === 'output') {
-    tOut.classList.add('active');
-    tIn.classList.remove('active');
-    pOut.style.display = 'block';
-    pIn.style.display = 'none';
-    if (termCollapsed) toggleTerminal();
-  } else if (tabName === 'input') {
-    tIn.classList.add('active');
-    tOut.classList.remove('active');
-    pIn.style.display = 'block';
-    pOut.style.display = 'none';
-    if (termCollapsed) toggleTerminal();
+  // Deactivate all
+  for (const key in tabs) {
+    if (tabs[key].tab) tabs[key].tab.classList.remove('active');
+    if (tabs[key].panel) tabs[key].panel.style.display = 'none';
   }
+  
+  // Activate selected
+  if (tabs[tabName]) {
+    if (tabs[tabName].tab) tabs[tabName].tab.classList.add('active');
+    if (tabs[tabName].panel) tabs[tabName].panel.style.display = 'block';
+  }
+  
+  if (termCollapsed) toggleTerminal();
 }
 
 function toggleTerminal() {

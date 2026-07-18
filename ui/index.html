@@ -48,10 +48,10 @@
 <div class="menubar">
     <div class="menubar-left">
         <button class="menu-item" onclick="newFile()">File</button>
-        <button class="menu-item">Edit</button>
-        <button class="menu-item" onclick="runCode()">Run</button>
-        <button class="menu-item">View</button>
-        <button class="menu-item" onclick="window.open('about.html','_blank')">About Creator</button>
+        <button class="menu-item" onclick="switchActivity('search')" title="Search and Edit">Edit</button>
+        <button class="menu-item" onclick="runCode()" title="Run NATCOM Code">Run</button>
+        <button class="menu-item" onclick="toggleTerminal()" title="Toggle View">View</button>
+        <button class="menu-item" onclick="window.open('about.html','_blank')" title="View Creator Info">About Creator</button>
     </div>
     <div class="menubar-actions">
         <div class="error-badge" id="errorBadge" style="display:none">
